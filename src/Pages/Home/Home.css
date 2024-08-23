@@ -1,0 +1,327 @@
+.hero-home {
+    position: relative;
+    padding: 0;
+    height: 50vw;
+    min-height: 400px;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.hero-home .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.hero-home .hero-content {
+    color: var(--grey-dark-color);
+    flex-basis: 50%;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 2;
+}
+
+.hero-home .hero-content h2 {
+    font-family: var(--font-bold);
+    max-width: 600px;
+    font-size: var(--font-size-l);
+    margin-bottom: 0;
+}
+
+.hero-home .hero-content p {
+    font-family: var(--font-regular);
+    max-width: 600px;
+    font-size: var(--font-size-m);
+    margin-bottom: 7%;
+    margin-top: 0;
+}
+
+.hero-home .dot-separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7%;
+    margin-top: 7%;
+}
+
+.hero-home .dot-separator .dot {
+    width: clamp(8px, 1.5vw, 16px);
+    height: clamp(8px, 1.5vw, 16px);
+    background-color: var(--teal-medium-color);
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.hero-home .cta-buttons {
+    text-align: center;
+}
+
+.hero-home .cta-buttons .btn {
+    font-family: var(--font-bold);
+    font-size: var(--font-size-s);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin-left: clamp(8px, 1.2vw, 12px);
+    color: var(--grey-dark-color);
+}
+
+.hero-home .cta-buttons .btn.btn-secondary {
+    background-color: var(--teal-medium-color);
+    color: var(--background-color);
+    padding: 6px clamp(15px, 1.6vw, 20px);
+}
+
+@media (max-width: 768px) {
+    .hero-home .hero-content {
+        flex-basis: 100%;
+        padding: 0 10%;
+    }
+}
+
+.hero-home .hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    background-color: transparent;
+}
+
+.hero-home .hero-image img {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 120%;
+    width: auto;
+    object-fit: cover;
+    opacity: 70%;
+    margin-left: -50vw;
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    .hero-home .hero-image {
+        right: -120px;
+    }
+}
+
+#why-chambers {
+    background-color: var(--grey-light-color);
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#why-chambers .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#why-chambers .section-title .Filo-logo {
+    margin-right: calc(15vw - 20px);
+    flex-basis: 10vw;
+}
+
+#why-chambers .section-title .Filo-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    opacity: 50%;
+}
+
+#why-chambers .section-title h3 {
+    line-height: 1.3;
+    flex-basis: 50vw;
+    font-family: var(--font-bold);
+    font-size: var(--font-size-l);
+    color: var(--grey-dark-color);
+    margin: 0;
+    text-align: center;
+}
+
+#why-chambers .reasons {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: var(--font-size-m);
+}
+
+#why-chambers .reasons .reason {
+    flex-grow: 1;
+    background-color: var(--background-color);
+    min-width: 200px;
+    max-width: 400px;
+    padding-left: 20px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+#why-chambers .reasons .reason h4 {
+    font-family: var(--font-bold);
+    font-size: clamp(22px, 2.2vw, 40px);
+    color: var(--teal-medium-color);
+    margin-bottom: 20px;
+}
+
+#why-chambers .reasons .reason p {
+    font-family: var(--font-regular);
+    font-size: clamp(16px, 1.5vw, 32px);
+    color: var(--grey-dark-color);
+}
+
+@media (max-width: 768px) {
+    #why-chambers .reasons {
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+#benefits {
+    background-color: var(--background-color);
+    padding: 30px 0;
+}
+
+#benefits .benefits-layout {
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+}
+
+#benefits .benefits-title {
+    font-family: var(--font-bold);
+    flex: 1;
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 40px;
+}
+
+#benefits .benefits-title h3 {
+    color: var(--grey-dark-color);
+    font-size: var(--font-size-l);
+    margin-bottom: 20px;
+}
+
+#benefits .benefits-list {
+    flex: 2.2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    text-align: left;
+    padding-right: 20px;
+}
+
+#benefits .benefit {
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#benefits .benefit-number {
+    font-family: var(--font-bold);
+    font-size: var(--font-size-m);
+    color: var(--background-color);
+    margin-right: clamp(20px, 2.0vw, 40px);
+    background-color: var(--teal-medium-color);
+    width: clamp(30px, 4.0vw, 80px);
+    height: clamp(30px, 4.0vw, 80px);
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transform: rotate(45deg);
+}
+
+#benefits .benefit-number span {
+    transform: rotate(-45deg);
+    display: block;
+}
+
+#benefits #one {
+    background-color: var(--grey-dark-color);
+}
+
+#benefits #two {
+    background-color: var(--teal-dark-color);
+}
+
+#benefits #three {
+    background-color: var(--teal-medium-color);
+}
+
+#benefits #four {
+    background-color: var(--teal-light-color);
+}
+
+#benefits .benefit-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+}
+
+#benefits .benefit-content h4 {
+    font-family: var(--font-bold);
+    font-size: clamp(18px, 2.0vw, 32px);
+    color: var(--teal-medium-color);
+    margin-bottom: 0;
+    margin-top: 0;
+    height: clamp(30px, 4.0vw, 80px);
+    align-content: center;
+}
+
+#benefits .benefit-content p {
+    font-family: var(--font-regular);
+    font-size: clamp(15px, 1.6vw, 26px);
+    color: var(--grey-dark-color);
+}
+
+#benefits .benefit-content p {
+    font-family: var(--font-regular);
+    font-size: clamp(15px, 1.6vw, 26px);
+    color: var(--grey-dark-color);
+}
+
+@media (max-width: 768px) {
+    #benefits .benefits-layout .benefits-list {
+        grid-template-columns: repeat(1, 1fr);
+        padding-left: 10%;
+        padding-right: 10%;
+        gap: 20px;
+    }
+
+    #benefits .benefits-layout .benefits-title {
+        padding-bottom: 30px;
+    }
+
+    #benefits .benefits-layout {
+        flex-direction: column;
+        padding: 0;
+    }
+}

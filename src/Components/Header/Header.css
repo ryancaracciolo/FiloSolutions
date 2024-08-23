@@ -1,0 +1,100 @@
+header {
+    background-color: var(--background-color);
+    padding: 10px 20px; /* Combines padding-left and padding-right */
+    z-index: 1000;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: clamp(30px, 4vw, 50px);
+        margin-right: 10px;
+    }
+
+    nav {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 0 2%;
+    }
+
+    nav ul li a {
+        font-family: var(--font-regular);
+        font-size: clamp(14px, 1.5vw, 24px);
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        color: var(--grey-dark-color);
+    }
+
+    @media (max-width: 768px) {
+        .nav {
+            display: none;
+        }
+    }
+
+    .auth-buttons {
+        display: flex;
+        align-items: center;
+    }
+
+    .auth-buttons a {
+        font-family: var(--font-bold);
+        font-size: clamp(12px, 1.4vw, 20px);
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        padding: 0.5em 1em;
+        border-radius: 0.3em;
+        margin-left: 0.6em;
+    }
+
+    .auth-buttons a.sign-in {
+        color: var(--grey-dark-color);
+        background-color: transparent;
+        padding: 8px 5px;
+    }
+
+    .auth-buttons a.register {
+        color: var(--background-color);
+        background-color: var(--teal-medium-color);
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 4px;
+        background-color: var(--grey-dark-color);
+        margin: 2px 0;
+        margin-left: 15px;
+        border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+    }
+}

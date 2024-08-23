@@ -1,0 +1,15 @@
+@import './styles/variables.css';
+
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.app-content {
+  display: flex;
+  flex: 1;
+  padding: 0px;
+}

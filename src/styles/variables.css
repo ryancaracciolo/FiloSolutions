@@ -1,0 +1,82 @@
+/* Filo Color Palette */
+:root {
+    --grey-dark-color: #3B3B3B;
+    --teal-dark-color: #1E566C;
+    --teal-medium-color: #5795A7;
+    --teal-light-color: #79BEC3;
+    --grey-light-color: #F2F2F7;
+    --gold-dark-color: #D2A93A;
+    --gold-light-color: #DBBF57;
+    --sand-color: #E2DAD6;
+    --background-color: #ffffff;
+
+    /* Filo Font Family */
+    --font-light: 'BA-Light', sans-serif;
+    --font-regular: 'BA-Light', sans-serif;
+    --font-bold: 'BA-ExtraBold', sans-serif;
+    --font-extraBold: 'BA-ExtraBold', sans-serif;
+
+    /* Common Font Sizes to normalize the text size across the website */
+    --font-size-xs: clamp(10px, 1.1vw, 20px);
+    --font-size-s: clamp(12px, 1.3vw, 24px);
+    --font-size-m: clamp(14px, 1.5vw, 32px);
+    --font-size-l: clamp(24px, 3.0vw, 48px);
+    --font-size-xl: clamp(28px, 4.0vw, 56px);
+}
+
+/* Filo Font Family */
+@font-face {
+    font-family: "Almarai-ExtraBold";
+    src: url(../Assets/Fonts/Almarai-ExtraBold.ttf) format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Almarai-Bold";
+    src: url(../Assets/Fonts/Almarai-Bold.ttf) format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Almarai-Regular";
+    src: url(../Assets/Fonts/Almarai-Regular.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Almarai-Light";
+    src: url(../Assets/Fonts/Almarai-Light.ttf) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BA-Regular";
+    src: url(../Assets/Fonts/BuenosAires-Regular.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BA-Bold";
+    src: url(../Assets/Fonts/BuenosAires-Bold.ttf) format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BA-Light";
+    src: url(../Assets/Fonts/BuenosAires-Light.ttf) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BA-ExtraBold";
+    src: url(../Assets/Fonts/BuenosAires-Black.ttf) format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
