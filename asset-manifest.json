@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/filo-website/static/css/main.2fe97c9a.css",
+    "main.js": "/filo-website/static/js/main.d9f36c4c.js",
+    "static/media/hero-image.png": "/filo-website/static/media/hero-image.a0a2dd34ab6388659ad8.png",
+    "static/media/Almarai-ExtraBold.ttf": "/filo-website/static/media/Almarai-ExtraBold.ba4f890787b139e8fb73.ttf",
+    "static/media/Almarai-Bold.ttf": "/filo-website/static/media/Almarai-Bold.4422681bf4a67fe01897.ttf",
+    "static/media/Almarai-Regular.ttf": "/filo-website/static/media/Almarai-Regular.bedd4044c3f58c3a0e26.ttf",
+    "static/media/Almarai-Light.ttf": "/filo-website/static/media/Almarai-Light.05a4980da1eae65c2046.ttf",
+    "static/media/background.png": "/filo-website/static/media/background.1b240ec5411e89a8f37e.png",
+    "static/media/BuenosAires-Light.ttf": "/filo-website/static/media/BuenosAires-Light.b823872001097ce0ff3c.ttf",
+    "static/media/BuenosAires-Bold.ttf": "/filo-website/static/media/BuenosAires-Bold.8b64c0887bb3bbd435d8.ttf",
+    "static/media/BuenosAires-Black.ttf": "/filo-website/static/media/BuenosAires-Black.63f7b7910e14f40884af.ttf",
+    "static/media/BuenosAires-Regular.ttf": "/filo-website/static/media/BuenosAires-Regular.7853472108d03785f178.ttf",
+    "static/media/FiloLogo.png": "/filo-website/static/media/FiloLogo.2310c19d881a74f2daac.png",
+    "static/media/Filo-Logo-noText.png": "/filo-website/static/media/Filo-Logo-noText.ad43d0425888adc35e13.png",
+    "index.html": "/filo-website/index.html",
+    "main.2fe97c9a.css.map": "/filo-website/static/css/main.2fe97c9a.css.map",
+    "main.d9f36c4c.js.map": "/filo-website/static/js/main.d9f36c4c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2fe97c9a.css",
+    "static/js/main.d9f36c4c.js"
+  ]
+}
