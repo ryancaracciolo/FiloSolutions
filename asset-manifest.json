@@ -1,25 +1,28 @@
 {
   "files": {
-    "main.css": "/FiloSolutions/static/css/main.dd4e6a5e.css",
-    "main.js": "/FiloSolutions/static/js/main.594b723c.js",
-    "static/media/hero-image.png": "/FiloSolutions/static/media/hero-image.a0a2dd34ab6388659ad8.png",
-    "static/media/Almarai-ExtraBold.ttf": "/FiloSolutions/static/media/Almarai-ExtraBold.ba4f890787b139e8fb73.ttf",
-    "static/media/Almarai-Bold.ttf": "/FiloSolutions/static/media/Almarai-Bold.4422681bf4a67fe01897.ttf",
-    "static/media/Almarai-Regular.ttf": "/FiloSolutions/static/media/Almarai-Regular.bedd4044c3f58c3a0e26.ttf",
-    "static/media/Almarai-Light.ttf": "/FiloSolutions/static/media/Almarai-Light.05a4980da1eae65c2046.ttf",
-    "static/media/background.png": "/FiloSolutions/static/media/background.1b240ec5411e89a8f37e.png",
-    "static/media/BuenosAires-Light.ttf": "/FiloSolutions/static/media/BuenosAires-Light.b823872001097ce0ff3c.ttf",
-    "static/media/BuenosAires-Bold.ttf": "/FiloSolutions/static/media/BuenosAires-Bold.8b64c0887bb3bbd435d8.ttf",
-    "static/media/BuenosAires-Black.ttf": "/FiloSolutions/static/media/BuenosAires-Black.63f7b7910e14f40884af.ttf",
-    "static/media/BuenosAires-Regular.ttf": "/FiloSolutions/static/media/BuenosAires-Regular.7853472108d03785f178.ttf",
-    "static/media/FiloLogo.png": "/FiloSolutions/static/media/FiloLogo.2310c19d881a74f2daac.png",
-    "static/media/Filo-Logo-noText.png": "/FiloSolutions/static/media/Filo-Logo-noText.ad43d0425888adc35e13.png",
-    "index.html": "/FiloSolutions/index.html",
-    "main.dd4e6a5e.css.map": "/FiloSolutions/static/css/main.dd4e6a5e.css.map",
-    "main.594b723c.js.map": "/FiloSolutions/static/js/main.594b723c.js.map"
+    "main.css": "/www.filosolutions.co/static/css/main.6c25d62c.css",
+    "main.js": "/www.filosolutions.co/static/js/main.00d771d7.js",
+    "static/media/hero-image.png": "/www.filosolutions.co/static/media/hero-image.a0a2dd34ab6388659ad8.png",
+    "static/media/Almarai-ExtraBold.ttf": "/www.filosolutions.co/static/media/Almarai-ExtraBold.ba4f890787b139e8fb73.ttf",
+    "static/media/Almarai-Bold.ttf": "/www.filosolutions.co/static/media/Almarai-Bold.4422681bf4a67fe01897.ttf",
+    "static/media/Almarai-Regular.ttf": "/www.filosolutions.co/static/media/Almarai-Regular.bedd4044c3f58c3a0e26.ttf",
+    "static/media/Almarai-Light.ttf": "/www.filosolutions.co/static/media/Almarai-Light.05a4980da1eae65c2046.ttf",
+    "static/media/background.png": "/www.filosolutions.co/static/media/background.1b240ec5411e89a8f37e.png",
+    "static/media/BuenosAires-Light.ttf": "/www.filosolutions.co/static/media/BuenosAires-Light.b823872001097ce0ff3c.ttf",
+    "static/media/BuenosAires-Bold.ttf": "/www.filosolutions.co/static/media/BuenosAires-Bold.8b64c0887bb3bbd435d8.ttf",
+    "static/media/BuenosAires-Black.ttf": "/www.filosolutions.co/static/media/BuenosAires-Black.63f7b7910e14f40884af.ttf",
+    "static/media/BuenosAires-Regular.ttf": "/www.filosolutions.co/static/media/BuenosAires-Regular.7853472108d03785f178.ttf",
+    "static/media/Collab_Illust.svg": "/www.filosolutions.co/static/media/Collab_Illust.7433480924f656b1669636990147c4ea.svg",
+    "static/media/ryan-caracciolo.jfif": "/www.filosolutions.co/static/media/ryan-caracciolo.ecca5e14daa7b178f3b6.jfif",
+    "static/media/FiloLogo.png": "/www.filosolutions.co/static/media/FiloLogo.2310c19d881a74f2daac.png",
+    "static/media/evan-caracciolo.jfif": "/www.filosolutions.co/static/media/evan-caracciolo.926690b38a19af60d893.jfif",
+    "static/media/Filo-Logo-noText.png": "/www.filosolutions.co/static/media/Filo-Logo-noText.ad43d0425888adc35e13.png",
+    "index.html": "/www.filosolutions.co/index.html",
+    "main.6c25d62c.css.map": "/www.filosolutions.co/static/css/main.6c25d62c.css.map",
+    "main.00d771d7.js.map": "/www.filosolutions.co/static/js/main.00d771d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.dd4e6a5e.css",
-    "static/js/main.594b723c.js"
+    "static/css/main.6c25d62c.css",
+    "static/js/main.00d771d7.js"
   ]
 }
