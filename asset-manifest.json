@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.55484216.css",
-    "main.js": "/static/js/main.913b0382.js",
+    "main.css": "/static/css/main.32eda4c5.css",
+    "main.js": "/static/js/main.a86dc1e5.js",
     "static/media/hero-image.png": "/static/media/hero-image.a0a2dd34ab6388659ad8.png",
     "static/media/Almarai-ExtraBold.ttf": "/static/media/Almarai-ExtraBold.ba4f890787b139e8fb73.ttf",
     "static/media/Almarai-Bold.ttf": "/static/media/Almarai-Bold.4422681bf4a67fe01897.ttf",
@@ -18,11 +18,11 @@
     "static/media/evan-caracciolo.jfif": "/static/media/evan-caracciolo.926690b38a19af60d893.jfif",
     "static/media/Filo-Logo-noText.png": "/static/media/Filo-Logo-noText.ad43d0425888adc35e13.png",
     "index.html": "/index.html",
-    "main.55484216.css.map": "/static/css/main.55484216.css.map",
-    "main.913b0382.js.map": "/static/js/main.913b0382.js.map"
+    "main.32eda4c5.css.map": "/static/css/main.32eda4c5.css.map",
+    "main.a86dc1e5.js.map": "/static/js/main.a86dc1e5.js.map"
   },
   "entrypoints": [
-    "static/css/main.55484216.css",
-    "static/js/main.913b0382.js"
+    "static/css/main.32eda4c5.css",
+    "static/js/main.a86dc1e5.js"
   ]
 }
