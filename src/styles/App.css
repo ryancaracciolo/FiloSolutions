@@ -1,4 +1,4 @@
-@import './styles/variables.css';
+@import './variables.css';
 
 
 .app-wrapper {
@@ -8,8 +8,17 @@
   justify-content: center;
 }
 
-.app-content {
+.app-main {
   display: flex;
   flex: 1;
   padding: 0px;
 }
+
+.product-main {
+  display: flex;
+  flex: 1;
+  padding: 0px;
+  background-color: var(--background-color);
+}
+
+

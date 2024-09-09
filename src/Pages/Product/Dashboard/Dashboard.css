@@ -1,0 +1,21 @@
+.dashboard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard .dashboard-header {
+    display: flex;
+    height: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+.dashboard .dashboard-content {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    background-color: var(--grey-light-color);
+}

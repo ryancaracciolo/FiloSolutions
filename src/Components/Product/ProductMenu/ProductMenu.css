@@ -1,0 +1,49 @@
+.ProductMenu {
+    flex: 0;
+    height: 100%;
+    background-color: var(--teal-dark-color);
+    z-index: 1001;
+    border-top-right-radius: 10px;
+}
+  
+.ProductMenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+  
+.ProductMenu li {
+    display: flex;
+    height: 50px;
+    padding-left: 15px;
+    padding-right: 30px;
+    border-radius: 8px;
+}
+
+.ProductMenu li a {
+    display: flex; /* Make the Link a flex container */
+    flex-direction: row; /* Ensure items are in a row */
+    align-items: center; /* Vertically align items */
+    text-decoration: none; /* Remove underline from link text */
+    color: var(--background-color); /* Text color */
+    gap: 10px; /* Space between image and text */
+}
+  
+.ProductMenu li img {
+    width: 22px;
+    height: 22px;
+
+}
+
+.ProductMenu li p {
+    color: var(--background-color);
+    text-decoration: none;
+    font-family: var(--font-bold);
+    font-size: var(--font-size-s);
+}
+  
+.ProductMenu li:hover {
+    background-color: var(--teal-light-color);
+}
+  
+

@@ -1,0 +1,12 @@
+.in-development {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    height: 80vh;
+    font-size: var(--font-size-m);
+    color: var(--teal-medium-color);
+    font-family: var(--font-extraBold);
+    text-align: center;
+}

@@ -10,7 +10,7 @@ function Menu({isOpen, onMenuClosed}) {
             <span id="x2"></span>    
         </div>
         <ul>
-            <li onClick={onMenuClosed}><Link to="/home">Home</Link></li>
+            <li onClick={onMenuClosed}><Link to="/">Home</Link></li>
             <li onClick={onMenuClosed}><Link to="/about">About</Link></li>
             <li onClick={onMenuClosed}><Link to="/learn-more">Learn More</Link></li>
             <li onClick={onMenuClosed}><Link to="/contact">Contact</Link></li>

@@ -10,10 +10,13 @@
     --sand-color: #E2DAD6;
     --background-color: #ffffff;
 
+    --icon-dark: #5795A7;
+    --icon-light: #F2F2F7;
+
     /* Filo Font Family */
     --font-light: 'BA-Light', sans-serif;
     --font-regular: 'BA-Light', sans-serif;
-    --font-bold: 'BA-ExtraBold', sans-serif;
+    --font-bold: 'BA-Bold', sans-serif;
     --font-extraBold: 'BA-ExtraBold', sans-serif;
 
     /* Common Font Sizes to normalize the text size across the website */

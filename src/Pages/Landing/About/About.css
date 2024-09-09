@@ -1,0 +1,118 @@
+
+.about-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 0;
+}
+
+.about-item {
+    display: flex;
+    padding: 4vw;
+    gap: 4vw;
+}
+
+.about-item .content {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & h2 {
+        text-align: center;
+        font-family: var(--font-extraBold);
+        font-size: var(--font-size-xl);
+        color: var(--teal-dark-color);
+        margin-top: 3vh;
+        margin-bottom: 0;
+    }
+    & p {
+        font-family: var(--font-regular);
+        font-size: var(--font-size-m);
+        color: var(--grey-dark-color);
+        text-align: center;
+        margin-top: 4vh;
+        margin-bottom: 0;
+
+        & span {
+            font-family: var(--font-bold);
+            text-decoration: underline;
+        }
+    }
+}
+
+.about-item .image {
+    flex: 1.2;
+    display: flex;
+    justify-content: center;
+    margin: 1vw;
+    
+    & img {
+        width: 100%;
+        object-fit: contain;
+        opacity: 100%;
+    }
+}
+
+#core-values {
+    flex-direction: column;
+    background-color: var(--grey-light-color); 
+    padding-top: 0;
+    gap: 6vh;
+    
+    & .content p {
+        padding-left: 4vw;
+        padding-right: 4vw;
+    }
+}
+
+
+.about-item .team {
+    flex: 2.0;
+    display: flex;
+    justify-content: space-around;
+
+
+    & .team-member {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: center;
+        text-align: center;
+
+        & img { 
+            flex: 2;
+            width: 20vw;
+            height: 20vw;
+            border-radius: 20%;
+            align-self: center;
+        }
+
+        & h3 {
+            flex: 1;
+        }
+        & p {
+            flex: 1;
+            font-size: var(--font-size-s);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .about-item {
+        flex-direction: column;
+        margin-left: 3vw;
+        margin-right: 3vw;
+    }
+
+    .about-item .image {
+        width: 80%;
+        align-self: center;
+    }
+
+    #core-values {
+        margin: 0;
+    }
+    
+}
