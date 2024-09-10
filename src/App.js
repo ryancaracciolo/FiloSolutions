@@ -20,7 +20,9 @@ import Opportunities from './Pages/Product/Opportunities/Opportunities';
 
 
 function App() {
+  //const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
+
 
   const location = useLocation();
   let isProductRoute = location.pathname.startsWith('/app');

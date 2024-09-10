@@ -6,7 +6,7 @@ import {ReactComponent as QrButton} from '../../../Assets/Icons/qr-icon.svg';
 import {ReactComponent as ProfileButton} from '../../../Assets/Icons/profile-icon.svg';
 
 
-function Header() {
+const Header = () => {
     return (
         <header className='product-header'>
             <div className="container">
