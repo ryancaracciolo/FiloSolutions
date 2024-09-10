@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import './Header-Landing.css';
 import logo from '../../../Assets/Images/FiloLogo.png';
 
 const Header = ({ onMenuClick }) => {
     return (
-        <header>
+        <header className='header-landing'>
             <div className="container">
                 <div className="logo">
                     <Link to="/">

@@ -1,6 +1,5 @@
 .ProductMenu {
     flex: 0;
-    height: 100%;
     background-color: var(--teal-dark-color);
     z-index: 1001;
     border-top-right-radius: 10px;
@@ -14,7 +13,7 @@
   
 .ProductMenu li {
     display: flex;
-    height: 50px;
+    height: clamp(45px, 4vw, 65px);
     padding-left: 15px;
     padding-right: 30px;
     border-radius: 8px;
@@ -26,13 +25,13 @@
     align-items: center; /* Vertically align items */
     text-decoration: none; /* Remove underline from link text */
     color: var(--background-color); /* Text color */
-    gap: 10px; /* Space between image and text */
+    gap: 15px; /* Space between image and text */
 }
-  
-.ProductMenu li img {
+
+.ProductMenu .menu-icon {
     width: 22px;
     height: 22px;
-
+    fill: var(--background-color);
 }
 
 .ProductMenu li p {

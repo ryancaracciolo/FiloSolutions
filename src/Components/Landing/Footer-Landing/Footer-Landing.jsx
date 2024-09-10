@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Footer.css'; // Assuming you have a CSS file for styling
+import './Footer-Landing.css'; // Assuming you have a CSS file for styling
 import logo from '../../../Assets/Images/FiloLogo.png';
 
 function Footer() {
   return (
-    <footer>
+    <footer className='footer-landing'>
       <div className="container">
         <div className="footer-content">
           <div className="footer-logo">

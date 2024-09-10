@@ -1,0 +1,21 @@
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .content-header {
+    display: flex;
+    height: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+.content .content-detail {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    background-color: var(--grey-light-color);
+}

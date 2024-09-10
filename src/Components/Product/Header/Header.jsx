@@ -1,24 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ProductHeader.css';
+import './Header.css';
 import logo from '../../../Assets/Images/FiloLogo.png';
-import qrButton from '../../../Assets/Icons/settings-icon.svg';
-import profileButton from '../../../Assets/Icons/home-icon.svg';
+import {ReactComponent as QrButton} from '../../../Assets/Icons/qr-icon.svg';
+import {ReactComponent as ProfileButton} from '../../../Assets/Icons/profile-icon.svg';
 
 
-function ProductHeader() {
+function Header() {
     return (
-        <header>
+        <header className='product-header'>
             <div className="container">
                 <div className="logo">
                     <img src={logo} alt="Filo Logo" />
                 </div>
                 <div className="product-header-buttons">
                     <Link to="/app/qr-code" className="qr-button">
-                        <img src={qrButton} alt="QR Code" />
+                        <QrButton className='header-button' />
                     </Link>
                     <Link to="/app/profile" className="profile-button">
-                        <img src={profileButton} alt="Profile" />
+                        <ProfileButton className='header-button' />
                     </Link>
                 </div>
             </div>
@@ -26,4 +26,4 @@ function ProductHeader() {
     );
 };
 
-export default ProductHeader;
+export default Header;

@@ -1,15 +1,15 @@
 import React from 'react';
-import './Dashboard.css';
+import './Opportunities.css';
 import '../../../Components/Product/Content/Content.css';
 
 
-function Dashboard() {
+function Opportunities() {
     return (
-        <div className="content dashboard">
+        <div className="content opportunities">
             <div className="content-header">HEADER</div>
             <div className="content-detail">content</div>
         </div>
     );
 };
 
-export default Dashboard;
+export default Opportunities;

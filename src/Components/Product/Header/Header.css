@@ -1,0 +1,26 @@
+
+.product-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-header .logo img {
+    height: clamp(35px, 3vw, 45px);
+}
+
+.product-header .product-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.product-header .header-button {
+    fill: var(--teal-medium-color);
+    width: 35px;
+    height: 35px;
+}
+
+.product-header .header-button:hover {
+    fill: var(--teal-dark-color);
+}
