@@ -1,15 +1,16 @@
 import React from 'react';
-import './Dashboard.css';
+import './QRCode.css';
 import '../../../Components/Product/Content/Content.css';
 
-function Dashboard() {
+function QRCode() {
     return (
-        <div className="content dashboard">
+        <div className="content qrcode">
             <div className="content-header">HEADER</div>
             <div className="content-detail">
+                QRCode :DDD
             </div>
         </div>
     );
 };
 
-export default Dashboard;
+export default QRCode;

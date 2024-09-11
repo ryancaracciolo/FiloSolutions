@@ -16,12 +16,17 @@ import Menu from './Components/Product/Menu/Menu';
 import Dashboard from './Pages/Product/Dashboard/Dashboard';
 import Partnerships from './Pages/Product/Partnerships/Partnerships';
 import Opportunities from './Pages/Product/Opportunities/Opportunities';
-
+import Authentication from './Pages/Product/Authentication/Authentication';
+import Profile from './Pages/Product/Profile/Profile';
+import QRCode from './Pages/Product/QRCode/QRCode';
+// Amplify configuration
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
 
 
 function App() {
-  //const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false); // menu state
 
 
   const location = useLocation();
@@ -32,15 +37,21 @@ function App() {
       {isProductRoute ? (
         <>
           <Header />
-          <main className='product-main'>
-            <Menu />
-            <Routes>
-              {/* Product page routes */}
-              <Route path="/app/dashboard" element={<Dashboard />} />
-              <Route path="/app/partnerships" element={<Partnerships />} />
-              <Route path="/app/opportunities" element={<Opportunities />} />
-            </Routes>
-          </main>
+          <Authentication>
+            <main className='product-main'>
+              <Menu />
+              <Routes>
+                {/* Product page routes */}
+                <Route path="/app/dashboard" element={<Dashboard />} />
+                <Route path="/app/partnerships" element={<Partnerships />} />
+                <Route path="/app/opportunities" element={<Opportunities />} />
+                <Route path="/app/profile" element={<Profile />} />
+                <Route path="/app/qrcode" element={<QRCode />} />
+
+
+              </Routes>
+            </main>
+          </Authentication>
         </>
       ) : (
         <>

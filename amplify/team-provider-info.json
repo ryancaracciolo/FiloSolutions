@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-filoapp-dev-1660d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::397140355374:role/amplify-filoapp-dev-1660d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::397140355374:role/amplify-filoapp-dev-1660d-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-filoapp-dev-1660d-deployment",
+      "UnauthRoleName": "amplify-filoapp-dev-1660d-unauthRole",
+      "StackName": "amplify-filoapp-dev-1660d",
+      "StackId": "arn:aws:cloudformation:us-east-1:397140355374:stack/amplify-filoapp-dev-1660d/e641ce20-6f6f-11ef-bd1d-0e98b891b35b",
+      "AmplifyAppId": "d2h91vae1fslj3"
+    },
+    "categories": {
+      "auth": {
+        "filoapp40b1f772": {}
+      }
+    }
+  }
+}

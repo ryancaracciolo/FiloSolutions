@@ -41,7 +41,7 @@
     font-size: var(--font-size-s);
 }
   
-.ProductMenu li:hover {
+.menu-item.active {
     background-color: var(--teal-light-color);
 }
   

@@ -14,7 +14,7 @@ const Header = () => {
                     <img src={logo} alt="Filo Logo" />
                 </div>
                 <div className="product-header-buttons">
-                    <Link to="/app/qr-code" className="qr-button">
+                    <Link to="/app/qrcode" className="qr-button">
                         <QrButton className='header-button' />
                     </Link>
                     <Link to="/app/profile" className="profile-button">

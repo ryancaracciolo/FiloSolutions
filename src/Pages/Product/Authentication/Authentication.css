@@ -79,3 +79,12 @@
     background-color: #4da4a3;
     border-radius: 4px;
   }  
+
+
+  .product-main {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    padding: 0px;
+    background-color: var(--background-color);
+  }
