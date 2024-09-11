@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'; // body-parser is a middleware used to par
 import cors from 'cors'; // CORS (Cross-Origin Resource Sharing) is a middleware for Express that allos backend to accept requests from frontend running on a different origin
 import dotenv from 'dotenv'; // this is a package that loads environment variables from a .env file into process.env. (purpose is to keep sensitive data like API keys, passwords, etc. out of the codebase)
 import itemRoutes from './routes/itemRoutes.js'; // import the routes from itemRoutes.js
+import userRoutes from './routes/userRoutes.js'; // import the routes from userRoutes.js
 
 // Load environment variables
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(cors());
 
 // Routes
 app.use('/api/items', itemRoutes);
+app.use('/api/users', userRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3001;
