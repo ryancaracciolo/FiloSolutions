@@ -1,63 +1,22 @@
-// Importing modules with ES6 syntax
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import AWS from 'aws-sdk';
-import dotenv from 'dotenv';
+import express from 'express'; // express is a web framework for Node.js
+import bodyParser from 'body-parser'; // body-parser is a middleware used to parse incoming request bodies in a middleware before your handlers, available under the req.body property
+import cors from 'cors'; // CORS (Cross-Origin Resource Sharing) is a middleware for Express that allos backend to accept requests from frontend running on a different origin
+import dotenv from 'dotenv'; // this is a package that loads environment variables from a .env file into process.env. (purpose is to keep sensitive data like API keys, passwords, etc. out of the codebase)
+import itemRoutes from './routes/itemRoutes.js'; // import the routes from itemRoutes.js
+
+// Load environment variables
+dotenv.config();
 
 // Initialize Express app
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Load environment variables
-dotenv.config();
+// Routes
+app.use('/api/items', itemRoutes);
 
-// Initialize AWS SDK
-AWS.config.update({
-  region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
-
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-const tableName = 'FiloDBTable';
+// Start the server
 const PORT = process.env.PORT || 3001;
-
-// Define routes for interacting with DynamoDB
-app.post('/add-item', (req, res) => {
-  const params = {
-    TableName: tableName,
-    Item: {
-      id: req.body.id,
-      name: req.body.name,
-      description: req.body.description,
-    },
-  };
-
-  dynamodb.put(params, (err, data) => {
-    if (err) {
-      res.status(500).json({ error: 'Could not add item' });
-    } else {
-      res.json({ success: 'Item added', data });
-    }
-  });
-});
-
-app.get('/get-items', (req, res) => {
-  const params = {
-    TableName: tableName,
-  };
-
-  dynamodb.scan(params, (err, data) => {
-    if (err) {
-      res.status(500).json({ error: 'Could not retrieve items' });
-    } else {
-      res.json({ items: data.Items });
-    }
-  });
-});
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
