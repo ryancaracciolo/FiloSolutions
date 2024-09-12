@@ -42,13 +42,11 @@ function App() {
               <Menu />
               <Routes>
                 {/* Product page routes */}
-                <Route path="/app/dashboard" element={<Dashboard />} />
+                <Route path="/app" element={<Dashboard />} />
                 <Route path="/app/partnerships" element={<Partnerships />} />
                 <Route path="/app/opportunities" element={<Opportunities />} />
                 <Route path="/app/profile" element={<Profile />} />
                 <Route path="/app/qrcode" element={<QRCode />} />
-
-
               </Routes>
             </main>
           </Authentication>

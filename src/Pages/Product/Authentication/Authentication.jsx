@@ -42,8 +42,7 @@ function Authentication({ children }) {
   };
 
   // Step 2: Confirm the sign-up with the verification code
-  const handleCodeSubmit = async (e) => {
-    e.preventDefault();
+  const handleCodeSubmit = async (code) => {
     setError(null);
 
     try {
@@ -65,7 +64,7 @@ function Authentication({ children }) {
     }
   };
 
-  if (user) {
+  if (!user) {
     return (
       <div className="login-container">
         <div className="left-side">
@@ -111,7 +110,6 @@ function Authentication({ children }) {
 
             {step === 2 && (
               <ConfirmationCode onConfirm={handleCodeSubmit} />
-              
             )}
 
             {error && <p className="error-message">{error}</p>}
@@ -122,59 +120,6 @@ function Authentication({ children }) {
           </div>
         </div>
       </div>
-      // <div className="login-container">
-      //   <div className="login-box">
-      //     <div className="login-header">
-      //       <img src="/path-to-your-envelope-icon.png" alt="Envelope Icon" className="login-icon" />
-      //       <h2>Email Confirmation</h2>
-      //       <p>
-      //         To begin using Filo, please enter your business email address associated with your Chamber of Commerce Membership.
-      //       </p>
-      //     </div>
-
-      //     {step === 1 && (
-      //       <form onSubmit={handleEmailSubmit}>
-      //         <input
-      //           type="email"
-      //           className="email-input"
-      //           placeholder="Enter email address..."
-      //           value={email}
-      //           onChange={(e) => setEmail(e.target.value)}
-      //           required
-      //         />
-      //         <button type="submit" className="submit-btn">
-      //           Submit
-      //         </button>
-      //       </form>
-      //     )}
-
-      //     {step === 2 && (
-      //       <form onSubmit={handleCodeSubmit}>
-      //         <input
-      //           type="text"
-      //           className="code-input"
-      //           placeholder="Enter verification code..."
-      //           value={code}
-      //           onChange={(e) => setCode(e.target.value)}
-      //           required
-      //         />
-      //         <button type="submit" className="submit-btn">
-      //           Confirm Code
-      //         </button>
-      //       </form>
-      //     )}
-
-      //     {error && <p className="error-message">{error}</p>}
-
-      //     <p className="support-text">
-      //       For support, please contact <a href="mailto:support@filo.com">support@filo.com</a>
-      //     </p>
-
-      //     <div className="progress-bar">
-      //       <div className="progress-fill" />
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 
