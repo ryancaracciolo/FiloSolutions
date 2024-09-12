@@ -142,6 +142,21 @@
   font-family: var(--font-light);
 }
 
+.toggle-auth-mode {
+  background: none;
+  border: none;
+  color: var(--teal-medium-color);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 15px;
+  display: block;
+}
+
+.toggle-auth-mode:hover {
+  color: var(--teal-dark-color);
+}
+
 .support-text {
   margin-top: 40px;
   color: #777;

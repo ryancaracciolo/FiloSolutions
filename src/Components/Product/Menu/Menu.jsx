@@ -10,7 +10,7 @@ import { signOut } from '@aws-amplify/auth';
 
 function Menu() {
     const menuItems = [
-        { label: 'Dashboard', icon: DashboardIcon, path: '/app/dashboard' },
+        { label: 'Dashboard', icon: DashboardIcon, path: '/app' },
         { label: 'Partnerships', icon: PartnershipIcon, path: '/app/partnerships' },
         { label: 'Opportunities', icon: OpportIcon, path: '/app/opportunities' },
         { label: 'Collab', icon: CollabIcon, path: '/app/collab' },
@@ -28,7 +28,7 @@ function Menu() {
         try {
         await signOut();
         // Optionally, redirect to a login page after sign-out
-        window.location.href = '/app';
+        window.location.href = '/app/login';
         } catch (error) {
         console.log('Error signing out: ', error);
         }

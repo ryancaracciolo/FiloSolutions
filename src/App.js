@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './styles/App.css';
 /*Landing Pages*/
@@ -22,13 +23,13 @@ import QRCode from './Pages/Product/QRCode/QRCode';
 // Amplify configuration
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
+
 Amplify.configure(config);
 
 
 function App() {
-  const [menuOpen, setMenuOpen] = React.useState(false); // menu state
-
-
+  const [menuOpen, setMenuOpen] = useState(false); // menu state
+  const [user, setUser] = useState(null); // user state
   const location = useLocation();
   let isProductRoute = location.pathname.startsWith('/app');
   
@@ -36,29 +37,35 @@ function App() {
     <div className="app-wrapper">
       {isProductRoute ? (
         <>
-          <Authentication>
+          {user ? (
+          <>
             <Header />
-            <main className='product-main'>
+            <main className="product-main">
               <Menu />
               <Routes>
-                {/* Product page routes */}
                 <Route path="/app" element={<Dashboard />} />
                 <Route path="/app/partnerships" element={<Partnerships />} />
                 <Route path="/app/opportunities" element={<Opportunities />} />
                 <Route path="/app/profile" element={<Profile />} />
                 <Route path="/app/qrcode" element={<QRCode />} />
+                <Route path="*" element={<Navigate to="/app" />} />
               </Routes>
             </main>
-          </Authentication>
+          </>
+          ) : (
+            <Routes>
+              <Route path="*" element={<Authentication setUser={setUser} />} />
+            </Routes>
+          )}
         </>
       ) : (
         <>
+          {/* Landing page logic */}
           <LandingHeader onMenuClick={() => setMenuOpen(!menuOpen)} />
           <LandingMenu isOpen={menuOpen} onMenuClosed={() => setMenuOpen(!menuOpen)} />
           <main className="landing-main">
             <Routes>
-              {/* Landing page routes */}
-              <Route exact path="/" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/learn-more" element={<LearnMore />} />
               <Route path="/contact" element={<Contact />} />
