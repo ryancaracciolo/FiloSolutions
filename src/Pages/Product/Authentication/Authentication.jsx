@@ -24,6 +24,7 @@ function Authentication({setUser}) {
         console.log('User Found');
         setUser(user);
         setLoading(false); // Authentication check complete
+        navigate('/app'); // Redirect after login
       })
       .catch(() => {
         console.log('No user logged in');
