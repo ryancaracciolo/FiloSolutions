@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Authentication.css';
 import { signUp, signIn, confirmSignUp, getCurrentUser } from '@aws-amplify/auth';
+import filoLogo from '../../../Assets/Images/FiloLogo.png';
+import background from '../../../Assets/Images/background.png';
+import ConfirmationCode from './ConfirmCode';
 
 function Authentication({ children }) {
   const [user, setUser] = useState(null);
@@ -62,68 +65,123 @@ function Authentication({ children }) {
     }
   };
 
-  if (!user) {
+  if (user) {
     return (
       <div className="login-container">
-        <div className="login-box">
-          <div className="login-header">
-            <img src="/path-to-your-envelope-icon.png" alt="Envelope Icon" className="login-icon" />
-            <h2>Email Confirmation</h2>
+        <div className="left-side">
+          <div className="left-content">
+            <img src={filoLogo} alt="Filo Logo" className="filo-logo" />
+            <h1>Welcome to Filo!</h1>
             <p>
-              To begin using Filo, please enter your business email address associated with your Chamber of Commerce Membership.
+              Filo has partnered with your Chamber to help unlock new opportunities for you. 
+              Your Chamber network is powerful, and we are here to help you leverage it to collaborate, grow, and thrive.
             </p>
+            <hr />
+            <h2>Ready to get started?</h2>
+            <p className='sub-p'>
+              Log in with your Chamber email to access your network and explore everything Filo has to offer.
+            </p>
+            <img src={background} alt="Filo Logo" className="login-background" />
           </div>
+        </div>
 
-          {step === 1 && (
-            <form onSubmit={handleEmailSubmit}>
-              <input
-                type="email"
-                className="email-input"
-                placeholder="Enter email address..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <button type="submit" className="submit-btn">
-                Submit
-              </button>
-            </form>
-          )}
+        <div className="right-side">
+          <div className="right-content">
+            <h2>Start your journey with Filo</h2>
+            <hr />
+            <p>
+              {step === 1 ? 'To begin using Filo, please enter your business email address associated with your Chamber of Commerce Membership.' : 'Enter the verification code sent to your email.'}
+            </p>
 
-          {step === 2 && (
-            <form onSubmit={handleCodeSubmit}>
-              <input
-                type="text"
-                className="code-input"
-                placeholder="Enter verification code..."
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                required
-              />
-              <button type="submit" className="submit-btn">
-                Confirm Code
-              </button>
-            </form>
-          )}
+            {step === 1 && (
+              <form onSubmit={handleEmailSubmit}>
+                <input
+                  type="email"
+                  className="email-input"
+                  placeholder="Enter email address..."
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <button type="submit" className="submit-btn">
+                  Submit
+                </button>
+              </form>
+            )}
 
-          {error && <p className="error-message">{error}</p>}
+            {step === 2 && (
+              <ConfirmationCode onConfirm={handleCodeSubmit} />
+              
+            )}
 
-          <p className="support-text">
-            For support, please contact <a href="mailto:support@filo.com">support@filo.com</a>
-          </p>
+            {error && <p className="error-message">{error}</p>}
 
-          <div className="progress-bar">
-            <div className="progress-fill" />
+            <p className="support-text">
+              Have questions? Please contact <a href="mailto:support@filo.com">support@filo.com</a>
+            </p>
           </div>
         </div>
       </div>
+      // <div className="login-container">
+      //   <div className="login-box">
+      //     <div className="login-header">
+      //       <img src="/path-to-your-envelope-icon.png" alt="Envelope Icon" className="login-icon" />
+      //       <h2>Email Confirmation</h2>
+      //       <p>
+      //         To begin using Filo, please enter your business email address associated with your Chamber of Commerce Membership.
+      //       </p>
+      //     </div>
+
+      //     {step === 1 && (
+      //       <form onSubmit={handleEmailSubmit}>
+      //         <input
+      //           type="email"
+      //           className="email-input"
+      //           placeholder="Enter email address..."
+      //           value={email}
+      //           onChange={(e) => setEmail(e.target.value)}
+      //           required
+      //         />
+      //         <button type="submit" className="submit-btn">
+      //           Submit
+      //         </button>
+      //       </form>
+      //     )}
+
+      //     {step === 2 && (
+      //       <form onSubmit={handleCodeSubmit}>
+      //         <input
+      //           type="text"
+      //           className="code-input"
+      //           placeholder="Enter verification code..."
+      //           value={code}
+      //           onChange={(e) => setCode(e.target.value)}
+      //           required
+      //         />
+      //         <button type="submit" className="submit-btn">
+      //           Confirm Code
+      //         </button>
+      //       </form>
+      //     )}
+
+      //     {error && <p className="error-message">{error}</p>}
+
+      //     <p className="support-text">
+      //       For support, please contact <a href="mailto:support@filo.com">support@filo.com</a>
+      //     </p>
+
+      //     <div className="progress-bar">
+      //       <div className="progress-fill" />
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 
   return (
-    <div className='product-main'>
+    <>
       {children}
-    </div>
+    </>
   );
 }
 

@@ -36,8 +36,8 @@ function App() {
     <div className="app-wrapper">
       {isProductRoute ? (
         <>
-          <Header />
           <Authentication>
+            <Header />
             <main className='product-main'>
               <Menu />
               <Routes>
