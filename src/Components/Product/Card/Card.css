@@ -1,0 +1,112 @@
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    box-sizing: border-box;
+    aspect-ratio: 3 / 4; /* Maintain a 3:4 width to height ratio */
+    min-width: 250px;
+    max-width: 300px; /* Set a maximum width to prevent the cards from getting too large */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust card header, body, and footer (kept from previous) */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.card-icon {
+    position: absolute;
+    top: 0;
+    font-size: 16px;
+    background-color: #e0f7e0;
+    border-radius: 50%;
+    padding: 8px;
+    color: #00b900;
+}
+
+.check-icon {
+    left: 0;
+}
+
+.share-icon {
+    right: 0;
+}
+
+.card-body {
+    margin-top: 10px;
+}
+
+.company-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.contact-name {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 5px 10px 5px 0;
+    font-size: 10px;
+}
+
+.home-services {
+    background-color: #d7b9f9;
+}
+
+.building {
+    background-color: #a0e0d9;
+}
+
+.description {
+    font-size: 10px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    background-color: #4a4a6a;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.send-referral {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}

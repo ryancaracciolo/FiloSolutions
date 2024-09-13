@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.content-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.subheader {
+    display: flex;
+    align-content: center;
+    text-align: center;
+}
+
+.subheader h2 {
+    font-size: clamp(15px, 1.5vw, 25px);
+    font-family: var(--font-bold);
+    color: grey;
+    align-self: center;
+}
+
+.subheader p {
+    font-size: clamp(12px, 1.2vw, 20px);
+    font-family: var(--font-regular);
+    color: var(--grey-dark-color);
+    align-self: center;
+    padding-left: 10px;
+}
+
+.partner-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px; /* Maximum width of the container */
+    padding: 0px;
+    margin: 0 auto; /* Center the container */
+}

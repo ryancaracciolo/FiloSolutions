@@ -6,7 +6,7 @@
 
 .content .content-header {
     display: flex;
-    height: 10px;
+    height: 20px;
     justify-content: flex-start;
     align-items: center;
     padding: 20px;
@@ -16,6 +16,6 @@
 .content .content-detail {
     display: flex;
     flex: 1;
-    padding: 20px;
+    padding-left: 20px;
     background-color: var(--grey-light-color);
 }
