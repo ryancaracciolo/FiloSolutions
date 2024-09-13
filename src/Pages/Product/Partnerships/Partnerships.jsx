@@ -2,9 +2,17 @@ import React from 'react';
 import './Partnerships.css';
 import '../../../Components/Product/Content/Content.css';
 import Card from '../../../Components/Product/Card/Card';
+import {dummyBusinesses} from '../../../objects/test-objects/test-objects';
 
 
 function Partnerships() {
+
+    const partners = dummyBusinesses(3);
+    const suggPartners = dummyBusinesses(6);
+
+
+    console.log(partners);
+
     return (
         <div className="content partnerships">
             <div className="content-header">
@@ -13,13 +21,21 @@ function Partnerships() {
             <div className="content-detail">
                 <div className="subheader">
                     <h2>My Partners</h2>
-                    <p>(3 active)</p>
+                    <p>({partners.length} active)</p>
                 </div>
                 <div className="partner-cards">
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    {partners.map(partner => (
+                        <Card key={partner.id} partnerData={partner} status='partner'/>
+                    ))}
+                </div>
+                <div className="subheader">
+                    <h2>SuggestedPartners</h2>
+                    <p>♦ Powered by AI ♦</p>
+                </div>
+                <div className="partner-cards">
+                    {suggPartners.map(partner => (
+                        <Card key={partner.id} partnerData={partner} status='suggested'/>
+                    ))}
                 </div>
             </div>
         </div>

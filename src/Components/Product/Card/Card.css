@@ -1,16 +1,13 @@
 .card {
-    background-color: white;
+    position: relative;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-regular);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    position: relative;
     box-sizing: border-box;
-    aspect-ratio: 3 / 4; /* Maintain a 3:4 width to height ratio */
-    min-width: 250px;
-    max-width: 300px; /* Set a maximum width to prevent the cards from getting too large */
+    background-color: white;
 }
 
 .card:hover {
@@ -28,49 +25,53 @@
 }
 
 .company-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 70px;
+    height: 70px;
     margin: 0 auto;
     display: block;
+    background-color: gray;
+    opacity: 75%;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .card-icon {
     position: absolute;
     top: 0;
-    font-size: 16px;
-    background-color: #e0f7e0;
     border-radius: 50%;
-    padding: 8px;
-    color: #00b900;
+    padding: 0px;
 }
 
 .check-icon {
     left: 0;
+    fill: var(--teal-medium-color);
+}
+
+.add-icon {
+    left: 0;
+    fill: var(--gold-light-color);
 }
 
 .share-icon {
     right: 0;
-}
-
-.card-body {
-    margin-top: 10px;
+    fill: var(--teal-dark-color);
 }
 
 .company-name {
     font-size: 16px;
-    font-weight: bold;
-    margin: 5px 0;
+    font-family: var(--font-bold);
+    color: var(--grey-dark-color);
+    margin: 0px 0;
 }
 
 .contact-name {
     font-size: 12px;
     color: #6c757d;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .tags {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .tag {
@@ -94,13 +95,22 @@
 .description {
     font-size: 10px;
     color: #6c757d;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    display: -webkit-box;           
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;  
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-footer {
-    background-color: #4a4a6a;
-    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    background-color: var(--teal-medium-color);
     border-radius: 10px;
+    height: 40px;
+    width: calc(100% - 20px);
+    line-height: 40px;
 }
 
 .send-referral {
@@ -109,4 +119,5 @@
     color: white;
     font-size: 14px;
     cursor: pointer;
+    font-family: var(--font-regular);
 }
