@@ -1,12 +1,12 @@
 .card {
     position: relative;
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 10px;
     text-align: center;
     font-family: var(--font-regular);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: white;
 }
 

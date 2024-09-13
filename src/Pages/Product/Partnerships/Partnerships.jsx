@@ -7,8 +7,8 @@ import {dummyBusinesses} from '../../../objects/test-objects/test-objects';
 
 function Partnerships() {
 
-    const partners = dummyBusinesses(3);
-    const suggPartners = dummyBusinesses(6);
+    const partners = dummyBusinesses(1);
+    const suggPartners = dummyBusinesses(2);
 
 
     console.log(partners);

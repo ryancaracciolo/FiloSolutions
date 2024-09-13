@@ -1,0 +1,22 @@
+
+  .opportunities-table {
+    margin-right: 20px;
+  }
+  
+  table {
+    width: calc(100%-40px);
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Adds vertical spacing (10px gap) */
+    background-color: transparent; /* Table background is transparent */
+  }
+  
+  thead th {
+    padding: 10px;
+    padding-left: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    color: grey;
+    font-family: var(--font-bold);
+    font-size: 15px;
+  }
+  

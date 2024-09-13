@@ -1,0 +1,83 @@
+tbody td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+tbody tr {
+  background-color: white;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  box-sizing: border-box;
+  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.05);
+  font-family: var(--font-reg);
+  color: var(--grey-dark-color);
+  font-size: 14px;
+}
+  
+tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+tbody td:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+tbody td:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.received {
+  color: var(--teal-medium-color);
+  font-family: var(--font-bold);
+}
+
+.shared {
+  color: var(--gold-dark-color);
+  font-family: var(--font-bold);
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.status.closed-won {
+  background-color: #b8e2a5;
+  color: #2e7d32;
+}
+
+.status.active {
+  background-color: #e4d235;
+  color: #484408;
+}
+
+.status.closed-lost {
+  background-color: #e2b8b8;
+  color: #c62828;
+}
+
+.status.sent {
+  background-color: #e4d235;
+  color: #484408;
+}
+
+.status.intro {
+  background-color: #b3e5fc;
+  color: #0288d1;
+}
+
+.partners {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

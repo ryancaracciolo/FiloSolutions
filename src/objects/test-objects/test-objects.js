@@ -1,14 +1,8 @@
 import Business from '../business/business';
-//import Partnership from '../partnership/partnership';
-//import Customer from '../customer/customer';
+import Partnership from '../partnership/partnership';
+import Customer from '../customer/customer';
 import { faker } from '@faker-js/faker';
-//import Lead from '../lead/lead';
-
-
-// Dummy function to generate a business description
-function generateBusinessDescription() {
-    return `${faker.company.name()} specializes in ${faker.company.catchPhrase().toLowerCase()} and excels at ${faker.company.buzzPhrase().toLowerCase()}.`;
-}
+import Lead from '../lead/lead';
 
 export function dummyBusiness() {
     return new Business(
@@ -26,6 +20,11 @@ export function dummyBusiness() {
     );
 };
 
+// Dummy function to generate a business description
+function generateBusinessDescription() {
+    return `${faker.company.name()} specializes in ${faker.company.catchPhrase().toLowerCase()} and excels at ${faker.company.buzzPhrase().toLowerCase()}.`;
+}
+
 export function dummyBusinesses(count) {
     const businesses = [];
     for (let i = 1; i <= count; i++) {
@@ -33,6 +32,67 @@ export function dummyBusinesses(count) {
     }
     return businesses;
 };
+
+export function dummyLead() {
+    const creator = dummyBusiness();
+    const partner = dummyBusiness();
+    const partnership = dummyPartnership([], [creator.id, partner.id]);
+    const cust = dummyCustomer();
+
+    const l = new Lead(
+        faker.number.int(10000),
+        faker.date.recent(),
+        creator.id,
+        faker.company.buzzPhrase(),
+        partnership.id,
+        cust.id,
+        "Random Status"
+    );
+    partnership.leadIDs = [l.id];
+
+    return {
+        lead: l,
+        creator: creator,
+        partner: partner,
+        partnership: partnership,
+        customer: cust
+    };
+};
+
+export function dummyLeads(count) {
+    const leads = [];
+    for (let i = 1; i <= count; i++) {
+        leads.push(dummyLead());
+    }
+    return leads;
+};
+
+export function dummyCustomer() {
+    return new Customer(
+        faker.number.int(10000),
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.internet.email(),
+        faker.phone.number(),
+    );
+};
+
+export function dummyCustomers(count) {
+    const customers = [];
+    for (let i = 1; i <= count; i++) {
+        customers.push(dummyCustomer());
+    }
+    return customers;
+};
+
+export function dummyPartnership(leadIDs, businessIDs) {
+    return new Partnership(
+        faker.number.int(10000),
+        leadIDs,
+        businessIDs
+    );
+};
+
 
 // export default function generateData() {
 //     // Create arrays to hold our fake data
