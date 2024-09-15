@@ -4,6 +4,8 @@ import './Authentication.css';
 import { signUp, signIn, confirmSignUp, getCurrentUser } from '@aws-amplify/auth';
 import filoLogo from '../../../Assets/Images/FiloLogo.png';
 import background from '../../../Assets/Images/background.png';
+import { ReactComponent as EmailIcon } from '../../../Assets/Icons/email-icon.svg';
+import { ReactComponent as PasswordIcon } from '../../../Assets/Icons/password-icon.svg';
 import ConfirmationCode from './ConfirmCode';
 
 
@@ -122,7 +124,11 @@ function Authentication({setUser}) {
       <div className="right-side">
         <div className="right-content">
           <h2>{isSignIn ? 'Log in to Filo' : 'Start your Journey with Filo'}</h2>
-          <hr />
+          <div className='dots'>
+            <div className='dot'></div>
+            <div className='dot'></div>
+            <div className='dot'></div>
+          </div>
           <p>
             {step === 1
               ? `${isSignIn ? 'Please enter your email and password associated with your account' : 'To begin using Filo, please enter your business email address associated with your Chamber of Commerce Membership'}`
@@ -131,22 +137,28 @@ function Authentication({setUser}) {
 
           {step === 1 && (
             <form onSubmit={handleEmailSubmit}>
-              <input
-                type="email"
-                className="email-input"
-                placeholder="Enter email address..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                className="password-input"
-                placeholder="Enter password..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className='input-wrapper'>
+                <EmailIcon className='email-icon'/>
+                <input
+                  type="email"
+                  className="email-input"
+                  placeholder="Enter email address..."
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className='input-wrapper'>
+                <PasswordIcon className='email-icon'/>
+                <input
+                  type="password"
+                  className="email-input"
+                  placeholder="Enter password..."
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
               <button type="submit" className="submit-btn">
                 {isSignIn ? 'Log In' : 'Sign Up'}
               </button>

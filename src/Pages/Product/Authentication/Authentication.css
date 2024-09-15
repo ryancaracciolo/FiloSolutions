@@ -87,15 +87,22 @@
 .right-side h2 {
   font-size: clamp(20px, 1.8vw, 40px);
   color: var(--teal-medium-color);
-  margin-bottom: 3.5vh;
+  margin-bottom: 3.0vh;
   font-family: var(--font-bold);
 }
 
-.right-side hr {
-  width: 70%;
-  border: 1px solid #777;
-  margin-bottom: 2.5vh;
-  opacity: 30%;
+.right-side .dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.right-side .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--teal-medium-color);
 }
 
 .right-side p {
@@ -108,20 +115,41 @@
 
 }
 
+.input-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 4vh;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: 2px solid #dddddd;
+  gap: 5px;
+}
+
+.input-wrapper .email-icon {
+  width: 22px;
+  height: 22px;
+  fill: #aaaaaa;
+}
+
 .email-input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 4vh;
-  border: 1px solid #ccc;
-  background-color: var(--grey-light-color);
-  border-radius: 10px;
+  padding: 5px;
+  border: 0px;
   font-size: clamp(12px, 1.2vw, 20px);
   box-sizing: border-box;
   font-family: var(--font-light);
+  color: var(--grey-dark-color);
+  outline: none; /* Removes default browser focus border */
+}
+
+.email-input:focus {
+  border: none;
 }
 
 .submit-btn {
   width: 75%;
+  margin-top: 10px;
   padding: 10px;
   background-color: var(--teal-medium-color);
   color: white;

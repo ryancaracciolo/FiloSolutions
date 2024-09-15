@@ -1,0 +1,97 @@
+/* Popup container */
+.referral-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: var(--font-regular);
+    position: relative;
+    color: var(--grey-dark-color);
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 0px;
+    right: -30px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    font-family: var(--font-bold);
+  }
+  
+  /* Header buttons (toggle buttons) */
+  .referral-header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    background-color: rgb(239, 238, 238);
+    border-radius: 6px;
+  }
+
+  .referral-header .toggle-btn {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 4px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-regular);
+    font-size: 12px;
+    height: 25px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease; /* Add a transition */
+  }
+  
+  .referral-header .toggle-btn.active {
+    background-color: white;
+    font-family: var(--font-bold);
+    font-size: 13px;
+  }
+  
+  .referral-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .referral-content .copy-card {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    font-family: var(--font-bold);
+    color: var(--grey-dark-color);
+    font-size: 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .referral-content .copy-icon {
+    fill: var(--teal-medium-color);
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+  }
+  
+  .referral-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-family: var(--font-bold);
+    color: var(--grey-dark-color);
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }

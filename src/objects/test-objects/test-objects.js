@@ -11,7 +11,7 @@ export function dummyBusiness() {
         faker.image.url(150,150),     // Updated method for image URL (e.g., logo placeholder)
         generateBusinessDescription(),  // Updated to use catchPhrase for business slogan
         faker.person.fullName(),       
-        faker.company.catchPhrase(),    // Updated to use catchPhrase for business slogan
+        faker.company.buzzNoun(),    // Updated to use catchPhrase for business slogan
         faker.location.streetAddress(),  // Updated method for street address
         faker.internet.email(),
         faker.phone.number(),  // Updated method for phone number

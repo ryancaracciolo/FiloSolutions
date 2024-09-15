@@ -21,7 +21,7 @@ const Row = ({leadData}) => {
             {getRandomBinary() ? <td className="received">Received</td> : <td className="shared">Shared</td>}
             <td>{d}</td>
             <td>{customer.custFN + " " + customer.custLN}</td>
-            <td>{customer.custEmail}</td>
+            <td className='cust-email'>{customer.custEmail}</td>
             <td>
                 <span className={'status '+st}>{lead.status}</span>
             </td>

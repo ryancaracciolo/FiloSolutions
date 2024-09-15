@@ -2,6 +2,9 @@ tbody td {
   padding: 15px;
   border-bottom: 1px solid #eee;
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 tbody tr {
@@ -31,6 +34,13 @@ tbody td:last-child {
 
 input[type="checkbox"] {
   margin-right: 10px;
+}
+
+.cust-email {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .received {
@@ -76,7 +86,7 @@ input[type="checkbox"] {
 }
 
 .partners {
-  max-width: 100px;
+  max-width: 140px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

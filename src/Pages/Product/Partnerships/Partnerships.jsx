@@ -4,14 +4,9 @@ import '../../../Components/Product/Content/Content.css';
 import Card from '../../../Components/Product/Card/Card';
 import {dummyBusinesses} from '../../../objects/test-objects/test-objects';
 
-
 function Partnerships() {
-
-    const partners = dummyBusinesses(1);
-    const suggPartners = dummyBusinesses(2);
-
-
-    console.log(partners);
+    const partners = dummyBusinesses(3);
+    const suggPartners = dummyBusinesses(6);
 
     return (
         <div className="content partnerships">
@@ -29,8 +24,8 @@ function Partnerships() {
                     ))}
                 </div>
                 <div className="subheader">
-                    <h2>SuggestedPartners</h2>
-                    <p>♦ Powered by AI ♦</p>
+                    {suggPartners ? <h2>SuggestedPartners</h2> : null}
+                    {suggPartners ? <p>♦ Powered by AI ♦</p> : null}
                 </div>
                 <div className="partner-cards">
                     {suggPartners.map(partner => (
