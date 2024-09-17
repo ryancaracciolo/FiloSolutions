@@ -9,6 +9,7 @@ import { ReactComponent as LocIcon } from '../../../Assets/Icons/location-icon.s
 import { ReactComponent as LinkIcon } from '../../../Assets/Icons/link-icon.svg';
 import { ReactComponent as CopyIcon } from '../../../Assets/Icons/copy-icon.svg';
 import { ReactComponent as QRIcon } from '../../../Assets/Icons/qr-icon.svg';
+import Referral from '../Referral/Referral'
 
 import Popup from '../Popup/Popup';
 
@@ -65,7 +66,9 @@ const Card = ({partnerData, status, isPopped}) => {
                 </button>
                 <QRIcon className='qr-link' onClick={() => handleQR()}/>
             </div>
-            <Popup show={showPopup} partnerData={partner} onClose={togglePopup} />
+            <Popup show={showPopup} content={
+                <Referral partnerData={partner} closeClicked={togglePopup}/>
+            } onClose={togglePopup} />
         </div>    
     );
 };
