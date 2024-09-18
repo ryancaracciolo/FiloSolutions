@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 300px;
+    height: 400px;
     padding: 12px;
     background-color: #fff;
     border-radius: 15px;
@@ -56,42 +57,4 @@
     background-color: white;
     font-family: var(--font-bold);
     font-size: 13px;
-  }
-  
-  .referral-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .referral-content .copy-card {
-    display: inline-block;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    font-family: var(--font-bold);
-    color: var(--grey-dark-color);
-    font-size: 15px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  .referral-content .copy-icon {
-    fill: var(--teal-medium-color);
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
-  }
-  
-  .referral-footer {
-    text-align: center;
-    margin-top: 15px;
-    font-family: var(--font-bold);
-    color: var(--grey-dark-color);
-    font-size: 14px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
   }

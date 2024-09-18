@@ -1,41 +1,29 @@
 import React, {useState} from 'react';
 import './Referral.css';
-import Card from '../Card/Card'
-import { ReactComponent as CopyIcon } from '../../../Assets/Icons/copy-icon.svg';
+import PartnerRef from './PartnerRef';
+import CustomerRef from './CustomerRef';
 
-function Referral({partnerData, closeClicked}) {
-    const [toCustomer, setToCustomer] = useState(true);
-    const partner = partnerData;
+
+function Referral({partnerData, closeClicked, toCustomer}) {
+    const [toCust, setToCustomer] = useState(toCustomer);
 
     function handleToggle(clicked) {
-        if (clicked==='customer' & !toCustomer) {
-            setToCustomer(!toCustomer);
+        if (clicked==='customer' & !toCust) {
+            setToCustomer(!toCust);
         }
-        if (clicked==='business' & toCustomer) {
-            setToCustomer(!toCustomer);
+        if (clicked==='business' & toCust) {
+            setToCustomer(!toCust);
         }
-    }
-
-    function handleCopy() {
-        console.log("Copied!");
-    }
-
-    function handlePartnerClick() {
-        console.log("Partner Transition");
     }
 
     return (
         <div className="referral-popup">
             <button className="close-btn" onClick={closeClicked}>X</button>
             <div className="referral-header">
-                <button className={'toggle-btn ' + (toCustomer ? 'active' : '')} onClick={() => handleToggle('customer')}>To Customer</button>
-                <button className={'toggle-btn ' + (!toCustomer ? 'active' : '')} onClick={() => handleToggle('business')}>To Partner</button>
+                <button className={'toggle-btn ' + (toCust ? 'active' : '')} onClick={() => handleToggle('customer')}>Share Business Card</button>
+                <button className={'toggle-btn ' + (!toCust ? 'active' : '')} onClick={() => handleToggle('business')}>Refer Customer</button>
             </div>
-            <div className="referral-content">
-                <button className='copy-card' onClick={() => handleCopy()}>Copy Card <CopyIcon className='copy-icon'/></button>
-                <Card key='asdfasd' partnerData={partner} status='null' isPopped='true'/>
-            </div>
-            <button className="referral-footer" onClick={() => handlePartnerClick()}>{'Share Lead with Partner >>'}</button>
+            {toCust ? <PartnerRef partnerData={partnerData}/> : <CustomerRef partnerData={partnerData}/>}
         </div>
     );
 };

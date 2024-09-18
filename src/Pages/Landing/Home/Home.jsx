@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import heroImage from '../../../Assets/Images/hero-image.png';
 import filoLogo from '../../../Assets/Images/Filo-Logo-noText.png';
+import { ReactComponent as EngageIcon } from '../../../Assets/Icons/engage-icon.svg';
+import { ReactComponent as CommunityIcon } from '../../../Assets/Icons/circles-icon.svg';
+import { ReactComponent as GrowthIcon } from '../../../Assets/Icons/graph-icon.svg';
+
 import './Home.css';
 
 const Home = () => {
@@ -10,20 +14,13 @@ const Home = () => {
             <section className="hero-home">
                 <div className="container">
                     <div className="hero-content">
-                        <h2>Empowering Chambers to Drive Member Success</h2>
-                        <div className="dot-separator">
-                            <div className="dot"></div>
-                            <div className="dot"></div>
-                            <div className="dot"></div>
-                            <div className="dot"></div>
-                            <div className="dot"></div>
-                        </div>
+                        <h1>CHAMBER OF COMMERCE</h1>
+                        <h2>Turn Your Member Base <br/>Into a Community</h2>
                         <p>
                             Boost engagement and deliver exceptional value to your members with a platform
                             that makes strategic partnerships and collaboration effortless.
                         </p>
                         <div className="cta-buttons">
-                            <Link to="/contact" className="btn">Contact</Link>
                             <Link to="/learn-more" className="btn btn-secondary">Learn More</Link>
                         </div>
                     </div>
@@ -38,28 +35,34 @@ const Home = () => {
                     <div className="Filo-logo">
                         <img src={filoLogo} alt="Filo Logo" />
                     </div>
-                    <h3>Why Chambers Use Filo</h3>
+                    <h3>Why Chambers Choose Filo</h3>
                 </div>
                 <div className="reasons">
                     <div className="reason">
-                        <h4>Improve Member Engagement</h4>
+                        <EngageIcon className='reason-icon'/>
+                        <h4>Engagement</h4>
+                        <h5>Improve Member Engagement</h5>
                         <p>
-                            Enhance the value of Chamber membership by providing tangible value to business
-                            members, leading to strong retention & satisfaction.
+                            Filo helps maximize the impact of networking by facilitating partnerships, 
+                            streamlining referrals, and turning connections into valuable opportunities.
                         </p>
                     </div>
                     <div className="reason">
-                        <h4>Drive Collaborative Growth</h4>
+                        <CommunityIcon className='reason-icon'/>
+                        <h4>Community</h4>
+                        <h5>Build a Collaborative Community</h5>
                         <p>
-                            Facilitate strategic partnerships within your Chamber that enable businesses to
-                            collaborate, innovate, and grow together.
+                            Filo fosters a sense of community by encouraging collaboration and partnership among members, 
+                            helping businesses support one another and grow together.
                         </p>
                     </div>
                     <div className="reason">
-                        <h4>Grow Membership Base</h4>
+                        <GrowthIcon className='reason-icon'/>
+                        <h4>Growth</h4>
+                        <h5>Retain and Grow Membership</h5>
                         <p>
-                            Attract new, young business members to your Chamber with technology that drives
-                            collaborative growth and business success.
+                            Attract younger business owners with modern technology that tracks 
+                            and showcases the tangible value created through Chamber networking.
                         </p>
                     </div>
                 </div>

@@ -1,0 +1,68 @@
+/* General card styles */
+.cust-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Avatar styles */
+  .cust-card .avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #d6b8eb;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+  .cust-card .avatar .initials {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .cust-card .details {
+    align-self: stretch;
+    margin: 0px 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Input field styles */
+  .cust-card .details input {
+    margin: 0px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .cust-card .details input:focus {
+    outline: none;
+  }
+
+  .cust-card #cust-name {
+    font-family: var(--font-bold);
+    font-size: 14px;
+  }
+
+  .cust-card #cust-email {
+    font-family: var(--font-light);
+  }
+
+  input#cust-phone {
+    font-family: var(--font-bold);
+    background-color: #d6b8eb;
+    padding: 2px;
+    margin: 0 20%;
+    color: white;
+  }
+  

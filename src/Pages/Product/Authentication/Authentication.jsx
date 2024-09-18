@@ -8,7 +8,6 @@ import { ReactComponent as EmailIcon } from '../../../Assets/Icons/email-icon.sv
 import { ReactComponent as PasswordIcon } from '../../../Assets/Icons/password-icon.svg';
 import ConfirmationCode from './ConfirmCode';
 
-
 function Authentication({setUser}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

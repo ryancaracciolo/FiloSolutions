@@ -1,12 +1,102 @@
-.in-development {
+.how-it-works {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: var(--font-regular);
+  }
+  
+  .how-it-works h1 {
+    color: var(--grey-dark-color);
+    font-family: var(--font-extraBold);
+  }
+  
+  .content-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .content-sections .section {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  
+  .section .text-content {
+    flex: 1;
+    margin: 20px;
+    position: relative;
+  }
+
+  .section .text-content h2 {
+    color: lightgray;
+    font-family: var(--font-extraBold);
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .section .text-content h3 {
+    color: var(--teal-medium-color);
+    font-family: var(--font-extraBold);
+    font-size: 30px;
+    margin: 0;
+  }
+  
+  .section .image-content {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20vw;
-    margin-right: 20vw;
-    height: 80vh;
-    font-size: var(--font-size-m);
-    color: var(--teal-medium-color);
+    background-color: lightgray;
+    border-radius: 30px;
+    height: 400px;
+    margin: 20px;
+  }
+  
+  .content-sections .image-content img {
+    object-fit: cover;
+  }
+  
+  .content-sections .line {
+    position: absolute;
+    top: 30px;
+    left: calc(50% - 2px);
+    width: 4px;
+    height: calc(100% - 60px);
+    border-radius: 2px;
+    background-color: #ddd;
+  }
+  
+  .content-sections .circle {
+    position: sticky;
+    top: calc(50vh - 15px);
+    left: calc(50% - 19px);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 4px solid white;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease-in-out;
+    color: white;
     font-family: var(--font-extraBold);
-    text-align: center;
-}
+    z-index: 1;
+  }
+  
+  .content-sections .circle.active {
+    background-color: var(--teal-medium-color);
+  }
+
+  .landing-dot-grid {
+    background-color: aqua;
+  }
+  

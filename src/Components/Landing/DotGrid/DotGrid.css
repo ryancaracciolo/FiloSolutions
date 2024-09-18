@@ -1,0 +1,20 @@
+.dot-grid {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    display: grid;
+    grid-template-columns: repeat(25, 5px);
+    grid-template-rows: repeat(15, 5px);
+    gap: 12px;
+    background-color: transparent; /* Optional: Ensure the background is visible */
+    z-index: -2;
+  }
+  
+  .dot-grid .dot {
+    width: 5px;
+    height: 5px;
+    background-color: var(--grey-light-color);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
