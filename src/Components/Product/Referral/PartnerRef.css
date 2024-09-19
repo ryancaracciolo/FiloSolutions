@@ -8,7 +8,6 @@
   .partner-referral .copy-card {
     display: inline-block;
     text-align: center;
-    margin-bottom: 10px;
     margin-top: 0px;
     font-family: var(--font-bold);
     color: var(--grey-dark-color);
@@ -26,12 +25,18 @@
   }
   
   .partner-referral .referral-footer {
-    text-align: center;
-    margin-top: 15px;
-    font-family: var(--font-bold);
-    color: var(--grey-dark-color);
-    font-size: 14px;
-    background-color: transparent;
-    border: none;
+    display: flex;
+    justify-content: center;
+    background-color: var(--teal-medium-color);
+    font-size: 13px;
+    font-family: var(--font-regular);
+    border-radius: 10px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 15%;
+    margin-right: 15%;
     cursor: pointer;
+    color: white;
+    border: none;
+    text-align: center;
   }

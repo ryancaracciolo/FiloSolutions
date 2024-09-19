@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Popup.css';
 
-const Popup = ({ show, content, onClose }) => {
-
-  if (!show) return null;
+const Popup = ({ content, onClose }) => {
 
   // Render the popup in the body using React Portal
   return ReactDOM.createPortal(

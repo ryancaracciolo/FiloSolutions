@@ -1,0 +1,28 @@
+.invite-wrapper {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: var(--font-bold);
+    color: var(--grey-dark-color);
+    width: 200px;
+}
+
+.invite-wrapper h3 {
+    text-align: center;
+}
+
+
+.invite-wrapper .invite-yes {
+    background-color: var(--teal-medium-color);
+    border-radius: 7px;
+    border: none;
+    color: white;
+    font-family: var(--font-bold);
+}
+
+.invite-wrapper .invite-no {
+    background-color: white;
+    padding: 8px;
+    border: none;
+    font-family: var(--font-regular);
+}

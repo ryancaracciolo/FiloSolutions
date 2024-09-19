@@ -11,14 +11,29 @@ import { ReactComponent as CopyIcon } from '../../../Assets/Icons/copy-icon.svg'
 import { ReactComponent as QRIcon } from '../../../Assets/Icons/qr-icon.svg';
 import Referral from '../Referral/Referral';
 import Popup from '../Popup/Popup';
+import Invite from '../Invite/Invite';
 
-const Card = ({partnerData, status, isPopped}) => {
+const Card = ({partnerData, status, setStatus}) => {
+    
+    let topLeftButton;
+    let topRightButton;
+    let cardFooter;
 
     const [showPopup, setShowPopup] = useState(false); // popup state
+    const [showShare, setShowShare] = useState(false);
+    const [showAdd, setShowAdd] = useState(false);
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };
+
+    const toggleShare = () => {
+        setShowShare(!showShare);
+    }
+
+    const toggleAdd = () => {
+        setShowAdd(!showAdd);
+    }
 
     const handleCopy = () => {
         console.log("asdfadssfadsasd");
@@ -28,11 +43,11 @@ const Card = ({partnerData, status, isPopped}) => {
         console.log("QR!!!!!!!!!!!");
     }
 
-    /////////// Rendering logic for Card variants ///////////////////
-    let topLeftButton;
-    let topRightButton;
-    let cardFooter;
-    
+    const handleInviteUI = () => {
+        setStatus()
+    }
+
+    /////////// Rendering logic for Card variants //////////////////
     if (status==='popped') {
         topLeftButton = null;
         topRightButton = null;
@@ -47,15 +62,15 @@ const Card = ({partnerData, status, isPopped}) => {
             </div>;
     }
     else if(status==='partner') {
-        topLeftButton = <CheckIcon className={'card-icon check-icon'+(isPopped ? ' hidden' : '')}/>;
-        topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
+        topLeftButton = <CheckIcon className={'card-icon check-icon'}/>;
+        topRightButton = <ShareIcon className={'card-icon share-icon'} onClick={toggleShare}/>;
         cardFooter =
             <div className='card-footer' onClick={togglePopup}>
                 <button className='card-footer-content'>Send Referral ➔</button>
             </div>;
     }
     else if (status==='suggested') {
-        topLeftButton = <AddIcon className={'card-icon add-icon'+(isPopped ? ' hidden' : '')}/>;
+        topLeftButton = <AddIcon className={'card-icon add-icon'} onClick={toggleAdd}/>;
         topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
         cardFooter =
             <div className={'card-footer'} onClick={togglePopup}>
@@ -65,12 +80,20 @@ const Card = ({partnerData, status, isPopped}) => {
     else if (status==='self') {
         topLeftButton = null;
         topRightButton = null;
-        cardFooter = null;
+        cardFooter = 
+            <div className='card-footer-popped'>
+                <button className='copy-link' onClick={() => handleCopy()}>
+                    <LinkIcon className='copy-link-linkicon'/>
+                    <span>'https://filosolutions.com/as/asdfads/fadsaf'</span>
+                    <CopyIcon className='copy-link-copyicon'/>
+                </button>
+                <QRIcon className='qr-link' onClick={() => handleQR()}/>
+            </div>;
     }
     //////////////////////////////////
 
     return (
-        <div className={'card'+(!isPopped ? ' active' : '')}>
+        <div className={'card active'}>
             <div className="card-header">
                 {topLeftButton}
                 <img src={partnerData.logo} loading="lazy" alt="Company Logo" className="company-logo" />
@@ -83,17 +106,21 @@ const Card = ({partnerData, status, isPopped}) => {
                     <span className="tag home-services">{partnerData.industry}</span>
                 </div>
                 <div className="info-icons">
-                    <EmailIcon className='email-icon'/>
-                    <PhoneIcon className='phone-icon'/>
-                    <LocIcon className='loc-icon'/>
-                    <LinkIcon className='link-icon'/>
+                    <EmailIcon className='info-icon email'/>
+                    <PhoneIcon className='info-icon phone'/>
+                    <LocIcon className='info-icon loc'/>
+                    <LinkIcon className='info-icon link'/>
                 </div>
                 <p className="description">{partnerData.desc}</p>
             </div>
             {cardFooter}
-            <Popup show={showPopup} content={
-                <Referral partnerData={partnerData} closeClicked={togglePopup} toCustomer={false}/>
-            } onClose={togglePopup} />
+            {showPopup ? <Popup content={<Referral partnerData={partnerData} closeClicked={togglePopup} toCustomer={false}/>}
+            onClose={togglePopup} /> : null}
+            {showShare ? <Popup content={<Referral partnerData={partnerData} closeClicked={toggleShare} toCustomer={true}/>}
+            onClose={toggleShare} /> : null}
+            {showAdd ? <Popup content={
+                <Invite partnerData={partnerData} onClose={toggleAdd} onInvite={handleInviteUI}/>
+            } onClose={toggleAdd} /> : null}
         </div>    
     );
 };

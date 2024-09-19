@@ -16,6 +16,10 @@ const Header = () => {
     const handleProfileClick = () => {
         setShowPopup(!showPopup);
     };
+
+    // const handleEdit = () => {
+    //     console.log("Edit Clicked");
+    // };
     
 
     return (
@@ -32,11 +36,15 @@ const Header = () => {
                     <ProfileButton className='header-button' />
                 </button>
             </div>
-            <Popup show={showPopup} content={
+            {showPopup ? <Popup content={
                 <div className='user-profile-wrapper'>
+                    <div className='user-profile-header'>
+                        <h2>My Profile Info</h2>
+                        {/*<button onClick={handleEdit}>Edit</button>*/}
+                    </div>
                     <Card key='asdfasd' partnerData={currUser} status='self'/>
                 </div>
-            } onClose={handleProfileClick} />
+            } onClose={handleProfileClick} /> : null }
         </header>
     );
 };

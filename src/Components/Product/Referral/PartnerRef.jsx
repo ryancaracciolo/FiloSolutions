@@ -18,7 +18,7 @@ function PartnerRef({partnerData}) {
             {console.log(partnerData)}
             <button className='copy-card' onClick={() => handleCopy()}>Copy Card <CopyIcon className='copy-icon'/></button>
             <Card key='asdfasd' partnerData={partnerData} status='popped'/>
-            <button className="referral-footer" onClick={() => handlePartnerClick()}>{'Share Lead with Partner >>'}</button>
+            <button className="referral-footer" onClick={() => handlePartnerClick()}>{'Record Lead in Filo >>'}</button>
         </div>
     );
 };

@@ -16,7 +16,13 @@ function Partnerships() {
           // Allow body to scroll again when the component unmounts
           document.body.style.overflow = '';
         };
-      }, []);
+    }, []);
+
+    const updatePartner = (id, newStatus) => {
+        // const updatedPartners = items.map((item) =>
+        //     item.id === id ? {...item, status:})
+        console.log("NEW STATUS");
+    }
 
     return (
         <div className="content partnerships">
@@ -30,7 +36,7 @@ function Partnerships() {
                 </div>
                 <div className="partner-cards">
                     {partners.map(partner => (
-                        <Card key={partner.id} partnerData={partner} status='partner'/>
+                        <Card key={partner.id} partnerData={partner} status='partner' setStatus={updatePartner}/>
                     ))}
                 </div>
                 <div className="subheader">
@@ -39,7 +45,7 @@ function Partnerships() {
                 </div>
                 <div className="partner-cards">
                     {suggPartners.map(partner => (
-                        <Card key={partner.id} partnerData={partner} status='suggested'/>
+                        <Card key={partner.id} partnerData={partner} status='suggested' setStatus={updatePartner}/>
                     ))}
                 </div>
             </div>

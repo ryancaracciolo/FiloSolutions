@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 5px;
-    margin-top: 10px;
+    margin-top: 15px;
   }
   
   .cust-card .avatar .initials {
@@ -31,18 +31,19 @@
   .cust-card .details {
     align-self: stretch;
     margin: 0px 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
   }
   
   /* Input field styles */
   .cust-card .details input {
-    margin: 0px 0;
+    margin: 1px 0;
     border: none;
     border-radius: 5px;
     font-size: 12px;
     text-align: center;
+    color: var(--grey-dark-color);
   }
   
   .cust-card .details input:focus {
@@ -63,6 +64,10 @@
     background-color: #d6b8eb;
     padding: 2px;
     margin: 0 20%;
+    color: white;
+  }
+
+  input#cust-phone::placeholder {
     color: white;
   }
   

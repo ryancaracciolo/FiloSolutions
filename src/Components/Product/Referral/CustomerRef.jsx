@@ -12,12 +12,12 @@ function CustomerRef({partnerData}) {
         <div className="customer-referral">
             <button className='cust-referral-header'>Refer Customer to Partner</button>
             <CustCard />
-            <input className="cust-note"type="text" placeholder="Note (Optional):" />
+            <textarea className="cust-note"type="text" placeholder="Note (Optional):" />
             <div className='acknowledge-statement'>
-                <div><input type="acknowledge-checkbox" /></div>
+                <input type="checkbox" id="acknowledge-checkbox" />
                 <p>I acknowledge customer info will be shared with Partner</p>
             </div>
-            <button className="cust-referral-footer" onClick={() => handleSubmit()}>{'Submit'}</button>
+            <button className="cust-referral-footer" onClick={() => handleSubmit()}>Submit</button>
         </div>
     );
 };
