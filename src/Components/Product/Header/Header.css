@@ -3,16 +3,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 4vh;
 }
 
 .product-header .logo img {
-    height: clamp(35px, 3vw, 45px);
+    height: clamp(30px, 2vw, 38px);
 }
 
-.product-header .product-header-buttons {
+.product-header .profile-button {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0px;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.product-header .profile-button h3 {
+    color: var(--grey-dark-color);
+    font-family: var(--font-bold);
+    font-size: 14px;
+    margin-right: 5px;
 }
 
 .product-header .header-button {
@@ -24,3 +36,39 @@
 .product-header .header-button:hover {
     fill: var(--teal-dark-color);
 }
+
+.search-bar-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  .search-bar {
+    width: 100%;
+    padding: 4px 12px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    background-color: #f4f4f4; /* Grey background */
+    color: #333; /* Dark grey text */
+    border: 1px solid rgba(77, 76, 76, 0.2);
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Smooth transition on hover */
+    font-family: var(--font-light);
+  }
+  
+  .search-bar::placeholder {
+    color: #959595; /* Light grey placeholder text */
+  }
+  
+  .search-bar:hover {
+    background-color: #efefef; /* Lighter grey on hover */
+  }
+
+  .user-profile-wrapper {
+    width: 300px;
+    height: auto;
+  }
+  

@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { ReactComponent as DashboardIcon } from '../../../Assets/Icons/dashboard-icon.svg';
+//import { ReactComponent as DashboardIcon } from '../../../Assets/Icons/dashboard-icon.svg';
 import { ReactComponent as PartnershipIcon } from '../../../Assets/Icons/handshake-icon.svg';
 import { ReactComponent as OpportIcon } from '../../../Assets/Icons/lightbulb-icon.svg';
-import { ReactComponent as CollabIcon } from '../../../Assets/Icons/collab-icon.svg';
+//import { ReactComponent as CollabIcon } from '../../../Assets/Icons/collab-icon.svg';
 import { ReactComponent as SignOutIcon } from '../../../Assets/Icons/logout-icon.svg';
 import MenuItem from './MenuItem';
 import './Menu.css';
 import { signOut } from '@aws-amplify/auth';
+import { Link } from 'react-router-dom';
 
 function Menu() {
     const menuItems = [
-        { label: 'Dashboard', icon: DashboardIcon, path: '/app' },
+        //{ label: 'Dashboard', icon: DashboardIcon, path: '/app' },
         { label: 'Partnerships', icon: PartnershipIcon, path: '/app/partnerships' },
         { label: 'Opportunities', icon: OpportIcon, path: '/app/opportunities' },
-        { label: 'Collab', icon: CollabIcon, path: '/app/collab' },
-        { label: 'Sign Out', icon: SignOutIcon, path: '/app/collab' }
+        //{ label: 'Collab', icon: CollabIcon, path: '/app/collab' },
     ];
     
     const [selectedItem, setSelectedItem] = useState(0);
@@ -54,6 +54,12 @@ function Menu() {
                     />
                 ))}
             </ul>
+            <li className='sign-out' onClick={() => {handleSignOut()}}>
+                <Link to='app/login'>
+                    <SignOutIcon className="menu-icon" />
+                    <p>Sign Out</p>
+                </Link>
+            </li>
         </nav>
     );
 }

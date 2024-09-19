@@ -1,10 +1,13 @@
 // React imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// Styles
+import { UserProvider } from './objects/UserContext/UserContext';
 import './styles/index.css';
-// App
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+    <UserProvider>
+        <App />
+    </UserProvider>
+);

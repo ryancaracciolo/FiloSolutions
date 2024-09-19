@@ -28,15 +28,53 @@ const Card = ({partnerData, status, isPopped}) => {
         console.log("QR!!!!!!!!!!!");
     }
 
+    /////////// Rendering logic for Card variants ///////////////////
+    let topLeftButton;
+    let topRightButton;
+    let cardFooter;
+    
+    if (status==='popped') {
+        topLeftButton = null;
+        topRightButton = null;
+        cardFooter = 
+            <div className='card-footer-popped'>
+                <button className='copy-link' onClick={() => handleCopy()}>
+                    <LinkIcon className='copy-link-linkicon'/>
+                    <span>'https://filosolutions.com/as/asdfads/fadsaf'</span>
+                    <CopyIcon className='copy-link-copyicon'/>
+                </button>
+                <QRIcon className='qr-link' onClick={() => handleQR()}/>
+            </div>;
+    }
+    else if(status==='partner') {
+        topLeftButton = <CheckIcon className={'card-icon check-icon'+(isPopped ? ' hidden' : '')}/>;
+        topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
+        cardFooter =
+            <div className='card-footer' onClick={togglePopup}>
+                <button className='card-footer-content'>Send Referral ➔</button>
+            </div>;
+    }
+    else if (status==='suggested') {
+        topLeftButton = <AddIcon className={'card-icon add-icon'+(isPopped ? ' hidden' : '')}/>;
+        topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
+        cardFooter =
+            <div className={'card-footer'} onClick={togglePopup}>
+                <button className='card-footer-content'>Send Referral ➔</button>
+            </div>;
+    }
+    else if (status==='self') {
+        topLeftButton = null;
+        topRightButton = null;
+        cardFooter = null;
+    }
+    //////////////////////////////////
+
     return (
         <div className={'card'+(!isPopped ? ' active' : '')}>
             <div className="card-header">
-                {status==="partner" ?
-                    <CheckIcon className={'card-icon check-icon'+(isPopped ? ' hidden' : '')}/> :
-                    <AddIcon className={'card-icon add-icon'+(isPopped ? ' hidden' : '')}/>
-                }
+                {topLeftButton}
                 <img src={partnerData.logo} loading="lazy" alt="Company Logo" className="company-logo" />
-                <ShareIcon className={'card-icon share-icon'+(isPopped ? ' hidden' : '')}/>
+                {topRightButton}
             </div>
             <div className="card-body">
                 <h3 className="company-name">{partnerData.name}</h3>
@@ -52,17 +90,7 @@ const Card = ({partnerData, status, isPopped}) => {
                 </div>
                 <p className="description">{partnerData.desc}</p>
             </div>
-            <div className={'card-footer'+(isPopped ? ' hidden' : '')} onClick={togglePopup}>
-                <button className='card-footer-content'>Send Referral ➔</button>
-            </div>
-            <div className={'card-footer-popped'+(isPopped ? '' : ' hidden')}>
-                <button className='copy-link' onClick={() => handleCopy()}>
-                    <LinkIcon className='copy-link-linkicon'/>
-                    <span>'https://filosolutions.com/as/asdfads/fadsaf'</span>
-                    <CopyIcon className='copy-link-copyicon'/>
-                </button>
-                <QRIcon className='qr-link' onClick={() => handleQR()}/>
-            </div>
+            {cardFooter}
             <Popup show={showPopup} content={
                 <Referral partnerData={partnerData} closeClicked={togglePopup} toCustomer={false}/>
             } onClose={togglePopup} />

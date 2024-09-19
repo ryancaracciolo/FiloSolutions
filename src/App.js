@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { UserContext } from './objects/UserContext/UserContext'; // Import the UserContext
 import './styles/App.css';
 /*Landing Pages*/
 import LandingHeader from './Components/Landing/Header-Landing/Header-Landing';
@@ -14,12 +15,9 @@ import PrivacyPolicy from './Pages/Landing/Privacy-Policy/Privacy-Policy';
 /*Product Pages*/
 import Header from './Components/Product/Header/Header';
 import Menu from './Components/Product/Menu/Menu';
-import Dashboard from './Pages/Product/Dashboard/Dashboard';
 import Partnerships from './Pages/Product/Partnerships/Partnerships';
 import Opportunities from './Pages/Product/Opportunities/Opportunities';
 import Authentication from './Pages/Product/Authentication/Authentication';
-import Profile from './Pages/Product/Profile/Profile';
-import QRCode from './Pages/Product/QRCode/QRCode';
 // Amplify configuration
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
@@ -29,7 +27,7 @@ Amplify.configure(config);
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false); // menu state
-  const [user, setUser] = useState(null); // user state
+  const { user, setUser } = useContext(UserContext); // Access user and setUser from context
   const location = useLocation();
   let isProductRoute = location.pathname.startsWith('/app');
   
@@ -43,12 +41,9 @@ function App() {
             <main className="product-main">
               <Menu />
               <Routes>
-                <Route path="/app" element={<Dashboard />} />
                 <Route path="/app/partnerships" element={<Partnerships />} />
                 <Route path="/app/opportunities" element={<Opportunities />} />
-                <Route path="/app/profile" element={<Profile />} />
-                <Route path="/app/qrcode" element={<QRCode />} />
-                <Route path="*" element={<Navigate to="/app" />} />
+                <Route path="*" element={<Navigate to="/app/partnerships" />} />
               </Routes>
             </main>
           </>

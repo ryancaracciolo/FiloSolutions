@@ -3,6 +3,9 @@
     background-color: var(--teal-dark-color);
     z-index: 1001;
     border-top-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
   
 .ProductMenu ul {
@@ -44,6 +47,15 @@
   
 .menu-item.active {
     background-color: var(--teal-light-color);
+}
+
+.ProductMenu .sign-out {
+    display: flex;
+    height: clamp(45px, 4vw, 65px);
+    padding-left: 15px;
+    padding-right: 30px;
+    margin-bottom: 5px;
+    border-radius: 8px;
 }
   
 
