@@ -23,6 +23,8 @@ const Card = ({partnerData, status, setStatus}) => {
     const [showShare, setShowShare] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
 
+    console.log("DATA: "+partnerData.id)
+
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };

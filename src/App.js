@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { UserContext } from './objects/UserContext/UserContext'; // Import the UserContext
+import { BusinessContext } from './objects/UserContext/UserContext'; // Import the UserContext
 import './styles/App.css';
 /*Landing Pages*/
 import LandingHeader from './Components/Landing/Header-Landing/Header-Landing';
@@ -27,16 +27,17 @@ Amplify.configure(config);
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false); // menu state
-  const { user, setUser } = useContext(UserContext); // Access user and setUser from context
+  const { business, setBusiness } = useContext(BusinessContext); // Access user and setUser from context
   const location = useLocation();
   let isProductRoute = location.pathname.startsWith('/app');
-  
+
   return (
     <div className="app-wrapper">
       {isProductRoute ? (
         <>
-          {user ? (
+          {business.id ? (
           <>
+          {console.log(business)}
             <Header />
             <main className="product-main">
               <Menu />
@@ -49,7 +50,7 @@ function App() {
           </>
           ) : (
             <Routes>
-              <Route path="*" element={<Authentication setUser={setUser} />} />
+              <Route path="*" element={<Authentication setBusiness={setBusiness} />} />
             </Routes>
           )}
         </>

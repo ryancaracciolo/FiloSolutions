@@ -2,16 +2,14 @@ import React, { useContext, useState } from 'react';
 import './Header.css';
 import logo from '../../../Assets/Images/FiloLogo.png';
 import {ReactComponent as ProfileButton} from '../../../Assets/Icons/profile-icon.svg';
-import { UserContext } from '../../../objects/UserContext/UserContext'; // Import the context
+import { BusinessContext } from '../../../objects/UserContext/UserContext'; // Import the context
 import Popup from '../Popup/Popup';
 import Card from '../../../Components/Product/Card/Card';
 import {dummyBusiness} from '../../../objects/test-objects/test-objects';
 
 const Header = () => {
-    const { user } = useContext(UserContext);
+    const { business } = useContext(BusinessContext);
     const [showPopup, setShowPopup] = useState(false); // popup state
-    const currUser = dummyBusiness();
-
     
     const handleProfileClick = () => {
         setShowPopup(!showPopup);
@@ -32,7 +30,7 @@ const Header = () => {
                     <input type="text" placeholder="Search for Anything..." className="search-bar" />
                 </div>
                 <button className="profile-button" onClick={handleProfileClick}>
-                    <h3>{'Ryan'}</h3>
+                    <h3>{business.name}</h3>
                     <ProfileButton className='header-button' />
                 </button>
             </div>
@@ -42,7 +40,7 @@ const Header = () => {
                         <h2>My Profile Info</h2>
                         {/*<button onClick={handleEdit}>Edit</button>*/}
                     </div>
-                    <Card key='asdfasd' partnerData={currUser} status='self'/>
+                    <Card key={business.id} partnerData={business} status='self'/>
                 </div>
             } onClose={handleProfileClick} /> : null }
         </header>

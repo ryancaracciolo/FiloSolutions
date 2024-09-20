@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { BusinessContext } from '../../../objects/UserContext/UserContext';
 //import { ReactComponent as DashboardIcon } from '../../../Assets/Icons/dashboard-icon.svg';
 import { ReactComponent as PartnershipIcon } from '../../../Assets/Icons/handshake-icon.svg';
 import { ReactComponent as OpportIcon } from '../../../Assets/Icons/lightbulb-icon.svg';
@@ -10,6 +11,8 @@ import { signOut } from '@aws-amplify/auth';
 import { Link } from 'react-router-dom';
 
 function Menu() {
+    const { business, setBusiness } = useContext(BusinessContext);
+
     const menuItems = [
         //{ label: 'Dashboard', icon: DashboardIcon, path: '/app' },
         { label: 'Partnerships', icon: PartnershipIcon, path: '/app/partnerships' },
@@ -28,7 +31,9 @@ function Menu() {
         try {
         await signOut();
         // Optionally, redirect to a login page after sign-out
-        window.location.href = '/app/login';
+        setBusiness(null)
+        //window.location.href = '/app/login';
+
         } catch (error) {
         console.log('Error signing out: ', error);
         }

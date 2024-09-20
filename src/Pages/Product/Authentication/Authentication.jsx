@@ -7,8 +7,9 @@ import background from '../../../Assets/Images/background.png';
 import { ReactComponent as EmailIcon } from '../../../Assets/Icons/email-icon.svg';
 import { ReactComponent as PasswordIcon } from '../../../Assets/Icons/password-icon.svg';
 import ConfirmationCode from './ConfirmCode';
+import axios from 'axios';
 
-function Authentication({setUser}) {
+function Authentication({setBusiness}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [step, setStep] = useState(1); // Step 1: Enter email, Step 2: Enter code
@@ -18,14 +19,27 @@ function Authentication({setUser}) {
   const [loading, setLoading] = useState(true); // loading state to track authentication check
   const navigate = useNavigate();
 
+  const fetchPartners = async (email) => {
+    try {
+        const response = await axios.post('http://localhost:3001/api/businesses/get-business-byemail',{email});
+        console.log("response!: "+response.data)
+        setBusiness(response.data);
+        //navigate('/app/partnerships'); // Redirect after login
+    } catch (err) {
+        console.error('Error fetching business:', err.response?.data || err.message);
+        setError(err.response?.data?.error || 'An error occurred while fetching business.');
+        console.log(err);
+    } finally {
+        setLoading(false);
+    }
+  };
+
   useEffect(() => {
     // Check if a user is already authenticated
     getCurrentUser()
       .then(user => {
         console.log('User Found');
-        setUser(user);
-        setLoading(false); // Authentication check complete
-        navigate('/app'); // Redirect after login
+        fetchPartners(user.signInDetails.loginId)
       })
       .catch(() => {
         console.log('No user logged in');
@@ -53,13 +67,12 @@ function Authentication({setUser}) {
         await signIn({ username: email, password });
         const user = await getCurrentUser();
         console.log("Successfully signed in: ", { user });
-        setUser(user);
-        navigate('/app'); // Redirect after login
+        fetchPartners(user.signInDetails.loginId);
       } else {
         // Sign up flow
         await signUp({
           username: email,
-          password, // Dummy password for sign-up
+          password,
           attributes: { email }, // User attribute
         });
         console.log("Verification code sent to email");
@@ -90,8 +103,8 @@ function Authentication({setUser}) {
       await signIn({ username: email, password });
       const user = await getCurrentUser();
       console.log("Successfully signed in");
-      setUser(user);
-      navigate('/app'); // Redirect to app after login
+      fetchPartners(user.signInDetails.loginId);
+      //navigate('/app/partnerships'); // Redirect after login
     } catch (error) {
       setError(error.message);
     } finally {

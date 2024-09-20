@@ -32,3 +32,8 @@
     width: 100%;
     padding: 0px;
 }
+
+.content-detail .no-partners {
+    font-family: var(--font-regular);
+    color: var(--grey-dark-color);
+}
