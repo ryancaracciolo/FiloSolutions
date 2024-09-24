@@ -1,14 +1,17 @@
 import dynamodb from '../config/db.js';
-import { v4 as uuidv4 } from 'uuid';
 import Business from '../Objects/Business.js'
+import Partnership from '../Objects/Partnership.js'
+import Lead from '../Objects/Lead.js'
+import shortUUID from "short-uuid";
+
 
 const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 
 ///////////////// Adding Business /////////////////////
 export const addBusiness = (req, res) => {
-  const { id, name, logo, desc, owner, industry, address, email, phone, website } = req.body;
+  const { name, logo, desc, owner, industry, address, email, phone, website } = req.body;
 
-  const business = new Business(id, name, logo, desc, owner, industry, address, email, phone, website);
+  const business = new Business(shortUUID().new(), name, logo, desc, owner, industry, address, email, phone, website);
 
   try {
     business.validate();
@@ -37,7 +40,6 @@ export const addBusiness = (req, res) => {
 
 ///////////////// Fetching Business with ID /////////////////////
 export const fetchBusinessByID = (req, res) => {
-  // 1. Retrieve the Business ID from the URL parameters
   const businessId = req.params.id;
 
 
@@ -45,16 +47,14 @@ export const fetchBusinessByID = (req, res) => {
     return res.status(400).json({ error: 'Business ID is required.' });
   }
 
-  // 2. Set up DynamoDB Get Parameters
   const params = {
-    TableName: tableName, // Replace with your actual table name
+    TableName: tableName,
     Key: {
       PK: 'BUSINESS#'+businessId,
       SK: 'METADATA',
     },
   };
 
-  // 3. Perform the Get Operation
   dynamodb.get(params, (err, data) => {
     console.log('BUSINESS#'+businessId)
     if (err) {
@@ -62,16 +62,16 @@ export const fetchBusinessByID = (req, res) => {
         'Unable to get business. Error JSON:',
         JSON.stringify(err, null, 2)
       );
-      // 4a. Handle Error Response
+      // Handle Error Response
       res.status(500).json({ error: 'An error occurred while fetching the business.' });
     } else if (data.Item) {
-      // 4b. Process the Retrieved Item
+      // Process the Retrieved Item
       const business = Business.fromItem(data.Item);
       console.log('Fetched business:', business);
       res.status(200).json(business);
     } else {
       console.log('Business not found');
-      // 4c. Handle Business Not Found
+      // Handle Business Not Found
       res.status(404).json({ error: 'Business not found.' });
     }
   });
@@ -86,10 +86,9 @@ export const fetchBusinessByEmail = (req, res) => {
     return res.status(400).json({ error: 'Email is required.' });
   }
 
-  // Set up DynamoDB query parameters
   const params = {
-    TableName: tableName, // Replace with your actual table name
-    IndexName: 'GSI1', // The name of your GSI on the email attribute
+    TableName: tableName,
+    IndexName: 'GSI1', // The name of our GSI on the email attribute
     KeyConditionExpression: 'email = :email',
     ExpressionAttributeValues: {
       ':email': email,
@@ -118,11 +117,10 @@ export const fetchBusinessByEmail = (req, res) => {
 };
 
 
-///////////////// Fetching Partners for Business /////////////////////
+///////////////// Fetching Partners /////////////////////
 export const fetchPartnersForBusiness = async (req, res) => {
   const businessId = req.params.id;
-  console.log("BUSINESS ID: "+businessId);
-
+  console.log("FETCHING PARTNERS");
   if (!businessId) {
     return res.status(400).json({ error: 'Business ID is required.' });
   }
@@ -133,7 +131,7 @@ export const fetchPartnersForBusiness = async (req, res) => {
       TableName: tableName,
       KeyConditionExpression: 'PK = :pk AND begins_with(SK, :sk)',
       ExpressionAttributeValues: {
-        ':pk': 'BUSINESS#'+businessId,
+        ':pk': 'BUSINESS#' + businessId,
         ':sk': 'PARTNER#',
       },
     };
@@ -144,15 +142,21 @@ export const fetchPartnersForBusiness = async (req, res) => {
       return res.status(404).json({ error: 'No partners found for this business.' });
     }
 
-    // Extract PartnerBusinessIDs
-    const partnerBusinessIds = data.Items.map(item => item.PartnerBusinessID);
+    // Step 1: Create a map of partnerId to status
+    const partnerInfoMap = {};
+    data.Items.forEach((item) => {
+      const partnerId = item.partnerId;
+      partnerInfoMap[partnerId] = {
+        status: item.status
+      };
+    });
 
-    // Remove duplicates, if any
-    const uniquePartnerBusinessIds = [...new Set(partnerBusinessIds)];
+    // Step 2: Extract PartnerBusinessIDs
+    const partnerIds = Object.keys(partnerInfoMap);
 
-    // Fetch partner business data for each PartnerBusinessID using batchGet
-    const keys = uniquePartnerBusinessIds.map(id => ({
-      PK: 'BUSINESS#'+id,
+    // Step 3: Fetch partner business data for each PartnerBusinessID using batchGet
+    const keys = partnerIds.map((id) => ({
+      PK: 'BUSINESS#' + id,
       SK: 'METADATA',
     }));
 
@@ -166,15 +170,106 @@ export const fetchPartnersForBusiness = async (req, res) => {
 
     const batchData = await dynamodb.batchGet(batchParams).promise();
 
-    // Map the retrieved items to Business instances
-    const partnerBusinesses = batchData.Responses[tableName].map(item =>
-      Business.fromItem(item)
+    // Step 4: Initialize the result structure
+    const result = {
+      Pending_Sent: [],
+      Pending_Received: [],
+      Confirmed: [],
+      Suggested: [],
+    };
+
+    // Step 5: Map the retrieved items and group them by status
+    batchData.Responses[tableName].forEach((item) => {
+      const partnerBusiness = Business.fromItem(item);
+      const partnerId = item.PK.replace('BUSINESS#', '');
+      const { status } = partnerInfoMap[partnerId];
+
+      if (result[status]) {
+        result[status].push(partnerBusiness);
+      } else {
+        // Handle unexpected statuses if necessary
+        console.warn(`Unknown status '${status}' for partnerId '${partnerId}'`);
+      }
+    });
+
+    // Return the structured result to the frontend
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error fetching partners:', error);
+    res.status(500).json({ error: 'An error occurred while fetching partners: ' + error });
+  }
+};
+
+
+//////////////////// Fetching Leads /////////////////////////////
+export const fetchLeadsForBusiness = async (req, res) => {
+  const businessId = req.params.id;
+
+  if (!businessId) {
+    return res.status(400).json({ error: 'Business ID is required.' });
+  }
+
+  try {
+    // Query for Partner items under the business's partition
+    const params = {
+      TableName: tableName,
+      KeyConditionExpression: 'PK = :pk AND begins_with(SK, :skPrefix)',
+      ExpressionAttributeValues: {
+        ':pk': `BUSINESS#${businessId}`,
+        ':skPrefix': 'LEAD#',
+      },
+    };
+
+    const data = await dynamodb.query(params).promise();
+
+    if (data.Items.length === 0) {
+      return res.status(404).json({ error: 'No leads found for this business.' });
+    }
+
+    // Map the retrieved items to Lead instances
+    const leads = data.Items.map(item =>
+      Lead.fromItem(item)
     );
 
     // Return the partner businesses to the frontend
     res.status(200).json(partnerBusinesses);
+
   } catch (error) {
       console.error('Error fetching partners:', error);
       res.status(500).json({ error: 'An error occurred while fetching partners.. '+error });
   }
 };
+
+
+
+export const fetchBusinessName = async (req, res) => { 
+  try {
+    const businessId = req.params.id;
+
+    if (!businessId) {
+      return res.status(400).json({ error: 'businessId is required.' });
+    }
+
+    const params = {
+      TableName: tableName,
+      Key: {
+        PK: `BUSINESS#${businessId}`,
+        SK: 'PROFILE',
+      },
+      ProjectionExpression: 'name',
+    };
+
+    const result = await dynamodb.get(params).promise();
+
+    if (!result.Item) {
+      return res.status(404).json({ error: 'Business not found.' });
+    }
+
+    res.status(200).json({ name: result.Item.name });
+  } catch (error) {
+    console.error('Error fetching business name:', error);
+    res.status(500).json({ error: 'An error occurred while fetching the business name.' });
+  }
+};
+
+

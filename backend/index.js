@@ -4,6 +4,7 @@ import cors from 'cors'; // CORS (Cross-Origin Resource Sharing) is a middleware
 import dotenv from 'dotenv'; // this is a package that loads environment variables from a .env file into process.env. (purpose is to keep sensitive data like API keys, passwords, etc. out of the codebase)
 import businessRoutes from './routes/businessRoutes.js';
 import partnershipRoutes from './routes/partnershipRoutes.js';
+import leadRoutes from './routes/leadRoutes.js';
 
 
 // Load environment variables
@@ -18,6 +19,8 @@ app.use(cors({
 // Routes
 app.use('/api/businesses', businessRoutes);
 app.use('/api/partnerships', partnershipRoutes);
+app.use('/api/leads', leadRoutes);
+
 
 
 // Start the server

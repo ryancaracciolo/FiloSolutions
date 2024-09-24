@@ -1,13 +1,15 @@
+import shortUUID from "short-uuid";
+
 export default class Business {
-    constructor(id, name, logo, desc, owner, industry, address, email, phone, website) {
+    constructor(id, name, logo, desc, owner, industry, address, email, phone, website,) {
       if (!id || !email || !name) {
         console.log(id, email, name)
         throw new Error('Business ID, email, and name are required.');
       }
-      this.PK = 'BUSINESS#'+id; // Partition Key
+      this.id = id || shortUUID().new(); // Generate a unique ID
+      this.PK = `BUSINESS#${this.id}`; // Partition Key
       this.SK = 'METADATA';        // Sort Key
       this.Type = 'Business';      // Item Type
-      this.id = id;
       this.name = name;
       this.logo = logo;
       this.desc = desc;
@@ -30,10 +32,10 @@ export default class Business {
     // Method to convert the class instance to a plain object for DynamoDB
     toItem() {
       return {
+        id: this.id,
         PK: this.PK,
         SK: this.SK,
         Type: this.Type,
-        id: this.id,
         name: this.name,
         logo: this.logo,
         desc: this.desc,
@@ -42,26 +44,23 @@ export default class Business {
         address: this.address,
         email: this.email,
         phone: this.phone,
-        website: this.website
+        website: this.website,
       };
     }
 
     static fromItem(item) {
         const business = new Business(
-          item.id,
-          item.name,
-          item.logo,
-          item.desc,
-          item.owner,
-          item.industry,
-          item.address,
-          item.email,
-          item.phone,
-          item.website
+            item.id,
+            item.name,
+            item.logo,
+            item.desc,
+            item.owner,
+            item.industry,
+            item.address,
+            item.email,
+            item.phone,
+            item.website,
         );
-        business.PK = item.PK;
-        business.SK = item.SK;
-        business.Type = item.Type;
         return business;
       }
 }

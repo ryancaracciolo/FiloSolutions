@@ -1,18 +1,19 @@
-import React, {useEffect, useState, useContext} from 'react';
-import { BusinessContext } from '../../../objects/UserContext/UserContext';
+import React, {useEffect, useState, useRef} from 'react';
 import './Partnerships.css';
+import MyPartners from './MyPartners'
+import Invites from './Invites'
+import FindPartners from './FindPartners'
 import '../../../Components/Product/Content/Content.css';
-import Card from '../../../Components/Product/Card/Card';
-import {dummyBusinesses} from '../../../objects/test-objects/test-objects';
-import axios from 'axios';
 
 function Partnerships() {
-    const { business } = useContext(BusinessContext); // Access user and setUser from context
-    const [partners, setPartners] = useState([]);
-    const suggPartners = dummyBusinesses(3);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(''); 
-    const [hasPartners, setHasPartners] = useState(false);
+    const [activeTab, setActiveTab] = useState('Find Partners');
+    const sliderRef = useRef(null);
+    const [pendingSent, setPendingSent] = useState([]);
+    const [pendingReceived, setPendingReceived] = useState([]);
+
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+    };
 
     useEffect(() => {
         // Prevent body from scrolling when the component mounts
@@ -23,72 +24,51 @@ function Partnerships() {
     }, []);
 
     useEffect(() => {
-        // Fetch partners when the component mounts
-        const fetchPartners = async () => {
-            try {
-                // Step 1: Fetch the list of partner IDs for the given business
-                const response = await axios.get(`http://localhost:3001/api/businesses/get-partners/${business.id}`);
-                const data = response.data; // Assuming response.data is an array of partner IDs
-                const partnersData = Array.isArray(data) ? data : [data];
-                setPartners(partnersData);
-                console.log("Partners Data:", partnersData);
-                setHasPartners(true);
-            } catch (err) {
-                console.error('Error fetching partners:', err.response?.data || err.message);
-                const errorMessage = err.response?.data?.error;
-        
-                if (errorMessage === 'No partners found for this business.') {
-                    setHasPartners(false);
-                    setPartners([]); // Ensure partners array is empty
-                } else {
-                    console.log(errorMessage);
-                    setError(errorMessage || 'An error occurred while fetching partners.');
-                }
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }        
+        // Function to move the slider under the active tab
+        const moveSlider = () => {
+          const activeTabElement = document.querySelector('.header-tab.active');
+          if (activeTabElement && sliderRef.current) {
+            const { offsetLeft, offsetWidth } = activeTabElement;
+            sliderRef.current.style.left = `${offsetLeft+10}px`;
+            sliderRef.current.style.width = `${offsetWidth-20}px`;
+          }
         };
-        fetchPartners();
-    }, [business]);
-    
-    if (loading) {
-        return <div>Loading partners...</div>;
-    }
-    
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-    const updatePartner = (id, newStatus) => {
-        console.log("NEW STATUS");
-    }
+        moveSlider();
+        window.addEventListener('resize', moveSlider); // Reposition on window resize
+        // Cleanup listener on component unmount
+        return () => {
+          window.removeEventListener('resize', moveSlider);
+        };
+    }, [activeTab]);
 
     return (
         <div className="content partnerships">
             <div className="content-header">
                 <h1>Partners</h1>
+                <div className="header-tabs">
+                    <div className='header-slider' ref={sliderRef}/>
+                    <button
+                    className={'header-tab'+(activeTab === 'My Partners' ? ' active' : '')}
+                    onClick={() => handleTabChange('My Partners')}>
+                    My Partners
+                    </button>
+                    <button
+                    className={'header-tab'+(activeTab === 'Invites' ? ' active' : '')}
+                    onClick={() => handleTabChange('Invites')}>
+                    Invites
+                    </button>
+                    <button
+                    className={'header-tab'+(activeTab === 'Find Partners' ? ' active' : '')}
+                    onClick={() => handleTabChange('Find Partners')}>
+                    All Other
+                    </button>
+                </div>
             </div>
+            {/* Render Content Based on Active Tab */}
             <div className="content-detail">
-                <div className="subheader">
-                    <h2>My Partners</h2>
-                    <p>({partners.length} active)</p>
-                </div>
-                {!hasPartners ? <div className='no-partners'>Invite other members to create your first partnership!</div> : null}
-                <div className="partner-cards">
-                    {hasPartners ? partners.map(partner => (
-                        <Card key={partner.PK} partnerData={partner} status='partner' setStatus={updatePartner}/>
-                    )) : null}
-                </div>
-                <div className="subheader">
-                    {suggPartners ? <h2>Suggested Partners</h2> : null}
-                    {suggPartners ? <p>♦ Powered by AI ♦</p> : null}
-                </div>
-                <div className="partner-cards">
-                    {suggPartners.map(partner => (
-                        <Card key={partner.id} partnerData={partner} status='suggested' setStatus={updatePartner}/>
-                    ))}
-                </div>
+                {activeTab === 'My Partners' && <MyPartners setPendingSent={setPendingSent} setPendingReceived={setPendingReceived}/>}
+                {activeTab === 'Invites' && <Invites pendingSent={pendingSent} pendingReceived={pendingReceived}/>}
+                {activeTab === 'Find Partners' && <FindPartners />}
             </div>
         </div>
     );

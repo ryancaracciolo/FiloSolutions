@@ -1,33 +1,61 @@
+import shortUUID from "short-uuid";
+
 export default class Lead {
-    static STATUS_OPTIONS = {
-      Sent: 'Sent',
-      Intro: 'Intro',
-      Active: 'Active',
-      ClosedWon: 'Closed-Won',
-      ClosedLost: 'Closed-Lost',
+  constructor(id, businessId, otherBusinessId, name, email, phone, note, status, direction, createdAt) {
+    this.id = id || shortUUID().new(); // Generate or accept a unique Lead ID
+    this.PK = `BUSINESS#${this.businessId}`;
+    this.SK = `LEAD#${this.createdAt}#${this.id}`;
+    this.Type = 'Lead';
+    this.businessId = businessId; // The business that will own this item (sender or recipient)
+    this.otherBusinessId = otherBusinessId; // The other business involved
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.note = note;
+    this.status = status;
+    this.direction = direction; // 'Shared' or 'Received'
+    this.createdAt = createdAt || new Date().toISOString();   
+  }
+
+  toItem() {
+    return {
+      id: this.id,
+      PK: this.PK,
+      SK: this.SK,
+      Type: this.Type,
+      businessId: this.businessId,
+      otherBusinessId: this.otherBusinessId,
+      name: this.name,
+      email: this.email,
+      phone: this.phone,
+      note: this.note,
+      status: this.status,
+      direction: this.direction,
+      createdAt: this.createdAt,
     };
-  
-    constructor(id, date, creatorId, partnershipId, customerId, note, status) {
-      this.PK = `PARTNERSHIP#${partnershipId}`; // Partition Key
-      this.SK = `LEAD#${id}`;                   // Sort Key
-      this.Type = 'Lead';                       // Item Type
-      this.date = date;
-      this.creator = creatorId; // Business ID of the creator
-      this.customer = customerId; // Customer ID
-      this.note = note;
-      this.setStatus(status);
-    }
-  
-    setStatus(status) {
-      if (Object.values(Lead.STATUS_OPTIONS).includes(status)) {
-        this.status = status;
-      } else {
-        this.status = this.getRandomStatus();
-      }
-    }
-  
-    getRandomStatus() {
-      const statuses = Object.values(Lead.STATUS_OPTIONS);
-      return statuses[Math.floor(Math.random() * statuses.length)];
-    }
-  }  
+  }
+
+  fromItem(item) {
+    const lead = new Lead(
+        item.id,
+        item.businessId,
+        item.otherBusinessId,
+        item.name,
+        item.email,
+        item.phone,
+        item.note,
+        item.status,
+        item.direction,
+        item.createdAt
+    );
+    return lead;
+  }
+
+  static STATUS_OPTIONS = {
+    Sent: 'Sent',
+    Intro: 'Intro',
+    Active: 'Active',
+    ClosedWon: 'Closed-Won',
+    ClosedLost: 'Closed-Lost',
+  };
+}
