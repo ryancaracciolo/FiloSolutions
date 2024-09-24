@@ -1,18 +1,66 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useContext, useRef } from 'react';
+import { BusinessContext } from '../../../objects/UserContext/UserContext';
 import './Partnerships.css';
 import MyPartners from './MyPartners'
 import Invites from './Invites'
 import FindPartners from './FindPartners'
+import TabularMenu from '../../../Components/Product/TabularMenu/TabularMenu';
 import '../../../Components/Product/Content/Content.css';
+import axios from 'axios';
 
-function Partnerships() {
-    const [activeTab, setActiveTab] = useState('Find Partners');
-    const sliderRef = useRef(null);
+function Partnerships() {    
+    const { business } = useContext(BusinessContext);
+    const tabItems = ['My Partners', 'Invites', 'Find Partners'];
+    const [activeTab, setActiveTab] = useState('My Partners');
+    const [fetchedPartners, setFetchedPartners] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(''); 
+    // My Partners Lists
+    const [partners, setPartners] = useState([]);
+    const [suggPartners, setSuggPartners] = useState([]);
+    // Invites Lists
     const [pendingSent, setPendingSent] = useState([]);
     const [pendingReceived, setPendingReceived] = useState([]);
 
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
+    const fetchPartners = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`http://localhost:3001/api/businesses/get-partners/${business.id}`);
+            const data = response.data;
+            setPendingSent(data["Pending_Sent"])
+            setPendingReceived(data["Pending_Received"])
+            setPartners(data["Confirmed"]);
+            setSuggPartners(data["Suggested"]);
+        } catch (err) {
+            console.error('Error fetching partners:', err.response?.data || err.message);
+            const errorMessage = err.response?.data?.error;
+    
+            if (errorMessage !== 'No partners found for this business.') {
+                setError(errorMessage || 'An error occurred while fetching partners.');
+            }
+            console.log(err);
+        } finally {
+            console.log("FETCH PARTNERS COMPLETED.");
+            setFetchedPartners(true);
+            setLoading(false);
+        }        
+    };
+
+    const updatePartner = async (partnerId, newStatus) => {
+        console.log ("UPDATING!");
+        try {
+          const response = await axios.post('http://localhost:3001/api/partnerships/update-partnership', {
+            businessId1: business.id,
+            businessId2: partnerId,
+            status: newStatus,
+          });
+          console.log('Partnership updated successfully:', response.data);
+    
+          // Optionally update state or handle UI feedback if needed
+          
+        } catch (error) {
+          console.error('Error updating partnership:', error.response?.data || error.message);
+        }
     };
 
     useEffect(() => {
@@ -24,52 +72,30 @@ function Partnerships() {
     }, []);
 
     useEffect(() => {
-        // Function to move the slider under the active tab
-        const moveSlider = () => {
-          const activeTabElement = document.querySelector('.header-tab.active');
-          if (activeTabElement && sliderRef.current) {
-            const { offsetLeft, offsetWidth } = activeTabElement;
-            sliderRef.current.style.left = `${offsetLeft+10}px`;
-            sliderRef.current.style.width = `${offsetWidth-20}px`;
-          }
-        };
-        moveSlider();
-        window.addEventListener('resize', moveSlider); // Reposition on window resize
-        // Cleanup listener on component unmount
-        return () => {
-          window.removeEventListener('resize', moveSlider);
-        };
+        if (!fetchedPartners && !loading) {
+            fetchPartners();
+        }
     }, [activeTab]);
 
     return (
         <div className="content partnerships">
-            <div className="content-header">
-                <h1>Partners</h1>
-                <div className="header-tabs">
-                    <div className='header-slider' ref={sliderRef}/>
-                    <button
-                    className={'header-tab'+(activeTab === 'My Partners' ? ' active' : '')}
-                    onClick={() => handleTabChange('My Partners')}>
-                    My Partners
-                    </button>
-                    <button
-                    className={'header-tab'+(activeTab === 'Invites' ? ' active' : '')}
-                    onClick={() => handleTabChange('Invites')}>
-                    Invites
-                    </button>
-                    <button
-                    className={'header-tab'+(activeTab === 'Find Partners' ? ' active' : '')}
-                    onClick={() => handleTabChange('Find Partners')}>
-                    All Other
-                    </button>
-                </div>
-            </div>
+            <TabularMenu headerName={"Partners"} tabItems={tabItems} activeTab={activeTab} setActiveTab={setActiveTab}/>
             {/* Render Content Based on Active Tab */}
-            <div className="content-detail">
-                {activeTab === 'My Partners' && <MyPartners setPendingSent={setPendingSent} setPendingReceived={setPendingReceived}/>}
-                {activeTab === 'Invites' && <Invites pendingSent={pendingSent} pendingReceived={pendingReceived}/>}
-                {activeTab === 'Find Partners' && <FindPartners />}
-            </div>
+            {loading ? (
+                <div>Loading partners...</div>
+            ) : error ? (
+                <div>Error: {error}</div>
+            ) : (
+                <div className="content-detail">
+                    {activeTab === 'My Partners' && (
+                    <MyPartners partners={partners} suggPartners={suggPartners} updatePartner={updatePartner} />
+                    )}
+                    {activeTab === 'Invites' && (
+                    <Invites pendingSent={pendingSent} pendingReceived={pendingReceived} updatePartner={updatePartner} />
+                    )}
+                    {activeTab === 'Find Partners' && <FindPartners />}
+                </div>
+            )}
         </div>
     );
 };

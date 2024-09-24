@@ -35,7 +35,7 @@ function App() {
     <div className="app-wrapper">
       {isProductRoute ? (
         <>
-          {business.id ? (
+          {business?.id ? (
           <>
           {console.log(business)}
             <Header />
@@ -50,7 +50,8 @@ function App() {
           </>
           ) : (
             <Routes>
-              <Route path="*" element={<Authentication setBusiness={setBusiness} />} />
+              <Route path="/app/login" element={<Authentication setBusiness={setBusiness} />} />
+              <Route path="*" element={<Navigate to="/app/login" />} />
             </Routes>
           )}
         </>
@@ -66,6 +67,7 @@ function App() {
               <Route path="/learn-more" element={<LearnMore />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>
           <LandingFooter />

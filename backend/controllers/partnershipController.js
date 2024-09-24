@@ -25,7 +25,7 @@ export const createPartnership = async (req, res) => {
     var statusTwo = status;
 
 
-    if (status === "Pending") {
+    if (status === "Pending" || status ==="Pending_Sent") {
       statusOne = "Pending_Sent"
       statusTwo = "Pending_Received"
     }
@@ -104,6 +104,16 @@ export const updatePartnership = async (req, res) => {
       return res.status(400).json({ error: 'A business cannot partner with itself.' });
     }
 
+    var statusOne = status;
+    var statusTwo = status;
+    if (status === 'Pending' || status === 'Pending_Sent') {
+      statusOne = 'Pending_Sent'
+      statusTwo = 'Pending_Received'
+    } else if (status === 'Pending_Received') {
+      statusOne = 'Pending_Received'
+      statusTwo = 'Pending_Sent'
+    }
+
     // Prepare transactional update
     const transactParams = {
       TransactItems: [
@@ -119,7 +129,7 @@ export const updatePartnership = async (req, res) => {
               '#status': 'status',
             },
             ExpressionAttributeValues: {
-              ':newStatus': status,
+              ':newStatus': statusOne,
             },
           },
         },
@@ -135,7 +145,7 @@ export const updatePartnership = async (req, res) => {
               '#status': 'status',
             },
             ExpressionAttributeValues: {
-              ':newStatus': status,
+              ':newStatus': statusTwo,
             },
           },
         },

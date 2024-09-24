@@ -11,7 +11,7 @@ import { ReactComponent as CopyIcon } from '../../../Assets/Icons/copy-icon.svg'
 import { ReactComponent as QRIcon } from '../../../Assets/Icons/qr-icon.svg';
 import Referral from '../Referral/Referral';
 import Popup from '../Popup/Popup';
-import Invite from '../Invite/Invite';
+import Confirm from '../Invite/Invite';
 
 const Card = ({partnerData, status, setStatus}) => {
     
@@ -45,8 +45,12 @@ const Card = ({partnerData, status, setStatus}) => {
         console.log("QR!!!!!!!!!!!");
     }
 
-    const handleInviteUI = () => {
-        setStatus()
+    const handleAccept = () => {
+        setStatus(partnerData.id, "Confirmed");
+    }
+
+    const handleInvite = () => {
+        setStatus(partnerData.id, "Pending_Sent");
     }
 
     /////////// Rendering logic for Card variants //////////////////
@@ -63,7 +67,7 @@ const Card = ({partnerData, status, setStatus}) => {
                 <QRIcon className='qr-link' onClick={() => handleQR()}/>
             </div>;
     }
-    else if(status==='partner') {
+    else if(status==='Partner') {
         topLeftButton = <CheckIcon className={'card-icon check-icon'}/>;
         topRightButton = <ShareIcon className={'card-icon share-icon'} onClick={toggleShare}/>;
         cardFooter =
@@ -71,7 +75,7 @@ const Card = ({partnerData, status, setStatus}) => {
                 <button className='card-footer-content'>Send Referral ➔</button>
             </div>;
     }
-    else if (status==='suggested') {
+    else if (status==='Suggested') {
         topLeftButton = <AddIcon className={'card-icon add-icon'} onClick={toggleAdd}/>;
         topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
         cardFooter =
@@ -79,7 +83,24 @@ const Card = ({partnerData, status, setStatus}) => {
                 <button className='card-footer-content'>Send Referral ➔</button>
             </div>;
     }
-    else if (status==='self') {
+
+    else if (status==='Pending_Sent') {
+        topLeftButton = <div className={'card-icon pending_sent-icon'}>Invite Sent</div>;
+        topRightButton = null;
+        cardFooter =
+            <div className={'card-footer'} style={{backgroundColor: 'lightGrey'}}>
+                <button className='card-footer-content' style={{color: 'var(--grey-dark-color'}}>Pending</button>
+            </div>;
+    }
+    else if (status==='Pending_Received') {
+        topLeftButton = <div className={'card-icon pending_received-icon'}>Invited</div>;
+        topRightButton = null;
+        cardFooter =
+            <div className={'card-footer'} onClick={handleAccept}>
+                <button className='card-footer-content'>Accept Invite</button>
+            </div>;
+    }
+    else if (status==='Self') {
         topLeftButton = null;
         topRightButton = null;
         cardFooter = 
@@ -120,9 +141,8 @@ const Card = ({partnerData, status, setStatus}) => {
             onClose={togglePopup} /> : null}
             {showShare ? <Popup content={<Referral partnerData={partnerData} closeClicked={toggleShare} toCustomer={true}/>}
             onClose={toggleShare} /> : null}
-            {showAdd ? <Popup content={
-                <Invite partnerData={partnerData} onClose={toggleAdd} onInvite={handleInviteUI}/>
-            } onClose={toggleAdd} /> : null}
+            {showAdd ? <Popup content={<Confirm onClose={toggleAdd} onInvite={handleInvite}/>} 
+            onClose={toggleAdd} /> : null}
         </div>    
     );
 };

@@ -62,6 +62,22 @@
     fill: var(--teal-medium-color);
 }
 
+.pending_received-icon {
+    background-color: var(--gold-dark-color);
+    color: white;
+    border-radius: 5px;
+    padding: 0 6px;
+    font-size: 12px;
+}
+
+.pending_sent-icon {
+    background-color: var(--grey-dark-color);
+    color: white;
+    border-radius: 5px;
+    padding: 0 6px;
+    font-size: 12px;
+}
+
 .company-name {
     font-size: 16px;
     font-family: var(--font-bold);

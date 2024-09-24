@@ -40,7 +40,7 @@ const Header = () => {
                         <h2>My Profile Info</h2>
                         {/*<button onClick={handleEdit}>Edit</button>*/}
                     </div>
-                    <Card key={business.id} partnerData={business} status='self'/>
+                    <Card key={business.id} partnerData={business} status='Self'/>
                 </div>
             } onClose={handleProfileClick} /> : null }
         </header>

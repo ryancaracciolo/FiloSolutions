@@ -1,0 +1,34 @@
+.header-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    width: 40vw;
+    position: relative;
+}
+
+.header-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    font-size: 14px;
+    font-family: var(--font-regular);
+    position: relative;
+    transition: color 0.3s;
+    color: var(--grey-dark-color);
+}
+
+.header-tab.active {
+    font-family: var(--font-bold);
+}
+
+.header-tabs .header-slider {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    height: 3px;
+    background-color: var(--teal-medium-color);
+    transition: all 0.3s ease;
+    z-index: 1;
+    border-radius: 2px;
+  }
