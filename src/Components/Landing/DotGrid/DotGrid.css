@@ -3,17 +3,17 @@
     top: 30px;
     left: 30px;
     display: grid;
-    grid-template-columns: repeat(25, 5px);
-    grid-template-rows: repeat(15, 5px);
+    grid-template-columns: repeat(20, 5px);
+    grid-template-rows: repeat(12, 5px);
     gap: 12px;
     background-color: transparent; /* Optional: Ensure the background is visible */
-    z-index: -2;
+    z-index: 1;
   }
   
   .dot-grid .dot {
     width: 5px;
     height: 5px;
-    background-color: var(--grey-light-color);
+    background-color: rgb(226, 226, 226);
     border-radius: 50%;
     display: inline-block;
   }

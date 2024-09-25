@@ -1,7 +1,8 @@
 header {
-    background-color: var(--background-color);
+    background-color: white;
     padding: 10px 20px;
     z-index: 1000;
+    
 }
 
 header .container {
@@ -38,8 +39,8 @@ header nav ul li {
 }
 
 header nav ul li a {
-    font-family: var(--font-regular);
-    font-size: clamp(14px, 1.5vw, 24px);
+    font-family: var(--font-reg);
+    font-size: clamp(10px, 1.2vw, 20px);
     letter-spacing: 0.5px;
     text-decoration: none;
     color: var(--grey-dark-color);
@@ -58,7 +59,7 @@ header .auth-buttons {
 
 header .auth-buttons a {
     font-family: var(--font-bold);
-    font-size: clamp(12px, 1.4vw, 20px);
+    font-size: clamp(10px, 1.2vw, 20px);
     letter-spacing: 0.5px;
     text-decoration: none;
     padding: 0.5em 1em;

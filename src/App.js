@@ -7,11 +7,12 @@ import './styles/App.css';
 import LandingHeader from './Components/Landing/Header-Landing/Header-Landing';
 import LandingFooter from './Components/Landing/Footer-Landing/Footer-Landing';
 import LandingMenu from './Components/Landing/Menu-Landing/Menu-Landing';
-import Home from './Pages/Landing/Home/Home';
-import About from './Pages/Landing/About/About';
-import LearnMore from './Pages/Landing/Learn-More/Learn-More';
-import Contact from './Pages/Landing/Contact/Contact';
-import PrivacyPolicy from './Pages/Landing/Privacy-Policy/Privacy-Policy';
+//import Home from './Pages/Landing/Home/Home';
+//import About from './Pages/Landing/About/About';
+//import LearnMore from './Pages/Landing/HowItWorks/HowItWorks';
+//import Contact from './Pages/Landing/Contact/Contact';
+//import PrivacyPolicy from './Pages/Landing/Privacy-Policy/Privacy-Policy';
+import LandingMain from './Pages/Landing/LandingMain/LandingMain'
 /*Product Pages*/
 import Header from './Components/Product/Header/Header';
 import Menu from './Components/Product/Menu/Menu';
@@ -60,7 +61,8 @@ function App() {
           {/* Landing page logic */}
           <LandingHeader onMenuClick={() => setMenuOpen(!menuOpen)} />
           <LandingMenu isOpen={menuOpen} onMenuClosed={() => setMenuOpen(!menuOpen)} />
-          <main className="landing-main">
+          <LandingMain />
+          {/* <main className="landing-main">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -69,7 +71,7 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-          </main>
+          </main> */}
           <LandingFooter />
         </>
       )}

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://www.filosolutions.co/",
-  "proxy": "http://localhost:3001",
   "dependencies": {
     "@aws-amplify/auth": "^6.4.0",
     "@aws-amplify/ui-react": "^6.3.0",

@@ -14,15 +14,15 @@ const Header = ({ onMenuClick }) => {
                 </div>
                 <nav className="nav">
                     <ul>
-                        <li><Link to="/" className="home">Home</Link></li>
-                        <li><Link to="/about" className="about">About Us</Link></li>
-                        <li><Link to="/learn-more" className="learn-more">How it Works</Link></li>
-                        <li><Link to="/contact" className="contact">Contact</Link></li>
+                    <li><a href="#home">Chamber of Commerce</a></li>
+                    <li><Link to="/app/login" className="about">Chamber Members</Link></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
                 <div className="auth-buttons">
-                    <Link to="/learn-more" className="sign-in">Sign In</Link>
-                    <Link to="/learn-more" className="register">Register</Link>
+                    <Link to="/app/login" className="sign-in">Sign In</Link>
+                    <Link to="/app/login" className="register">Register</Link>
                     <div className="hamburger" onClick={onMenuClick}>
                         <span className="menu-line"></span>
                         <span className="menu-line"></span>

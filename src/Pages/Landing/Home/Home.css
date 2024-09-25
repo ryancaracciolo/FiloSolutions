@@ -161,7 +161,7 @@
     flex-grow: 1;
     background-color: var(--background-color);
     min-width: 200px;
-    max-width: 400px;
+    max-width: 500px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
@@ -169,6 +169,13 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+#why-chambers .reasons .reason:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.16);
 }
 
 #why-chambers .reason .reason-icon {
@@ -208,7 +215,9 @@
 
 #benefits {
     background-color: var(--background-color);
-    padding: 30px 0;
+    padding-top: 30px;
+    padding-bottom: 20px;
+
 }
 
 #benefits .benefits-layout {
@@ -251,6 +260,7 @@
     font-size: var(--font-size-m);
     color: var(--background-color);
     margin-right: clamp(20px, 2.0vw, 40px);
+    margin-top: 20px;
     background-color: var(--teal-medium-color);
     width: clamp(30px, 4.0vw, 80px);
     height: clamp(30px, 4.0vw, 80px);
@@ -258,7 +268,7 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 6px;
     transform: rotate(45deg);
 }
 
@@ -297,7 +307,7 @@
     color: var(--teal-medium-color);
     margin-bottom: 0;
     margin-top: 0;
-    height: clamp(30px, 4.0vw, 80px);
+    height: 80px;
     align-content: center;
 }
 
