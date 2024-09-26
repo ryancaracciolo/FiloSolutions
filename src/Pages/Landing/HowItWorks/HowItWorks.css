@@ -6,7 +6,47 @@
     padding: 20px;
     font-family: var(--font-regular);
     background-color: var(--grey-light-color);
+    position: relative;
+    z-index: -2;
+  }
 
+  .how-it-works .illustration {
+    position: absolute;
+    box-sizing: border-box;
+    opacity: 2.5%;
+    background-color: transparent;
+    z-index: -1;
+  }
+
+  .how-it-works .content-sections .section .illustration.design-one {
+    top: -23vw;
+    left: -23vw;
+    height: 60vw;
+    width: 60vw;
+    border-radius: 50%;
+    border: 15vw solid var(--grey-dark-color);
+
+  }
+
+  .how-it-works .content-sections .section .illustration.design-two {
+    top: 0vw;
+    right: -20px;
+    height: 32vw;
+    width: 32vw;
+    border-radius: 16vw;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 10vw solid var(--grey-dark-color);
+    border-right: none;
+  }
+
+  .how-it-works .content-sections .section .illustration.design-three {
+    top: 0vw;
+    left: -15vw;
+    height: 40vw;
+    width: 40vw;
+    border-radius: 50%;
+    background-color: var(--grey-dark-color);;
   }
   
   .how-it-works h1 {
@@ -19,10 +59,11 @@
   .content-sections {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     width: 100%;
-    padding: 10px;
+    padding: 0 10px;
     position: relative;
+    margin-bottom: 30px;
   }
   
   .content-sections .section {
@@ -36,7 +77,7 @@
   .section .text-content {
     flex: 1;
     margin: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 0;
     position: relative;
   }
 
@@ -58,6 +99,7 @@
   .section .text-content p {
     font-size: clamp(15px, 1.5vw, 25px);
     margin-top: 5px;
+    margin-bottom: 0;
 
   }
 
@@ -72,9 +114,7 @@
     justify-content: center;
     align-items: center;
     margin: 20px;
-    margin-bottom: 50px;
     object-fit: cover;
-
   }
   
   .content-sections .image-content img {
@@ -82,15 +122,21 @@
     width: 100%;
     object-fit: cover;
   }
+
+  .section .image-content #referral {
+    width: 85%;
+  }
   
   .content-sections .circle {
     position: sticky;
     top: calc(50vh - 15px);
-    left: calc(50% - 19px);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    left: calc(50% - 16px);
+    width: 25px;
+    height: 25px;
+    transform: rotate(45deg); /* Rotate to create a diamond shape */
+    border-radius: 10px;
     border: 4px solid var(--grey-light-color);
+    box-sizing:content-box;
     background-color: #ddd;
     display: flex;
     align-items: center;
@@ -100,6 +146,10 @@
     font-family: var(--font-extraBold);
     z-index: 1;
   }
+
+  .circle .number {
+    transform: rotate(-45deg);
+  }
   
   .content-sections .circle.active {
     background-color: var(--teal-medium-color);
@@ -107,10 +157,10 @@
 
   .dynamic-line-container {
     position: absolute;
-    top: 30px;
+    top: 20px;
     left: calc(50% - 2px);
     width: 6px;
-    height: calc(100% - 60px);
+    height: calc(100% - 40px);
     border-radius: 2px;
   }
 
@@ -131,6 +181,8 @@
     left: calc(50% - 2px);
     width: 4px; /* Width of the line */
     background-color: var(--teal-medium-color); /* Adjust color as needed */
+    border-radius: 2px;
+
   }
   
   @media (max-width: 768px) {
@@ -161,6 +213,7 @@
 
     .how-it-works {
       padding-bottom: 0;
+      overflow: hidden;
     }
   
 }

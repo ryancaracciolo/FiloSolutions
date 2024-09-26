@@ -86,8 +86,8 @@ header .auth-buttons a {
 }
 
 .header-landing .hamburger span {
-    width: 25px;
-    height: 4px;
+    width: 18px;
+    height: 2px;
     background-color: var(--grey-dark-color);
     margin: 2px 0;
     margin-left: 15px;

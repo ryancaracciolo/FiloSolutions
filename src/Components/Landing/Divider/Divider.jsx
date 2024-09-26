@@ -1,10 +1,10 @@
 import React from 'react';
 import './Divider.css'
 
-const Divider = () => {
+const Divider = ({color}) => {
 
   return (
-    <div className="divider-wrapper">
+    <div style={{ backgroundColor: (color ? color : 'transparent') }} className="divider-wrapper">
       <div className="divider-line"></div>
       <div className="divider-diamonds">
         <div className="diamond"></div>

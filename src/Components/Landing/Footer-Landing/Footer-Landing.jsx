@@ -6,8 +6,8 @@ import logo from '../../../Assets/Images/Filo-Logo-white.png';
 function Footer() {
   return (
     <footer className='footer-landing'>
+      <hr/>
       <div className="container">
-        <hr/>
         <div className="footer-content">
           <div className="footer-logo">
               <img src={logo} alt="Filo Logo" />

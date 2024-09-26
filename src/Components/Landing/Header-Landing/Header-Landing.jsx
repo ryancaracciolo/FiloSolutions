@@ -14,7 +14,7 @@ const Header = ({ onMenuClick }) => {
                 </div>
                 <nav className="nav">
                     <ul>
-                    <li><a href="#home">Chamber of Commerce</a></li>
+                    <li><a href="#home">Chambers of Commerce</a></li>
                     <li><Link to="/app/login" className="about">Chamber Members</Link></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#contact">Contact</a></li>

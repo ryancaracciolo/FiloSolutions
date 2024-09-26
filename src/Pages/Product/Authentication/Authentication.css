@@ -29,6 +29,7 @@
   width: 50%;
   margin-bottom: 5vh;
   filter: brightness(0) invert(1);
+  object-fit: cover;
 }
 
 .left-side h1 {

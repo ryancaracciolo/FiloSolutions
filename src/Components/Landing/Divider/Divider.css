@@ -4,7 +4,6 @@
   justify-content: center;
   width: 100%;
   padding: 20px 7vw; /* Adjust the margin to your preference */
-  background-color: transparent;
   box-sizing: border-box;
 }
 
@@ -18,13 +17,13 @@
 
 .divider-diamonds {
   display: flex;
-  gap: 15px; /* Space between the diamonds */
+  gap: 13px; /* Space between the diamonds */
   padding: 0 30px; /* Space around the diamonds, adjusting the gap from the lines */
 }
 
 .diamond {
-  width: 15px; /* Size of each diamond */
-  height: 15px;
+  width: 13px; /* Size of each diamond */
+  height: 13px;
   background-color: transparent; /* Adjust color to match your design */
   border: 4px solid var(--teal-medium-color); /* Width, style, and color of the border */
   transform: rotate(45deg); /* Rotate to create a diamond shape */

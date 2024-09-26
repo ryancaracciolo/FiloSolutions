@@ -27,7 +27,7 @@
   
 .menu li {
     padding: 8px 16px;
-    text-align: center;
+    text-align: left;
 }
   
 .menu li a {
@@ -53,11 +53,11 @@
 .close-Menu span {
     position: absolute;
     top: 16px;
-    width: 25px;
-    height: 3px;
+    width: 22px;
+    height: 2px;
     background-color: var(--background-color);
     margin: 2px 0;
-    border-radius: 5px;
+    border-radius: 4px;
 }
   
 #x1 {

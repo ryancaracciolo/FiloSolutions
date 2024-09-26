@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import heroImage from '../../../Assets/Images/hero-image.png';
+import productImage from '../../../Assets/Images/product-overview.png';
 import filoLogo from '../../../Assets/Images/Filo-Logo-noText.png';
 import { ReactComponent as EngageIcon } from '../../../Assets/Icons/engage-icon.svg';
 import { ReactComponent as CommunityIcon } from '../../../Assets/Icons/circles-icon.svg';
@@ -24,6 +24,9 @@ const Home = () => {
                         <div className="cta-buttons">
                             <a className="btn btn-secondary" href="#contact">Contact</a>
                         </div>
+                    </div>
+                    <div className="product-image">
+                        <img src={productImage} alt="Product" />
                     </div>
                 </div>
                 <div className="hero-image">
@@ -53,7 +56,7 @@ const Home = () => {
                         <h4>Community</h4>
                         <h5>Build a Collaborative Community</h5>
                         <p>
-                            Filo fosters a sense of community by encouraging collaboration and partnership among members, 
+                            Filo fosters community by encouraging collaboration and partnerships among members, 
                             helping businesses support one another and grow together.
                         </p>
                     </div>
@@ -79,8 +82,8 @@ const Home = () => {
                                 <div><span>1</span></div>
                             </div>
                             <div className="benefit-content">
-                                <h4 id="benefit-one">Find Strategic Partnerships</h4>
-                                <p>Easily connect with businesses that complement your goals and grow through meaningful collaborations.</p>
+                                <h4 id="benefit-one">Create Strategic Partnerships</h4>
+                                <p>Easily connect with other local businesses that complement your goals and grow through meaningful collaboration.</p>
                             </div>
                         </div>
                         <div className="benefit">
@@ -99,9 +102,9 @@ const Home = () => {
                                 <div><span>3</span></div>
                             </div>
                             <div className="benefit-content">
-                                <h4 id="benefit-three">Give and get</h4>
+                                <h4 id="benefit-three">Track Outcomes </h4>
                                 <p>
-                                    Track the effectiveness of each partnership, ensuring mutual benefit and fostering stronger business relationships.
+                                    Measure the effectiveness of each partnership, ensuring mutual benefit and fostering stronger business relationships.
                                 </p>
                             </div>
                         </div>
@@ -117,7 +120,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Divider />
+            <Divider color='white' />
         </div>
     );
 };

@@ -22,7 +22,6 @@ const HowItWorks = () => {
         const triggerPoint = window.innerHeight / 2; // Halfway point of the viewport
         if (sectionTop < triggerPoint) {
         setActiveSection(index + 1); // Update the active section based on scroll
-        console.log(activeSection);
         }
     });
     };
@@ -69,24 +68,24 @@ const HowItWorks = () => {
         <h1 className='header'>How It Works</h1>
         <div className="content-sections">
             <div className='section'>
+                <div className='illustration design-one'></div>
                 <div className="text-content" ref={sectionRefs[0]}>
-                    <DotGrid />
                     <div className='text'>
                         <h2>STEP 1</h2>
                         <h3>Find Partnerships</h3>
                         <p>It’s like LinkedIn for partnerships. Members can find and connect with the companies in their partner ecosystem in just a few clicks.</p>
                     </div>
                 </div>
-                <div className={`circle ${activeSection >= 1 ? 'active' : ''}`}>1</div>
+                <div className={`circle ${activeSection >= 1 ? 'active' : ''}`}><span className="number">1</span></div>
                 <div className="image-content">
                     <img src={PageOne} alt="How It Works" />
                 </div>
             </div>
             <div className='section'>
                 <div className="image-content two">
-                    <img src={PageTwo} alt="How It Works" />
+                    <img id='referral' src={PageTwo} alt="How It Works" />
                 </div>
-                <div className={`circle ${activeSection >= 2 ? 'active' : ''}`}>2</div>
+                <div className={`circle ${activeSection >= 2 ? 'active' : ''}`}><span className="number">2</span></div>
                 <div className="text-content one" ref={sectionRefs[1]}>
                     <div className='text'>
                         <h2>STEP 2</h2>
@@ -94,8 +93,8 @@ const HowItWorks = () => {
                         <p>Make the most of networking. Members can send and receive promising business opportunities with ease. 
                             Strengthen business connections and turn them into valuable partnerships.</p>
                     </div>
-                    <DotGrid />
                 </div>
+                <div className='illustration design-two'></div>
             </div>
             <div className='section'>
                 <div className="text-content" ref={sectionRefs[2]}>
@@ -105,19 +104,16 @@ const HowItWorks = () => {
                         <p>Track opportunities effortlessly. Members stay on top of every business lead and referral, 
                             ensuring no opportunity slips through the cracks and partnerships are beneficial.</p>
                     </div>
-                    <DotGrid />
                 </div>
-                <div className={`circle ${activeSection >= 3 ? 'active' : ''}`}>3</div>
+                <div className={`circle ${activeSection >= 3 ? 'active' : ''}`}><span className="number">3</span></div>
                 <div className="image-content">
                     <img src={PageThree} alt="How It Works" />
                 </div>
+                <div className='illustration design-three'></div>
             </div>
             <div className="dynamic-line-container">
-                {/* Target div pinned to the line */}
                 <div ref={targetRef} className="line">
-                    {/* Your content */}
                 </div>
-                {/* The line that adjusts its height */}
                 <div
                     ref={lineRef}
                     className="dynamic-line"

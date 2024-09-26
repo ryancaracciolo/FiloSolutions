@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef } from 'react';
+import React, {useEffect, useState, useContext } from 'react';
 import { BusinessContext } from '../../../objects/UserContext/UserContext';
 import './Partnerships.css';
 import MyPartners from './MyPartners'
@@ -54,6 +54,10 @@ function Partnerships() {
             businessId2: partnerId,
             status: newStatus,
           });
+          
+          if (newStatus === 'Pending_Sent') {
+
+          }
           console.log('Partnership updated successfully:', response.data);
     
           // Optionally update state or handle UI feedback if needed

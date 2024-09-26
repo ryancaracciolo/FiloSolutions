@@ -188,7 +188,7 @@ function Authentication({setBusiness}) {
           </button>
 
           <p className="support-text">
-            Have questions? Please contact <a href="mailto:support@filo.com">support@filo.com</a>
+            Have questions? Please contact <a href="mailto:ryan@filosolutions.co">ryan@filosolutions.co</a>
           </p>
         </div>
       </div>

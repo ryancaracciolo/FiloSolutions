@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(20, 5px);
     grid-template-rows: repeat(12, 5px);
-    gap: 12px;
+    gap: 15px;
     background-color: transparent; /* Optional: Ensure the background is visible */
     z-index: 1;
   }
@@ -13,7 +13,7 @@
   .dot-grid .dot {
     width: 5px;
     height: 5px;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(235, 235, 235);
     border-radius: 50%;
     display: inline-block;
   }
