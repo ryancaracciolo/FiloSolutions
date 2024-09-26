@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import './Authentication.css';
 import { signUp, signIn, confirmSignUp, getCurrentUser } from '@aws-amplify/auth';
 import filoLogo from '../../../Assets/Images/FiloLogo.png';
@@ -17,9 +17,9 @@ function Authentication({setBusiness}) {
   const [isSignIn, setIsSignIn] = useState(true); // Toggle between sign-in and sign-up
   const [isSubmitting, setIsSubmitting] = useState(false); // Prevent multiple submissions
   const [loading, setLoading] = useState(true); // loading state to track authentication check
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  const fetchPartners = async (email) => {
+  const fetchBusiness = async (email) => {
     try {
         const response = await axios.post('http://localhost:3001/api/businesses/get-business-byemail',{email});
         console.log("response!: "+response.data)
@@ -34,12 +34,22 @@ function Authentication({setBusiness}) {
     }
   };
 
+  const checkExistence = async (email) => {
+    try {
+        const response = await axios.post('http://localhost:3001/api/businesses/check-existence',{email});
+        return response.data?.exists
+    } catch (err) {
+        console.error('Error confirming email:', err.response?.data || err.message);
+        return true;
+    }
+  };
+
   useEffect(() => {
     // Check if a user is already authenticated
     getCurrentUser()
       .then(user => {
         console.log('User Found');
-        fetchPartners(user.signInDetails.loginId)
+        fetchBusiness(user.signInDetails.loginId)
       })
       .catch(() => {
         console.log('No user logged in');
@@ -57,32 +67,46 @@ function Authentication({setBusiness}) {
     console.log('Email Submit');
     e.preventDefault();
     setError(null);
-    
+  
     if (isSubmitting) return; // Prevent multiple submissions
     setIsSubmitting(true);
-
+  
     try {
       if (isSignIn) {
         // Sign in flow
         await signIn({ username: email, password });
         const user = await getCurrentUser();
-        console.log("Successfully signed in: ", { user });
-        fetchPartners(user.signInDetails.loginId);
+        console.log('Successfully signed in:', { user });
+        fetchBusiness(user.signInDetails.loginId);
       } else {
         // Sign up flow
-        await signUp({
-          username: email,
-          password,
-          attributes: { email }, // User attribute
-        });
-        console.log("Verification code sent to email");
-        setStep(2); // Move to step 2: verification code
+        await handleSignUpFlow();
       }
     } catch (error) {
-      setError(error.message);
+      setError(error.message || 'An error occurred during the process.');
     } finally {
       setIsSubmitting(false); // Enable submitting again
     }
+  };
+  
+  const handleSignUpFlow = async () => {
+    const emailExists = await checkExistence(email);
+  
+    if (!emailExists) {
+      setError('This email is not associated with a Chamber account.');
+      setIsSubmitting(false); // Ensure submitting is re-enabled after error
+      return; // Stop the sign-up process if the email exists
+    }
+  
+    // Proceed with sign-up if email exists
+    await signUp({
+      username: email,
+      password,
+      attributes: { email }, // User attribute
+    });
+  
+    console.log('Verification code sent to email');
+    setStep(2); // Move to step 2: verification code
   };
 
   const handleCodeSubmit = async (code) => {
@@ -103,7 +127,7 @@ function Authentication({setBusiness}) {
       await signIn({ username: email, password });
       const user = await getCurrentUser();
       console.log("Successfully signed in");
-      fetchPartners(user.signInDetails.loginId);
+      fetchBusiness(user.signInDetails.loginId);
       //navigate('/app/partnerships'); // Redirect after login
     } catch (error) {
       setError(error.message);

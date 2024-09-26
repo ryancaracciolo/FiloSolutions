@@ -1,6 +1,5 @@
 import dynamodb from '../config/db.js';
 import Business from '../Objects/Business.js'
-import Partnership from '../Objects/Partnership.js'
 import Lead from '../Objects/Lead.js'
 import shortUUID from "short-uuid";
 
@@ -116,6 +115,43 @@ export const fetchBusinessByEmail = (req, res) => {
   });
 };
 
+//////////////// Checking if Email Exists /////////////////////
+export const checkEmailExists = (req, res) => {
+  // Extract the email from the request body
+  const email = req.body.email;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required.' });
+  }
+
+  const params = {
+    TableName: tableName,
+    IndexName: 'GSI1', // The name of our GSI on the email attribute
+    KeyConditionExpression: 'email = :email',
+    ExpressionAttributeValues: {
+      ':email': email,
+    },
+    ProjectionExpression: 'email', // Only fetch the email attribute to save bandwidth
+    Limit: 1, // Limit to 1 item since we're only checking existence
+  };
+
+  // Query the GSI to check if the email exists
+  dynamodb.query(params, (err, data) => {
+    if (err) {
+      console.error(
+        'Unable to query email existence. Error JSON:',
+        JSON.stringify(err, null, 2)
+      );
+      res.status(500).json({ error: 'An error occurred while checking the email.' });
+    } else if (data.Items && data.Items.length > 0) {
+      // Email exists in the database
+      res.status(200).json({ exists: true });
+    } else {
+      // Email does not exist
+      res.status(200).json({ exists: false });
+    }
+  });
+};
 
 ///////////////// Fetching Partners /////////////////////
 export const fetchPartnersForBusiness = async (req, res) => {

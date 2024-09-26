@@ -10,10 +10,10 @@ function Menu({isOpen, onMenuClosed}) {
             <span id="x2"></span>    
         </div>
         <ul>
-          <li><a href="#home">Chambers of Commerce</a></li>
-          <li><Link to="/app/login" className="about">Chamber Members</Link></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li onClick={onMenuClosed}><a href="#home">Chambers of Commerce</a></li>
+          <li onClick={onMenuClosed}><Link to="/app/login" className="about">Chamber Members</Link></li>
+          <li onClick={onMenuClosed}><a href="#how-it-works">How It Works</a></li>
+          <li onClick={onMenuClosed}><a href="#contact">Contact</a></li>
         </ul>
   </nav>
   );

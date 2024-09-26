@@ -54,7 +54,7 @@
 
 .contact-detail p {
     margin: 0;
-    padding-left: 10px;
+    padding-left: 0px;
     font-family: var(--font-light);
     font-size: 13px;
     color: var(--grey-light-color);
@@ -71,6 +71,5 @@
 
     .contact-info .contact-detail {
         gap: 30px;
-
     }
 }

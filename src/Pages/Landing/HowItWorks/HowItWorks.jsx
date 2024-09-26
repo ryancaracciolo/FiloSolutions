@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './HowItWorks.css';
 import DotGrid from '../../../Components/Landing/DotGrid/DotGrid';
 import Divider from '../../../Components/Landing/Divider/Divider'
@@ -16,22 +16,18 @@ const HowItWorks = () => {
 
     const sectionRefs = [useRef(null), useRef(null), useRef(null)]; // Adjust the number based on sections
 
-    const handleScroll = () => {
-    sectionRefs.forEach((ref, index) => {
-        const sectionTop = ref.current.getBoundingClientRect().top;
-        const triggerPoint = window.innerHeight / 2; // Halfway point of the viewport
-        if (sectionTop < triggerPoint) {
-        setActiveSection(index + 1); // Update the active section based on scroll
-        }
-    });
-    };
+    const handleScroll = useCallback(() => {
+        sectionRefs.forEach((ref, index) => {
+          const sectionTop = ref.current.getBoundingClientRect().top;
+          const triggerPoint = window.innerHeight / 2; // Halfway point of the viewport
+          if (sectionTop < triggerPoint) {
+            setActiveSection(index + 1); // Update the active section based on scroll
+          } else if (index === 0) {
+            setActiveSection (index); // Brings activeSection back to zero when user scrolls back up
+          }
+        });
+      }, [sectionRefs]); // Include only necessary dependencies
 
-    useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    useEffect(() => {
     const updateLineHeight = () => {
         const targetElement = targetRef.current;
         const lineElement = lineRef.current;
@@ -51,6 +47,12 @@ const HowItWorks = () => {
         }
     };
 
+    useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
+
+    useEffect(() => {
     // Update line height on load and on scroll/resize
     updateLineHeight();
     window.addEventListener('resize', updateLineHeight);

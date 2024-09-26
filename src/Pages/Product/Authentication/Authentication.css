@@ -26,10 +26,10 @@
 }
 
 .filo-logo {
-  width: 50%;
+  width: 60%;
   margin-bottom: 5vh;
   filter: brightness(0) invert(1);
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .left-side h1 {
@@ -220,7 +220,7 @@
   }
 
   .filo-logo {
-    width: 30%;
+    width: 50%;
     filter: brightness(1) invert(0);
   }
 
