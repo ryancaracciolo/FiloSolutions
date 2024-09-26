@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5fe3f375.css",
-    "main.js": "/static/js/main.89fa24c0.js",
+    "main.css": "/static/css/main.25b0775d.css",
+    "main.js": "/static/js/main.2245d9fb.js",
     "static/media/partners-page.png": "/static/media/partners-page.c4d7424132dc4f1f7280.png",
     "static/media/product-overview.png": "/static/media/product-overview.cd621d886034e3c36fc0.png",
     "static/media/opport-page.png": "/static/media/opport-page.903c3775df03e18722e1.png",
@@ -37,11 +37,11 @@
     "static/media/graph-icon.svg": "/static/media/graph-icon.406a0c1acf46a7bc2990bf8ea3d12d6f.svg",
     "static/media/copy-icon.svg": "/static/media/copy-icon.3894c6a0cf5623d5d525a997add79011.svg",
     "static/media/email-icon.svg": "/static/media/email-icon.959bf418ad03c15222f458fcbf9b9e8e.svg",
-    "main.5fe3f375.css.map": "/static/css/main.5fe3f375.css.map",
-    "main.89fa24c0.js.map": "/static/js/main.89fa24c0.js.map"
+    "main.25b0775d.css.map": "/static/css/main.25b0775d.css.map",
+    "main.2245d9fb.js.map": "/static/js/main.2245d9fb.js.map"
   },
   "entrypoints": [
-    "static/css/main.5fe3f375.css",
-    "static/js/main.89fa24c0.js"
+    "static/css/main.25b0775d.css",
+    "static/js/main.2245d9fb.js"
   ]
 }
