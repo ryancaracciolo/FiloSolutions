@@ -9,6 +9,7 @@ import { ReactComponent as LocIcon } from '../../../Assets/Icons/location-icon.s
 import { ReactComponent as LinkIcon } from '../../../Assets/Icons/link-icon.svg';
 import { ReactComponent as CopyIcon } from '../../../Assets/Icons/copy-icon.svg';
 import { ReactComponent as QRIcon } from '../../../Assets/Icons/qr-icon.svg';
+import HoverIcon from '../HoverIcon/HoverIcon';
 import Referral from '../Referral/Referral';
 import Popup from '../Popup/Popup';
 import Confirm from '../Invite/Invite';
@@ -46,11 +47,11 @@ const Card = ({partnerData, status, setStatus}) => {
     }
 
     const handleAccept = () => {
-        setStatus(partnerData.id, "Confirmed");
+        setStatus({partnerId: partnerData.id, newStatus: "Confirmed", oldStatus: status});
     }
 
     const handleInvite = () => {
-        setStatus(partnerData.id, "Pending_Sent");
+        setStatus({partnerId: partnerData.id, newStatus: "Pending_Sent", oldStatus: status});
     }
 
     /////////// Rendering logic for Card variants //////////////////
@@ -129,10 +130,10 @@ const Card = ({partnerData, status, setStatus}) => {
                     <span className="tag home-services">{partnerData.industry}</span>
                 </div>
                 <div className="info-icons">
-                    <EmailIcon className='info-icon email'/>
-                    <PhoneIcon className='info-icon phone'/>
-                    <LocIcon className='info-icon loc'/>
-                    <LinkIcon className='info-icon link'/>
+                    <HoverIcon IconComponent={EmailIcon} label={partnerData.email} />
+                    <HoverIcon IconComponent={PhoneIcon} label={partnerData.phone} />
+                    <HoverIcon IconComponent={LocIcon} label={partnerData.address} />
+                    <HoverIcon IconComponent={LinkIcon} label={partnerData.website} />
                 </div>
                 <p className="description">{partnerData.desc}</p>
             </div>

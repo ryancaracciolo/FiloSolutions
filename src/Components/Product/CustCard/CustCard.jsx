@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './CustCard.css';
 
-const CustCard = () => {
+const CustCard = ({ formData, onChange }) => {
 
 
     return (
@@ -10,9 +10,9 @@ const CustCard = () => {
                 <span className="initials">CN</span>
             </div>
             <div className="details">
-                <input type="text" id="cust-name" placeholder="[Customer Name]" />
-                <input type="email" id="cust-email" placeholder="[Customer Email]" />
-                <input type="tel" id="cust-phone" placeholder="[Customer Phone]" />
+                <input type="text" id="name" placeholder="[Customer Name]" onChange={onChange} />
+                <input type="email" id="email" placeholder="[Customer Email]" onChange={onChange} />
+                <input type="tel" id="phone" placeholder="[Customer Phone]" onChange={onChange} />
             </div>
         </div>
     );

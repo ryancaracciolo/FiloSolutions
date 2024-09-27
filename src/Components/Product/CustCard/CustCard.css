@@ -50,16 +50,16 @@
     outline: none;
   }
 
-  .cust-card #cust-name {
+  .cust-card #name {
     font-family: var(--font-bold);
     font-size: 14px;
   }
 
-  .cust-card #cust-email {
+  .cust-card #email {
     font-family: var(--font-light);
   }
 
-  input#cust-phone {
+  input#phone {
     font-family: var(--font-bold);
     background-color: #d6b8eb;
     padding: 2px;
@@ -67,7 +67,7 @@
     color: white;
   }
 
-  input#cust-phone::placeholder {
+  input#phone::placeholder {
     color: white;
   }
   

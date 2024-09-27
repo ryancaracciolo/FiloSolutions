@@ -2,6 +2,7 @@
 .content-detail {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .partner-detail {

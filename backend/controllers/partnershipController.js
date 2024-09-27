@@ -1,11 +1,11 @@
 import dynamodb from '../config/db.js';
 import Partnership from '../Objects/Partnership.js';
 import shortUUID from "short-uuid";
-
+import { TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 
 const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 
-///////////////// Send Partnership //////////////////////////
+// Send Partnership
 export const createPartnership = async (req, res) => {
   try {
     const { businessId1, businessId2, status } = req.body;
@@ -18,31 +18,29 @@ export const createPartnership = async (req, res) => {
       return res.status(400).json({ error: 'A business cannot partner with itself.' });
     }
 
-    // Create a new Partnership instance
     const newid = shortUUID().new();
     const createDate = new Date().toISOString();
-    var statusOne = status;
-    var statusTwo = status;
+    let statusOne = status;
+    let statusTwo = status;
 
-
-    if (status === "Pending" || status ==="Pending_Sent") {
-      statusOne = "Pending_Sent"
-      statusTwo = "Pending_Received"
+    if (status === "Pending" || status === "Pending_Sent") {
+      statusOne = "Pending_Sent";
+      statusTwo = "Pending_Received";
     }
 
     const partnerOne = new Partnership(
-      newid, 
-      businessId1, 
-      businessId2, 
-      statusOne, 
+      newid,
+      businessId1,
+      businessId2,
+      statusOne,
       createDate
     );
 
     const partnerTwo = new Partnership(
-      newid, 
-      businessId2, 
-      businessId1, 
-      statusTwo, 
+      newid,
+      businessId2,
+      businessId1,
+      statusTwo,
       createDate
     );
 
@@ -70,7 +68,8 @@ export const createPartnership = async (req, res) => {
     };
 
     // Execute the transaction
-    await dynamodb.transactWrite(transactParams).promise();
+    const command = new TransactWriteCommand(transactParams);
+    await dynamodb.send(command);
 
     // Respond with the created partnership
     res.status(201).json({
@@ -78,11 +77,11 @@ export const createPartnership = async (req, res) => {
       partnerItemOne: partnerItem1,
       partnerItemTwo: partnerItem2,
     });
-    
+
   } catch (error) {
     console.error('Error creating partnership:', error);
 
-    if (error.code === 'ConditionalCheckFailedException') {
+    if (error.name === 'ConditionalCheckFailedException') {
       return res.status(409).json({ error: 'Partnership already exists or business is already a partner.' });
     }
 
@@ -90,8 +89,7 @@ export const createPartnership = async (req, res) => {
   }
 };
 
-
-//////////////////// Update Partnership /////////////////////////
+// Update Partnership
 export const updatePartnership = async (req, res) => {
   try {
     const { businessId1, businessId2, status } = req.body;
@@ -104,14 +102,14 @@ export const updatePartnership = async (req, res) => {
       return res.status(400).json({ error: 'A business cannot partner with itself.' });
     }
 
-    var statusOne = status;
-    var statusTwo = status;
+    let statusOne = status;
+    let statusTwo = status;
     if (status === 'Pending' || status === 'Pending_Sent') {
-      statusOne = 'Pending_Sent'
-      statusTwo = 'Pending_Received'
+      statusOne = 'Pending_Sent';
+      statusTwo = 'Pending_Received';
     } else if (status === 'Pending_Received') {
-      statusOne = 'Pending_Received'
-      statusTwo = 'Pending_Sent'
+      statusOne = 'Pending_Received';
+      statusTwo = 'Pending_Sent';
     }
 
     // Prepare transactional update
@@ -153,22 +151,21 @@ export const updatePartnership = async (req, res) => {
     };
 
     // Execute the transaction
-    await dynamodb.transactWrite(transactParams).promise();
+    const command = new TransactWriteCommand(transactParams);
+    await dynamodb.send(command);
 
     // Respond with success
     res.status(200).json({
-      message: 'Partnership accepted successfully.',
+      message: 'Partnership updated successfully.',
     });
 
   } catch (error) {
-    console.error('Error accepting partnership:', error);
+    console.error('Error updating partnership:', error);
 
-    if (error.code === 'ConditionalCheckFailedException') {
+    if (error.name === 'ConditionalCheckFailedException') {
       return res.status(400).json({ error: 'Partnership invite does not exist or is not pending.' });
     }
 
-    res.status(500).json({ error: 'An error occurred while accepting the partnership.' });
+    res.status(500).json({ error: 'An error occurred while updating the partnership.' });
   }
 };
-
-

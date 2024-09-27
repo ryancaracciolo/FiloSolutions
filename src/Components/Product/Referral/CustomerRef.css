@@ -20,7 +20,7 @@
     font-family: var(--font-regular);
     border: 1px solid lightgray;
     border-radius: 5px;
-    height: 70px;
+    height: 60px;
     background-color: var(--grey-light-color);
     vertical-align: top;
     padding: 5px;
@@ -51,9 +51,21 @@
 .customer-referral .acknowledge-statement {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.acknowledge-statement input {
+    margin: 0;
 }
 
 .acknowledge-statement p {
     font-size: 10px;
+    margin: 0;
 }
+
+.warning-text {
+    color: red;
+    font-size: 10px;
+    margin-top: 0px;
+  }
+  

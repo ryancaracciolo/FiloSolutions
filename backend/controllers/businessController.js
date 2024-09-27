@@ -1,13 +1,13 @@
 import dynamodb from '../config/db.js';
-import Business from '../Objects/Business.js'
-import Lead from '../Objects/Lead.js'
+import Business from '../Objects/Business.js';
+import Lead from '../Objects/Lead.js';
 import shortUUID from "short-uuid";
-
+import { PutCommand, GetCommand, QueryCommand, BatchGetCommand } from '@aws-sdk/lib-dynamodb';
 
 const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 
-///////////////// Adding Business /////////////////////
-export const addBusiness = (req, res) => {
+// Adding Business
+export const addBusiness = async (req, res) => {
   const { name, logo, desc, owner, industry, address, email, phone, website } = req.body;
 
   const business = new Business(shortUUID().new(), name, logo, desc, owner, industry, address, email, phone, website);
@@ -16,8 +16,7 @@ export const addBusiness = (req, res) => {
     business.validate();
   } catch (error) {
     console.error('Validation error:', error.message);
-    // Handle the error (e.g., return a response to the client)
-    return;
+    return res.status(400).json({ error: error.message });
   }
 
   const item = business.toItem();
@@ -28,19 +27,20 @@ export const addBusiness = (req, res) => {
     ConditionExpression: 'attribute_not_exists(PK)', // Prevents overwriting existing items
   };
 
-  dynamodb.put(params, (err, data) => {
-    if (err) {
-      console.error('Unable to add business. Error JSON:', JSON.stringify(err, null, 2));
-    } else {
-      console.log('Added business:', JSON.stringify(data, null, 2));
-    }
-  });
+  try {
+    const command = new PutCommand(params);
+    await dynamodb.send(command);
+    console.log('Added business:', JSON.stringify(item, null, 2));
+    res.status(201).json({ message: 'Business added successfully.' });
+  } catch (err) {
+    console.error('Unable to add business. Error JSON:', JSON.stringify(err, null, 2));
+    res.status(500).json({ error: 'An error occurred while adding the business.' });
+  }
 };
 
-///////////////// Fetching Business with ID /////////////////////
-export const fetchBusinessByID = (req, res) => {
+// Fetching Business with ID
+export const fetchBusinessByID = async (req, res) => {
   const businessId = req.params.id;
-
 
   if (!businessId) {
     return res.status(400).json({ error: 'Business ID is required.' });
@@ -49,36 +49,32 @@ export const fetchBusinessByID = (req, res) => {
   const params = {
     TableName: tableName,
     Key: {
-      PK: 'BUSINESS#'+businessId,
+      PK: 'BUSINESS#' + businessId,
       SK: 'METADATA',
     },
   };
 
-  dynamodb.get(params, (err, data) => {
-    console.log('BUSINESS#'+businessId)
-    if (err) {
-      console.error(
-        'Unable to get business. Error JSON:',
-        JSON.stringify(err, null, 2)
-      );
-      // Handle Error Response
-      res.status(500).json({ error: 'An error occurred while fetching the business.' });
-    } else if (data.Item) {
-      // Process the Retrieved Item
+  try {
+    const command = new GetCommand(params);
+    const data = await dynamodb.send(command);
+    console.log('BUSINESS#' + businessId);
+
+    if (data.Item) {
       const business = Business.fromItem(data.Item);
       console.log('Fetched business:', business);
       res.status(200).json(business);
     } else {
       console.log('Business not found');
-      // Handle Business Not Found
       res.status(404).json({ error: 'Business not found.' });
     }
-  });
+  } catch (err) {
+    console.error('Unable to get business. Error JSON:', JSON.stringify(err, null, 2));
+    res.status(500).json({ error: 'An error occurred while fetching the business.' });
+  }
 };
 
-///////////////// Fetching Business with email /////////////////////
-export const fetchBusinessByEmail = (req, res) => {
-  // Extract the email from the request body
+// Fetching Business with email
+export const fetchBusinessByEmail = async (req, res) => {
   const email = req.body.email;
 
   if (!email) {
@@ -94,17 +90,11 @@ export const fetchBusinessByEmail = (req, res) => {
     },
   };
 
-  // Query the GSI for the business with the provided email
-  dynamodb.query(params, (err, data) => {
-    if (err) {
-      console.error(
-        'Unable to query business by email. Error JSON:',
-        JSON.stringify(err, null, 2)
-      );
-      res.status(500).json({ error: 'An error occurred while fetching the business.' });
-      console.log(err);
-    } else if (data.Items && data.Items.length > 0) {
-      // Assuming emails are unique, take the first item
+  try {
+    const command = new QueryCommand(params);
+    const data = await dynamodb.send(command);
+
+    if (data.Items && data.Items.length > 0) {
       const business = Business.fromItem(data.Items[0]);
       console.log('Fetched business:', business);
       res.status(200).json(business);
@@ -112,12 +102,14 @@ export const fetchBusinessByEmail = (req, res) => {
       console.log('Business not found');
       res.status(404).json({ error: 'Business not found.' });
     }
-  });
+  } catch (err) {
+    console.error('Unable to query business by email. Error JSON:', JSON.stringify(err, null, 2));
+    res.status(500).json({ error: 'An error occurred while fetching the business.' });
+  }
 };
 
-//////////////// Checking if Email Exists /////////////////////
-export const checkEmailExists = (req, res) => {
-  // Extract the email from the request body
+// Checking if Email Exists
+export const checkEmailExists = async (req, res) => {
   const email = req.body.email;
 
   if (!email) {
@@ -135,25 +127,22 @@ export const checkEmailExists = (req, res) => {
     Limit: 1, // Limit to 1 item since we're only checking existence
   };
 
-  // Query the GSI to check if the email exists
-  dynamodb.query(params, (err, data) => {
-    if (err) {
-      console.error(
-        'Unable to query email existence. Error JSON:',
-        JSON.stringify(err, null, 2)
-      );
-      res.status(500).json({ error: 'An error occurred while checking the email.' });
-    } else if (data.Items && data.Items.length > 0) {
-      // Email exists in the database
+  try {
+    const command = new QueryCommand(params);
+    const data = await dynamodb.send(command);
+
+    if (data.Items && data.Items.length > 0) {
       res.status(200).json({ exists: true });
     } else {
-      // Email does not exist
       res.status(200).json({ exists: false });
     }
-  });
+  } catch (err) {
+    console.error('Unable to query email existence. Error JSON:', JSON.stringify(err, null, 2));
+    res.status(500).json({ error: 'An error occurred while checking the email.' });
+  }
 };
 
-///////////////// Fetching Partners /////////////////////
+// Fetching Partners
 export const fetchPartnersForBusiness = async (req, res) => {
   const businessId = req.params.id;
   console.log("FETCHING PARTNERS");
@@ -162,7 +151,6 @@ export const fetchPartnersForBusiness = async (req, res) => {
   }
 
   try {
-    // Query for Partner items under the business's partition
     const params = {
       TableName: tableName,
       KeyConditionExpression: 'PK = :pk AND begins_with(SK, :sk)',
@@ -172,13 +160,13 @@ export const fetchPartnersForBusiness = async (req, res) => {
       },
     };
 
-    const data = await dynamodb.query(params).promise();
+    const command = new QueryCommand(params);
+    const data = await dynamodb.send(command);
 
     if (data.Items.length === 0) {
       return res.status(404).json({ error: 'No partners found for this business.' });
     }
 
-    // Step 1: Create a map of partnerId to status
     const partnerInfoMap = {};
     data.Items.forEach((item) => {
       const partnerId = item.partnerId;
@@ -187,10 +175,8 @@ export const fetchPartnersForBusiness = async (req, res) => {
       };
     });
 
-    // Step 2: Extract PartnerBusinessIDs
     const partnerIds = Object.keys(partnerInfoMap);
 
-    // Step 3: Fetch partner business data for each PartnerBusinessID using batchGet
     const keys = partnerIds.map((id) => ({
       PK: 'BUSINESS#' + id,
       SK: 'METADATA',
@@ -204,9 +190,9 @@ export const fetchPartnersForBusiness = async (req, res) => {
       },
     };
 
-    const batchData = await dynamodb.batchGet(batchParams).promise();
+    const batchCommand = new BatchGetCommand(batchParams);
+    const batchData = await dynamodb.send(batchCommand);
 
-    // Step 4: Initialize the result structure
     const result = {
       Pending_Sent: [],
       Pending_Received: [],
@@ -214,7 +200,6 @@ export const fetchPartnersForBusiness = async (req, res) => {
       Suggested: [],
     };
 
-    // Step 5: Map the retrieved items and group them by status
     batchData.Responses[tableName].forEach((item) => {
       const partnerBusiness = Business.fromItem(item);
       const partnerId = item.PK.replace('BUSINESS#', '');
@@ -223,12 +208,10 @@ export const fetchPartnersForBusiness = async (req, res) => {
       if (result[status]) {
         result[status].push(partnerBusiness);
       } else {
-        // Handle unexpected statuses if necessary
         console.warn(`Unknown status '${status}' for partnerId '${partnerId}'`);
       }
     });
 
-    // Return the structured result to the frontend
     res.status(200).json(result);
   } catch (error) {
     console.error('Error fetching partners:', error);
@@ -236,8 +219,7 @@ export const fetchPartnersForBusiness = async (req, res) => {
   }
 };
 
-
-//////////////////// Fetching Leads /////////////////////////////
+// Fetching Leads
 export const fetchLeadsForBusiness = async (req, res) => {
   const businessId = req.params.id;
 
@@ -246,7 +228,6 @@ export const fetchLeadsForBusiness = async (req, res) => {
   }
 
   try {
-    // Query for Partner items under the business's partition
     const params = {
       TableName: tableName,
       KeyConditionExpression: 'PK = :pk AND begins_with(SK, :skPrefix)',
@@ -256,29 +237,26 @@ export const fetchLeadsForBusiness = async (req, res) => {
       },
     };
 
-    const data = await dynamodb.query(params).promise();
+    const command = new QueryCommand(params);
+    const data = await dynamodb.send(command);
 
     if (data.Items.length === 0) {
       return res.status(404).json({ error: 'No leads found for this business.' });
     }
 
-    // Map the retrieved items to Lead instances
     const leads = data.Items.map(item =>
       Lead.fromItem(item)
     );
 
-    // Return the partner businesses to the frontend
-    res.status(200).json(partnerBusinesses);
+    res.status(200).json(leads);
 
   } catch (error) {
-      console.error('Error fetching partners:', error);
-      res.status(500).json({ error: 'An error occurred while fetching partners.. '+error });
+    console.error('Error fetching leads:', error);
+    res.status(500).json({ error: 'An error occurred while fetching leads. ' + error });
   }
 };
 
-
-
-export const fetchBusinessName = async (req, res) => { 
+export const fetchBusinessName = async (req, res) => {
   try {
     const businessId = req.params.id;
 
@@ -295,7 +273,8 @@ export const fetchBusinessName = async (req, res) => {
       ProjectionExpression: 'name',
     };
 
-    const result = await dynamodb.get(params).promise();
+    const command = new GetCommand(params);
+    const result = await dynamodb.send(command);
 
     if (!result.Item) {
       return res.status(404).json({ error: 'Business not found.' });
@@ -307,5 +286,3 @@ export const fetchBusinessName = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching the business name.' });
   }
 };
-
-

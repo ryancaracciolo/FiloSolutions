@@ -1,10 +1,11 @@
 import dynamodb from '../config/db.js';
-import Lead from '../Objects/Lead.js'
+import Lead from '../Objects/Lead.js';
 import shortUUID from "short-uuid";
+import { TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 
 const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 
-//////////////////////// Create Lead /////////////////////////
+// Create Lead
 export const createLead = async (req, res) => {
   try {
     const { businessId, otherBusinessId, name, email, phone, note, status } = req.body;
@@ -28,8 +29,8 @@ export const createLead = async (req, res) => {
     // Create Lead object for recipient
     const recipientLead = new Lead({
       id: leadId,
-      businessId: businessId,
-      otherBusinessId: otherBusinessId,
+      businessId: otherBusinessId,
+      otherBusinessId: businessId,
       name: name,
       email: email,
       phone: phone,
@@ -39,7 +40,7 @@ export const createLead = async (req, res) => {
       createdAt: createdAt,
     });
 
-    // Batch write to DynamoDB
+    // Transact write to DynamoDB
     const params = {
       TransactItems: [
         {
@@ -58,7 +59,8 @@ export const createLead = async (req, res) => {
     };
 
     // Execute the transaction
-    await dynamodb.transactWrite(params).promise();
+    const command = new TransactWriteCommand(params);
+    await dynamodb.send(command);
 
     // Respond with success
     res.status(201).json({
@@ -73,8 +75,7 @@ export const createLead = async (req, res) => {
   }
 };
 
-
-//////////////////////// Update Lead ////////////////////////////
+// Update Lead
 export const updateLead = async (req, res) => {
   try {
     const { businessId, otherBusinessId, leadId, status } = req.body;
@@ -125,7 +126,8 @@ export const updateLead = async (req, res) => {
     };
 
     // Execute the transaction
-    await dynamodb.transactWrite(params).promise();
+    const command = new TransactWriteCommand(params);
+    await dynamodb.send(command);
 
     // Respond with success
     res.status(200).json({
