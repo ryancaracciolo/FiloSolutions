@@ -4,8 +4,8 @@ import { addBusiness,
     fetchBusinessByEmail,
     checkEmailExists, 
     fetchPartnersForBusiness, 
-    fetchLeadsForBusiness,
-    fetchBusinessName } from '../controllers/businessController.js';
+    fetchLeadsForBusiness
+    } from '../controllers/businessController.js';
 
 const router = express.Router();
 
@@ -15,7 +15,6 @@ router.post('/get-business-byemail', fetchBusinessByEmail);
 router.post('/check-existence', checkEmailExists);
 router.get('/get-partners/:id', fetchPartnersForBusiness);
 router.get('/get-leads/:id', fetchLeadsForBusiness);
-router.get('/get-name/:id', fetchBusinessName);
 
 
 export default router;

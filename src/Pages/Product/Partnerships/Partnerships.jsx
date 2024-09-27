@@ -22,6 +22,8 @@ function Partnerships() {
     // Invites Lists
     const [pendingSent, setPendingSent] = useState([]);
     const [pendingReceived, setPendingReceived] = useState([]);
+    // Other List
+    const [otherBusinesses, setOtherBusinesses] = useState([]);
 
     const fetchPartners = async () => {
         try {
@@ -48,40 +50,41 @@ function Partnerships() {
     };
 
     const updatePartner = async ({partnerId, newStatus, oldStatus}) => {
+        moveItem(partnerId, newStatus, oldStatus);
         try {
-            setLoading(true);
             const response = await axios.post('http://localhost:3001/api/partnerships/update-partnership', {
                 businessId1: business.id,
                 businessId2: partnerId,
                 status: newStatus,
             });
             console.log('Partnership updated successfully:', response.data);
-            moveItem(partnerId, newStatus, oldStatus);
-            setLoading(false);
         } catch (error) {
             console.error('Error updating partnership:', error.response?.data || error.message);
-            setLoading(false);
         }
     };
 
     const moveItem = (id, newStatus, oldStatus) => {
-        if (newStatus === 'Confirmed' && oldStatus === 'Pending_Received') {
-            const itemToMove = pendingReceived.find((item) => item.id === id);
+        const statusMap = {
+            'Confirmed-Pending_Received': {sourceList: pendingReceived, setSource: setPendingReceived, setTarget: setPartners,},
+            'Pending_Sent-Suggested': {sourceList: suggPartners, setSource: setSuggPartners, setTarget: setPendingSent,},
+            'Other-Confirmed': {sourceList: partners, setSource: setPartners, setTarget: setOtherBusinesses,},
+            'Other-Pending_Sent': {sourceList: pendingSent, setSource: setPendingSent, setTarget: setOtherBusinesses,},
+            'Pending_Sent-Other': {sourceList: otherBusinesses, setSource: setOtherBusinesses, setTarget: setPendingSent,},
+        };
+
+        const key = `${newStatus}-${oldStatus}`;
+        const config = statusMap[key];
+
+        if (config) {
+            const { sourceList, setSource, setTarget } = config;
+            const itemToMove = sourceList.find((item) => item.id === id);
             if (itemToMove) {
-                const updatedSourceList = pendingReceived.filter((item) => item.id !== id);
-                setPendingReceived(updatedSourceList);
-                setPartners((prevTargetList) => [...prevTargetList, itemToMove]);
+                const updatedSourceList = sourceList.filter((item) => item.id !== id);
+                setSource(updatedSourceList);
+                setTarget((prevTargetList) => [...prevTargetList, itemToMove]);
             }
         }
-        if (newStatus === 'Pending_Sent' && oldStatus === 'Suggested') {
-            const itemToMove = suggPartners.find((item) => item.id === id);
-            if (itemToMove) {
-                const updatedSourceList = suggPartners.filter((item) => item.id !== id);
-                setSuggPartners(updatedSourceList);
-                setPendingSent((prevTargetList) => [...prevTargetList, itemToMove]);
-            }
-        }
-    };
+    }; 
 
     useEffect(() => {
         // Prevent body from scrolling when the component mounts

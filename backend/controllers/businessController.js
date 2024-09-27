@@ -6,7 +6,7 @@ import { PutCommand, GetCommand, QueryCommand, BatchGetCommand } from '@aws-sdk/
 
 const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 
-// Adding Business
+////////////////////////////// Adding Business
 export const addBusiness = async (req, res) => {
   const { name, logo, desc, owner, industry, address, email, phone, website } = req.body;
 
@@ -38,7 +38,7 @@ export const addBusiness = async (req, res) => {
   }
 };
 
-// Fetching Business with ID
+//////////////////////////////////// Fetching Business with ID
 export const fetchBusinessByID = async (req, res) => {
   const businessId = req.params.id;
 
@@ -73,7 +73,7 @@ export const fetchBusinessByID = async (req, res) => {
   }
 };
 
-// Fetching Business with email
+////////////////////////////////// Fetching Business with email
 export const fetchBusinessByEmail = async (req, res) => {
   const email = req.body.email;
 
@@ -108,7 +108,7 @@ export const fetchBusinessByEmail = async (req, res) => {
   }
 };
 
-// Checking if Email Exists
+////////////////////////////// Checking if Email Exists
 export const checkEmailExists = async (req, res) => {
   const email = req.body.email;
 
@@ -142,7 +142,7 @@ export const checkEmailExists = async (req, res) => {
   }
 };
 
-// Fetching Partners
+//////////////////////////////////////// Fetching Partners
 export const fetchPartnersForBusiness = async (req, res) => {
   const businessId = req.params.id;
   console.log("FETCHING PARTNERS");
@@ -219,7 +219,7 @@ export const fetchPartnersForBusiness = async (req, res) => {
   }
 };
 
-// Fetching Leads
+// Fetch Leads for a Business and include Business Names
 export const fetchLeadsForBusiness = async (req, res) => {
   const businessId = req.params.id;
 
@@ -240,49 +240,49 @@ export const fetchLeadsForBusiness = async (req, res) => {
     const command = new QueryCommand(params);
     const data = await dynamodb.send(command);
 
-    if (data.Items.length === 0) {
+    if (!data.Items || data.Items.length === 0) {
       return res.status(404).json({ error: 'No leads found for this business.' });
     }
 
-    const leads = data.Items.map(item =>
-      Lead.fromItem(item)
+    // Map leads and fetch associated business names
+    const leads = await Promise.all(
+      data.Items.map(async (item) => {
+        const lead = Lead.fromItem(item);
+        console.log(lead);
+        // Fetch the name of the business for `otherBusinessId`
+        try {
+          const nameParams = {
+            TableName: tableName,
+            Key: {
+              PK: `BUSINESS#${lead.otherBusinessId}`,
+              SK: 'METADATA',
+            },
+            ProjectionExpression: '#name', // Use #name to avoid conflict with reserved words
+            ExpressionAttributeNames: {
+              '#name': 'name', // Define #name as an alias for the actual 'name' attribute
+            },
+          };
+
+          const nameCommand = new GetCommand(nameParams);
+          const nameData = await dynamodb.send(nameCommand);
+
+          if (nameData.Item && nameData.Item['name']) {
+            lead.otherBusinessName = nameData.Item['name']; // Append the business name to the lead
+          } else {
+            lead.otherBusinessName = 'Unknown Business'; // Fallback if name is not available
+          }
+        } catch (error) {
+          console.error(`Error fetching business name for ${lead.otherBusinessId}:`, error);
+          lead.otherBusinessName = 'Error Fetching Name';
+        }
+
+        return lead;
+      })
     );
 
     res.status(200).json(leads);
-
   } catch (error) {
     console.error('Error fetching leads:', error);
     res.status(500).json({ error: 'An error occurred while fetching leads. ' + error });
-  }
-};
-
-export const fetchBusinessName = async (req, res) => {
-  try {
-    const businessId = req.params.id;
-
-    if (!businessId) {
-      return res.status(400).json({ error: 'businessId is required.' });
-    }
-
-    const params = {
-      TableName: tableName,
-      Key: {
-        PK: `BUSINESS#${businessId}`,
-        SK: 'PROFILE',
-      },
-      ProjectionExpression: 'name',
-    };
-
-    const command = new GetCommand(params);
-    const result = await dynamodb.send(command);
-
-    if (!result.Item) {
-      return res.status(404).json({ error: 'Business not found.' });
-    }
-
-    res.status(200).json({ name: result.Item.name });
-  } catch (error) {
-    console.error('Error fetching business name:', error);
-    res.status(500).json({ error: 'An error occurred while fetching the business name.' });
   }
 };

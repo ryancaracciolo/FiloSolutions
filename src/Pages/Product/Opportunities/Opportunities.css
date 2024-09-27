@@ -1,6 +1,8 @@
 
   .opportunities-table {
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+
   }
   
   table {
@@ -17,6 +19,6 @@
     border-bottom: 1px solid #ccc;
     color: grey;
     font-family: var(--font-bold);
-    font-size: 15px;
+    font-size: 13px;
   }
   

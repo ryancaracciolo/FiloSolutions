@@ -1,5 +1,5 @@
 tbody td {
-  padding: 15px;
+  padding: 14px;
   border-bottom: 1px solid #eee;
   text-align: left;
   white-space: nowrap;
@@ -36,6 +36,11 @@ input[type="checkbox"] {
   margin-right: 10px;
 }
 
+.cust-name {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .cust-email {
   max-width: 160px;
   white-space: nowrap;
@@ -54,35 +59,43 @@ input[type="checkbox"] {
 }
 
 .status {
-  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 0px;
   border-radius: 8px;
   font-size: 0.9em;
   white-space: nowrap;
+  color: white;
 }
 
 .status.closed-won {
-  background-color: #b8e2a5;
-  color: #2e7d32;
-}
+  background-color: var(--teal-light-color);
 
-.status.active {
-  background-color: #e4d235;
-  color: #484408;
 }
 
 .status.closed-lost {
-  background-color: #e2b8b8;
-  color: #c62828;
+  background-color: pink;
 }
 
-.status.sent {
-  background-color: #e4d235;
-  color: #484408;
+.status.in-negotiation {
+  background-color: yellow;
 }
 
-.status.intro {
-  background-color: #b3e5fc;
-  color: #0288d1;
+.status.qualified {
+  background-color: mediumseagreen;
+}
+
+.status.contracted {
+  background-color: mediumpurple;
+}
+
+.status.new {
+  background-color: mediumturquoise;
+}
+
+.status .drop-icon {
+  fill:white
 }
 
 .partners {

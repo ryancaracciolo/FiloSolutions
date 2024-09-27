@@ -63,18 +63,18 @@
 }
 
 .pending_received-icon {
-    background-color: var(--gold-dark-color);
+    background-color: var(--gold-light-color);
     color: white;
     border-radius: 5px;
-    padding: 0 6px;
+    padding: 2px 6px;
     font-size: 12px;
 }
 
 .pending_sent-icon {
-    background-color: var(--grey-dark-color);
+    background-color: var(--purple-color);
     color: white;
     border-radius: 5px;
-    padding: 0 6px;
+    padding: 2px 6px;
     font-size: 12px;
 }
 

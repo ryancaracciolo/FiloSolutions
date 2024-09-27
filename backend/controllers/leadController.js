@@ -3,12 +3,23 @@ import Lead from '../Objects/Lead.js';
 import shortUUID from "short-uuid";
 import { TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 
+
 const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 
 // Create Lead
 export const createLead = async (req, res) => {
   try {
-    const { businessId, otherBusinessId, name, email, phone, note, status } = req.body;
+    const { businessId, otherBusinessId, name, email, phone, note, status} = req.body;
+
+    // Input validation (optional but recommended)
+    if (!businessId || !otherBusinessId || !name || !email || !status) {
+      return res.status(400).json({ error: 'Missing required fields.' });
+    }
+
+    if (businessId === otherBusinessId) {
+      return res.status(400).json({ error: 'businessId and otherBusinessId cannot be the same.' });
+    }
+
     const leadId = shortUUID().new();
     const createdAt = new Date().toISOString();
 
@@ -40,19 +51,25 @@ export const createLead = async (req, res) => {
       createdAt: createdAt,
     });
 
+    console.log(senderLead)
+    // Convert to DynamoDB items
+    const senderItem = senderLead.toItem();
+    const recipientItem = recipientLead.toItem();
+
+
     // Transact write to DynamoDB
     const params = {
       TransactItems: [
         {
           Put: {
             TableName: tableName,
-            Item: senderLead.toItem(),
+            Item: senderItem,
           },
         },
         {
           Put: {
             TableName: tableName,
-            Item: recipientLead.toItem(),
+            Item: recipientItem,
           },
         },
       ],

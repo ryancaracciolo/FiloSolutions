@@ -24,8 +24,6 @@ const Card = ({partnerData, status, setStatus}) => {
     const [showShare, setShowShare] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
 
-    console.log("DATA: "+partnerData.id)
-
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };
@@ -46,12 +44,8 @@ const Card = ({partnerData, status, setStatus}) => {
         console.log("QR!!!!!!!!!!!");
     }
 
-    const handleAccept = () => {
-        setStatus({partnerId: partnerData.id, newStatus: "Confirmed", oldStatus: status});
-    }
-
-    const handleInvite = () => {
-        setStatus({partnerId: partnerData.id, newStatus: "Pending_Sent", oldStatus: status});
+    const handlePartnerUpdate = (newStatus) => {
+        setStatus({partnerId: partnerData.id, newStatus: newStatus, oldStatus: status});
     }
 
     /////////// Rendering logic for Card variants //////////////////
@@ -86,7 +80,7 @@ const Card = ({partnerData, status, setStatus}) => {
     }
 
     else if (status==='Pending_Sent') {
-        topLeftButton = <div className={'card-icon pending_sent-icon'}>Invite Sent</div>;
+        topLeftButton = <div className={'card-icon pending_sent-icon'}>Sent</div>;
         topRightButton = null;
         cardFooter =
             <div className={'card-footer'} style={{backgroundColor: 'lightGrey'}}>
@@ -94,10 +88,10 @@ const Card = ({partnerData, status, setStatus}) => {
             </div>;
     }
     else if (status==='Pending_Received') {
-        topLeftButton = <div className={'card-icon pending_received-icon'}>Invited</div>;
+        topLeftButton = <div className={'card-icon pending_received-icon'}>Received</div>;
         topRightButton = null;
         cardFooter =
-            <div className={'card-footer'} onClick={handleAccept}>
+            <div className={'card-footer'} style={{backgroundColor: 'var(--teal-light-color)'}} onClick={() => handlePartnerUpdate('Confirmed')}>
                 <button className='card-footer-content'>Accept Invite</button>
             </div>;
     }
@@ -114,7 +108,6 @@ const Card = ({partnerData, status, setStatus}) => {
                 <QRIcon className='qr-link' onClick={() => handleQR()}/>
             </div>;
     }
-    //////////////////////////////////
 
     return (
         <div className={'card active'}>
@@ -142,7 +135,7 @@ const Card = ({partnerData, status, setStatus}) => {
             onClose={togglePopup} /> : null}
             {showShare ? <Popup content={<Referral partnerData={partnerData} closeClicked={toggleShare} toCustomer={true}/>}
             onClose={toggleShare} /> : null}
-            {showAdd ? <Popup content={<Confirm onClose={toggleAdd} onInvite={handleInvite}/>} 
+            {showAdd ? <Popup content={<Confirm onClose={toggleAdd} onInvite={() => handlePartnerUpdate('Pending_Sent')} />} 
             onClose={toggleAdd} /> : null}
         </div>    
     );

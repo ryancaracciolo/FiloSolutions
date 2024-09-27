@@ -1,0 +1,14 @@
+.circle-initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%;
+    background-color: pink; /* Background color of the circle, adjust as needed */
+    color: white; /* Text color */
+    font-size: 20px; /* Adjust font size as needed */
+    font-weight: bold;
+    text-transform: uppercase; /* Ensure initials are uppercase */
+  }
+  
