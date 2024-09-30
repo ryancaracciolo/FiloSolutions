@@ -3,6 +3,8 @@ import './CircleInitials.css'; // CSS file for styling
 
 function CircleInitials({ businessName }) {
 
+  if (!businessName) {return null; }
+
     const getInitials = (name) => {
     // Split the name into words and filter out common words like "The"
     const words = name.split(' ').filter((word) => word.toLowerCase() !== 'The');

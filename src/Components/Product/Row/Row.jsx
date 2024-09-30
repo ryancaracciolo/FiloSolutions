@@ -1,17 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Row.css';
-import { ReactComponent as DropIcon } from '../../../Assets/Icons/down-icon.svg'
 import CircleInitials from '../CircleInitials/CircleInitials'
+import StatusButton from './StatusButton';
 
-function getRandomBinary() {
-    return Math.floor(Math.random() * 2);
-}
-
-const Row = ({leadData}) => {
-
-    console.log(leadData);
+const Row = ({leadData, updateLead}) => {
     const date = new Date(leadData.createdAt).toLocaleDateString()
-    const st = new String(leadData.status).toLowerCase();
 
     function getRelativeDateDescription(date) {
         const inputDate = new Date(date);
@@ -49,13 +42,10 @@ const Row = ({leadData}) => {
             </td>
             <td className='cust-email'>{leadData.email}</td>
             <td>
-                <div className={'status '+st}>
-                    <span >{leadData.status}</span>
-                    <DropIcon className='drop-icon'/>
-                </div>
+                <StatusButton status={leadData.status} setStatus={(newStatus) => updateLead({leadId: leadData.id, otherBusinessId: leadData.otherBusinessId, newStatus: newStatus})}/>
             </td>
             <td className='partners'>{leadData.otherBusinessName}</td>
-            <td>{getRelativeDateDescription(leadData.createdAt)}</td>
+            <td>{getRelativeDateDescription(leadData.updateAt)}</td>
         </tr>
     );
 };

@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Adjust size as needed */
+    width: 35px; /* Adjust size as needed */
+    height: 35px; /* Adjust size as needed */
     border-radius: 50%;
-    background-color: pink; /* Background color of the circle, adjust as needed */
+    background-color: pink;
     color: white; /* Text color */
-    font-size: 20px; /* Adjust font size as needed */
-    font-weight: bold;
+    font-size: 13px; /* Adjust font size as needed */
+    font-family: var(--font-bold);
     text-transform: uppercase; /* Ensure initials are uppercase */
   }
   

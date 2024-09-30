@@ -1,7 +1,7 @@
 import shortUUID from "short-uuid";
 
 export default class Lead {
-  constructor({id, businessId, otherBusinessId, name, email, phone, note, status, direction, createdAt}) {
+  constructor({id, businessId, otherBusinessId, name, email, phone, note, status, direction, createdAt, updatedAt}) {
     this.id = id || shortUUID().new(); // Generate or accept a unique Lead ID
     this.businessId = businessId; // The business that will own this item (sender or recipient)
     this.otherBusinessId = otherBusinessId; // The other business involved
@@ -12,8 +12,9 @@ export default class Lead {
     this.status = status;
     this.direction = direction; // 'Shared' or 'Received'
     this.createdAt = createdAt || new Date().toISOString();
+    this.updatedAt = updatedAt || new Date().toISOString();
     this.PK = `BUSINESS#${this.businessId}`;
-    this.SK = `LEAD#${this.createdAt}#${this.id}`;
+    this.SK = `LEAD#${this.id}`;
     this.Type = 'Lead';
   }
 
@@ -32,6 +33,7 @@ export default class Lead {
       status: this.status,
       direction: this.direction,
       createdAt: this.createdAt,
+      updatedAt: this.updatedAt
     };
   }
 
@@ -48,6 +50,7 @@ export default class Lead {
       status: item.status,
       direction: item.direction,
       createdAt: item.createdAt,
+      updatedAt: item.updatedAt
     });
     return lead;
   }  

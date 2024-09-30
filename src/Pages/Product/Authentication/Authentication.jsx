@@ -7,6 +7,7 @@ import background from '../../../Assets/Images/background.png';
 import { ReactComponent as EmailIcon } from '../../../Assets/Icons/email-icon.svg';
 import { ReactComponent as PasswordIcon } from '../../../Assets/Icons/password-icon.svg';
 import ConfirmationCode from './ConfirmCode';
+import LoadingScreen from '../../../Components/Product/LoadingScreen/LoadingScreen';
 import axios from 'axios';
 
 function Authentication({setBusiness}) {
@@ -58,9 +59,8 @@ function Authentication({setBusiness}) {
   }, []);
   
   if (loading) {
-    // Display loading spinner or message until the authentication check is complete
     console.log('Loading...');
-    return <div className="loading">Loading...</div>;
+    return <LoadingScreen isLoading={loading}/>;
   }
 
   const handleEmailSubmit = async (e) => {

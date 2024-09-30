@@ -22,6 +22,8 @@ export const createLead = async (req, res) => {
 
     const leadId = shortUUID().new();
     const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
+
 
     // Create Lead object for sender
     const senderLead = new Lead({
@@ -35,6 +37,7 @@ export const createLead = async (req, res) => {
       status: status,
       direction: 'Shared',
       createdAt: createdAt,
+      updatedAt: updatedAt
     });
 
     // Create Lead object for recipient
@@ -49,6 +52,7 @@ export const createLead = async (req, res) => {
       status: status,
       direction: 'Received',
       createdAt: createdAt,
+      updatedAt: updatedAt
     });
 
     console.log(senderLead)
@@ -95,22 +99,31 @@ export const createLead = async (req, res) => {
 // Update Lead
 export const updateLead = async (req, res) => {
   try {
-    const { businessId, otherBusinessId, leadId, status } = req.body;
-    const updatedAt = new Date().toISOString();
+    const { leadId, businessId, otherBusinessId, status } = req.body;
 
-    if (!businessId || !otherBusinessId || !leadId || !status) {
-      return res.status(400).json({ error: 'businessId, otherBusinessId, leadId, and status are required.' });
+    // Input validation
+    if (!leadId || !businessId || !otherBusinessId || !status) {
+      return res.status(400).json({ error: 'Missing required fields.' });
     }
 
-    // Prepare update parameters for both leads
-    const params = {
+    const updatedAt = new Date().toISOString();
+
+    // Construct PK and SK for both sender and recipient
+    const senderPK = `BUSINESS#${businessId}`;
+    const senderSK = `LEAD#${leadId}`;
+
+    const recipientPK = `BUSINESS#${otherBusinessId}`;
+    const recipientSK = `LEAD#${leadId}`;
+
+    // Prepare the transaction to update both sender and recipient leads
+    const updateParams = {
       TransactItems: [
         {
           Update: {
             TableName: tableName,
             Key: {
-              PK: `BUSINESS#${businessId}`,
-              SK: `LEAD#${leadId}`,
+              PK: senderPK,
+              SK: senderSK,
             },
             UpdateExpression: 'SET #status = :status, updatedAt = :updatedAt',
             ExpressionAttributeNames: {
@@ -120,14 +133,15 @@ export const updateLead = async (req, res) => {
               ':status': status,
               ':updatedAt': updatedAt,
             },
+            ConditionExpression: 'attribute_exists(PK) AND attribute_exists(SK)',
           },
         },
         {
           Update: {
             TableName: tableName,
             Key: {
-              PK: `BUSINESS#${otherBusinessId}`,
-              SK: `LEAD#${leadId}`,
+              PK: recipientPK,
+              SK: recipientSK,
             },
             UpdateExpression: 'SET #status = :status, updatedAt = :updatedAt',
             ExpressionAttributeNames: {
@@ -137,23 +151,25 @@ export const updateLead = async (req, res) => {
               ':status': status,
               ':updatedAt': updatedAt,
             },
+            ConditionExpression: 'attribute_exists(PK) AND attribute_exists(SK)',
           },
         },
       ],
     };
 
     // Execute the transaction
-    const command = new TransactWriteCommand(params);
-    await dynamodb.send(command);
+    const updateCommand = new TransactWriteCommand(updateParams);
+    await dynamodb.send(updateCommand);
 
     // Respond with success
     res.status(200).json({
-      message: 'Lead status updated successfully.',
+      message: 'Lead updated successfully.',
+      leadId,
     });
   } catch (error) {
-    console.error('Error updating lead status:', error);
+    console.error('Error updating lead:', error);
     res.status(500).json({
-      error: 'An error occurred while updating the lead status.',
+      error: 'An error occurred while updating the lead.',
     });
   }
 };

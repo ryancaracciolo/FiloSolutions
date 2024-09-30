@@ -1,10 +1,12 @@
 tbody td {
-  padding: 14px;
+  padding: 10px 14px;
   border-bottom: 1px solid #eee;
   text-align: left;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible; /* Allow the dropdown to overflow outside */
   text-overflow: ellipsis;
+  z-index: auto; /* Ensure parent elements don’t create unnecessary stacking contexts */
+
 }
 
 tbody tr {
@@ -15,11 +17,13 @@ tbody tr {
   font-family: var(--font-reg);
   color: var(--grey-dark-color);
   font-size: 14px;
+  z-index: 1; /* Ensure parent elements don’t create unnecessary stacking contexts */
+  overflow: visible; /* Allow the dropdown to overflow outside */
 }
   
 tbody tr:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Higher z-index on hover to ensure the dropdown and row come to the front */
 }
 
 tbody td:first-child {
@@ -39,10 +43,13 @@ input[type="checkbox"] {
 .cust-name {
   display: flex;
   flex-wrap: nowrap;
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .cust-email {
-  max-width: 160px;
+  max-width: 140px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -56,46 +63,6 @@ input[type="checkbox"] {
 .shared {
   color: var(--gold-dark-color);
   font-family: var(--font-bold);
-}
-
-.status {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1px 0px;
-  border-radius: 8px;
-  font-size: 0.9em;
-  white-space: nowrap;
-  color: white;
-}
-
-.status.closed-won {
-  background-color: var(--teal-light-color);
-
-}
-
-.status.closed-lost {
-  background-color: pink;
-}
-
-.status.in-negotiation {
-  background-color: yellow;
-}
-
-.status.qualified {
-  background-color: mediumseagreen;
-}
-
-.status.contracted {
-  background-color: mediumpurple;
-}
-
-.status.new {
-  background-color: mediumturquoise;
-}
-
-.status .drop-icon {
-  fill:white
 }
 
 .partners {

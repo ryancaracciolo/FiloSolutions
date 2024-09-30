@@ -41,6 +41,29 @@ function Opportunities() {
         }        
     };
 
+    const updateLead = async ({leadId, otherBusinessId, newStatus}) => {
+        updateLeadList({leadId: leadId, newStatus: newStatus})
+        try {
+            const response = await axios.post('http://localhost:3001/api/leads/update-lead', {
+                businessId: business.id,
+                otherBusinessId: otherBusinessId,
+                leadId: leadId,
+                status: newStatus,
+            });
+            console.log('Partnership updated successfully:', response.data);
+        } catch (error) {
+            console.error('Error updating partnership:', error.response?.data || error.message);
+        }
+    };
+
+    const updateLeadList = ({leadId, newStatus}) => {
+        setLeads((prevLeads) => 
+            prevLeads.map((lead) => 
+                lead.id === leadId ? { ...lead, status: newStatus } : lead
+            )
+        );
+    }
+
     useEffect(() => {
         // Prevent body from scrolling when the component mounts
         document.body.style.overflow = 'hidden';
@@ -79,7 +102,7 @@ function Opportunities() {
                         </thead>
                         <tbody>
                             {leads.map(lead => (
-                                <Row key={lead.id} leadData={lead}/>
+                                <Row key={lead.id} leadData={lead} updateLead={updateLead}/>
                             ))}
                         </tbody>
                     </table>
