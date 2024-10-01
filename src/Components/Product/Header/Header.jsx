@@ -5,7 +5,6 @@ import {ReactComponent as ProfileButton} from '../../../Assets/Icons/profile-ico
 import { BusinessContext } from '../../../objects/UserContext/UserContext'; // Import the context
 import Popup from '../Popup/Popup';
 import Card from '../../../Components/Product/Card/Card';
-import {dummyBusiness} from '../../../objects/test-objects/test-objects';
 
 const Header = () => {
     const { business } = useContext(BusinessContext);
@@ -14,10 +13,6 @@ const Header = () => {
     const handleProfileClick = () => {
         setShowPopup(!showPopup);
     };
-
-    // const handleEdit = () => {
-    //     console.log("Edit Clicked");
-    // };
     
 
     return (

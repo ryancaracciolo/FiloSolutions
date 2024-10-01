@@ -23,6 +23,7 @@ const Card = ({partnerData, status, setStatus}) => {
     const [showPopup, setShowPopup] = useState(false); // popup state
     const [showShare, setShowShare] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const togglePopup = () => {
         setShowPopup(!showPopup);
@@ -36,8 +37,12 @@ const Card = ({partnerData, status, setStatus}) => {
         setShowAdd(!showAdd);
     }
 
-    const handleCopy = () => {
-        console.log("asdfadssfadsasd");
+    const handleCopy = ({item}) => {
+        navigator.clipboard.writeText(item);
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 1000);
     }
 
     const handleQR = () => {
@@ -94,6 +99,14 @@ const Card = ({partnerData, status, setStatus}) => {
             <div className={'card-footer'} style={{backgroundColor: 'var(--teal-light-color)'}} onClick={() => handlePartnerUpdate('Confirmed')}>
                 <button className='card-footer-content'>Accept Invite</button>
             </div>;
+    }
+    else if (status==='Referral') {
+        topLeftButton = null;
+        topRightButton = null;
+        cardFooter =
+        <div className={'card-footer'} onClick={() => handleCopy({item: partnerData.email})}>
+            <button className='card-footer-content'>{copied ? "Email Copied to Clipboard!" : "Contact Representative"}</button>
+        </div>;
     }
     else if (status==='Self') {
         topLeftButton = null;

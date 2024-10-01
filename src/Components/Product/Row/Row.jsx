@@ -45,7 +45,7 @@ const Row = ({leadData, updateLead}) => {
                 <StatusButton status={leadData.status} setStatus={(newStatus) => updateLead({leadId: leadData.id, otherBusinessId: leadData.otherBusinessId, newStatus: newStatus})}/>
             </td>
             <td className='partners'>{leadData.otherBusinessName}</td>
-            <td>{getRelativeDateDescription(leadData.updateAt)}</td>
+            <td>{getRelativeDateDescription(leadData.updatedAt)}</td>
         </tr>
     );
 };

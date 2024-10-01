@@ -41,6 +41,20 @@ function Opportunities() {
         }        
     };
 
+    const deleteLead = async ({leadId, otherBusinessId}) => {
+        removeLeadFromList({leadId: leadId})
+        try {
+            const response = await axios.post('http://localhost:3001/api/leads/delete-lead', {
+                businessId: business.id,
+                otherBusinessId: otherBusinessId,
+                leadId: leadId,
+            });
+            console.log('Partnership updated successfully:', response.data);
+        } catch (error) {
+            console.error('Error updating partnership:', error.response?.data || error.message);
+        }
+    };
+
     const updateLead = async ({leadId, otherBusinessId, newStatus}) => {
         updateLeadList({leadId: leadId, newStatus: newStatus})
         try {
@@ -63,6 +77,12 @@ function Opportunities() {
             )
         );
     }
+
+    const removeLeadFromList = ({ leadId }) => {
+        setLeads((prevLeads) =>
+          prevLeads.filter((lead) => lead.id !== leadId)
+        );
+    };
 
     useEffect(() => {
         // Prevent body from scrolling when the component mounts

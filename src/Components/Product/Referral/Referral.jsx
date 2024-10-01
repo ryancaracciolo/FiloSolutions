@@ -23,7 +23,7 @@ function Referral({partnerData, closeClicked, toCustomer}) {
                 <button className={'toggle-btn ' + (toCust ? 'active' : '')} onClick={() => handleToggle('customer')}>Share Business Card</button>
                 <button className={'toggle-btn ' + (!toCust ? 'active' : '')} onClick={() => handleToggle('business')}>Refer Customer</button>
             </div>
-            {toCust ? <PartnerRef partnerData={partnerData}/> : <CustomerRef partnerData={partnerData}/>}
+            {toCust ? <PartnerRef partnerData={partnerData} changePage={setToCustomer}/> : <CustomerRef partnerData={partnerData} changePage={setToCustomer}/>}
         </div>
     );
 };

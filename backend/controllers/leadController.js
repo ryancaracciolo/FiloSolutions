@@ -173,3 +173,62 @@ export const updateLead = async (req, res) => {
     });
   }
 };
+
+export const deleteLead = async (req, res) => {
+  try {
+    const { leadId, businessId, otherBusinessId } = req.body;
+
+    // Input validation
+    if (!leadId || !businessId || !otherBusinessId) {
+      return res.status(400).json({ error: 'Missing required fields.' });
+    }
+
+    // Construct PK and SK for both sender and recipient
+    const senderPK = `BUSINESS#${businessId}`;
+    const senderSK = `LEAD#${leadId}`;
+
+    const recipientPK = `BUSINESS#${otherBusinessId}`;
+    const recipientSK = `LEAD#${leadId}`;
+
+    // Prepare the transaction to delete both sender's and recipient's leads
+    const deleteParams = {
+      TransactItems: [
+        {
+          Delete: {
+            TableName: tableName,
+            Key: {
+              PK: senderPK,
+              SK: senderSK,
+            },
+            ConditionExpression: 'attribute_exists(PK) AND attribute_exists(SK)',
+          },
+        },
+        {
+          Delete: {
+            TableName: tableName,
+            Key: {
+              PK: recipientPK,
+              SK: recipientSK,
+            },
+            ConditionExpression: 'attribute_exists(PK) AND attribute_exists(SK)',
+          },
+        },
+      ],
+    };
+
+    // Execute the transaction
+    const deleteCommand = new TransactWriteCommand(deleteParams);
+    await dynamodb.send(deleteCommand);
+
+    // Respond with success
+    res.status(200).json({
+      message: 'Lead deleted successfully.',
+      leadId,
+    });
+  } catch (error) {
+    console.error('Error deleting lead:', error);
+    res.status(500).json({
+      error: 'An error occurred while deleting the lead.',
+    });
+  }
+};
