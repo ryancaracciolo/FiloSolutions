@@ -81,7 +81,7 @@ function CustomerRef({ partnerData }) {
         </div>
       </div>
       <button className="cust-referral-footer" onClick={handleSubmit}>
-        {isSubmitted ? 'Submitted!' : 'Submit'}
+        {isSubmitted ? 'Submitted!' : 'Send Lead'}
       </button>
     </div>
   );

@@ -72,23 +72,18 @@
 
 .hero-home .cta-buttons {
     text-align: left;
-}
-
-.hero-home .cta-buttons .btn {
-    font-family: var(--font-bold);
-    font-size: var(--font-size-s);
     letter-spacing: 0.5px;
-    text-decoration: none;
-    padding: 5px 5px;
-    color: var(--grey-dark-color);
     transition: background-color 0.3s ease;
 }
 
-.hero-home .cta-buttons .btn.btn-secondary {
+.hero-home .cta-buttons .join-waitlist {
     background-color: var(--teal-medium-color);
-    color: var(--background-color);
-    padding: 8px clamp(15px, 1.6vw, 20px);
+    color: white;
+    padding: 8px clamp(10px, 1.5vw, 15px);
     border-radius: 8px;
+    font-family: var(--font-bold);
+    font-size: var(--font-size-s);
+    text-decoration: none;
 }
 
 .hero-home .hero-image {

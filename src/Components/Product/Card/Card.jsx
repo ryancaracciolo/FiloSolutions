@@ -19,6 +19,7 @@ const Card = ({partnerData, status, setStatus}) => {
     let topLeftButton;
     let topRightButton;
     let cardFooter;
+    var link = 'http://localhost:3000/referral'+partnerData.id;
 
     const [showPopup, setShowPopup] = useState(false); // popup state
     const [showShare, setShowShare] = useState(false);
@@ -57,15 +58,15 @@ const Card = ({partnerData, status, setStatus}) => {
     if (status==='popped') {
         topLeftButton = null;
         topRightButton = null;
-        cardFooter = 
-            <div className='card-footer-popped'>
-                <button className='copy-link' onClick={() => handleCopy()}>
-                    <LinkIcon className='copy-link-linkicon'/>
-                    <span>'https://filosolutions.com/as/asdfads/fadsaf'</span>
-                    <CopyIcon className='copy-link-copyicon'/>
-                </button>
-                <QRIcon className='qr-link' onClick={() => handleQR()}/>
-            </div>;
+        cardFooter = null;
+            // <div className='card-footer-popped'>
+            //     <button className='copy-link' onClick={() => handleCopy({item: link})}>
+            //         <LinkIcon className='copy-link-linkicon'/>
+            //         <span>'https://filosolutions.com/as/asdfads/fadsaf'</span>
+            //         <CopyIcon className='copy-link-copyicon'/>
+            //     </button>
+            //     <QRIcon className='qr-link' onClick={() => handleQR()}/>
+            // </div>;
     }
     else if(status==='Partner') {
         topLeftButton = <CheckIcon className={'card-icon check-icon'}/>;

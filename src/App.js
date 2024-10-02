@@ -7,7 +7,8 @@ import './styles/App.css';
 import LandingHeader from './Components/Landing/Header-Landing/Header-Landing';
 import LandingFooter from './Components/Landing/Footer-Landing/Footer-Landing';
 import LandingMenu from './Components/Landing/Menu-Landing/Menu-Landing';
-import LandingMain from './Pages/Landing/LandingMain/LandingMain'
+import LandingMain from './Pages/Landing/LandingMain/LandingMain';
+import Waitlist from './Pages/Landing/Waitlist/Waitlist';
 /*Product Pages*/
 import Header from './Components/Product/Header/Header';
 import Menu from './Components/Product/Menu/Menu';
@@ -29,6 +30,8 @@ function App() {
   const location = useLocation();
   let isProductRoute = location.pathname.startsWith('/app');
   let isReferral = location.pathname.startsWith('/referral');
+  let isWaitlist = location.pathname.startsWith('/waitlist');
+
 
 
   return (
@@ -61,12 +64,18 @@ function App() {
             <Route path="/referral/:businessId" element={<ReferralProfile />} />
           </Routes>
         ) : (
-          <>
-            <LandingHeader onMenuClick={() => setMenuOpen(!menuOpen)} />
-            <LandingMenu isOpen={menuOpen} onMenuClosed={() => setMenuOpen(!menuOpen)} />
-            <LandingMain />
-            <LandingFooter />
-          </>
+          isWaitlist ? (
+            <Routes>
+              <Route path="/waitlist" element={<Waitlist />} />
+            </Routes>
+          ) : (
+            <>
+              <LandingHeader onMenuClick={() => setMenuOpen(!menuOpen)} />
+              <LandingMenu isOpen={menuOpen} onMenuClosed={() => setMenuOpen(!menuOpen)} />
+              <LandingMain />
+              <LandingFooter />
+            </>
+          )
         )
       )}
     </div>

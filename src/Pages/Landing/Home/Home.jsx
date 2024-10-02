@@ -6,6 +6,7 @@ import { ReactComponent as EngageIcon } from '../../../Assets/Icons/engage-icon.
 import { ReactComponent as CommunityIcon } from '../../../Assets/Icons/circles-icon.svg';
 import { ReactComponent as GrowthIcon } from '../../../Assets/Icons/graph-icon.svg';
 import Divider from '../../../Components/Landing/Divider/Divider'
+import { Link } from 'react-router-dom';
 
 import './Home.css';
 
@@ -22,7 +23,7 @@ const Home = () => {
                             that makes strategic partnerships and collaboration effortless.
                         </p>
                         <div className="cta-buttons">
-                            <a className="btn btn-secondary" href="#contact">Contact</a>
+                            <Link to="/waitlist" className="join-waitlist">Join Waitlist</Link>
                         </div>
                     </div>
                     <div className="product-image">
