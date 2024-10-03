@@ -25,12 +25,6 @@ function Waitlist() {
     return <LoadingScreen isLoading={loading}/>;
   }
 
-  const handleJoin = async (e) => {
-    setJoinedWaitlist(true);
-    setEmail('');
-    setFullName('');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setJoinedWaitlist(true);

@@ -73,7 +73,7 @@ const Card = ({partnerData, status, setStatus}) => {
         topRightButton = <ShareIcon className={'card-icon share-icon'} onClick={toggleShare}/>;
         cardFooter =
             <div className='card-footer' onClick={togglePopup}>
-                <button className='card-footer-content'>Send Referral ➔</button>
+                <button className='card-footer-content'>Send Referral</button>
             </div>;
     }
     else if (status==='Suggested') {
@@ -81,7 +81,7 @@ const Card = ({partnerData, status, setStatus}) => {
         topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
         cardFooter =
             <div className={'card-footer'} onClick={togglePopup}>
-                <button className='card-footer-content'>Send Referral ➔</button>
+                <button className='card-footer-content'>Send Referral</button>
             </div>;
     }
 

@@ -5,39 +5,52 @@
     justify-content: space-between;
   }
 
-  .partner-referral .copy-card {
+  .partner-referral .partner-referral-header {
     display: inline-block;
     text-align: center;
     margin-top: 0px;
     font-family: var(--font-bold);
     color: var(--grey-dark-color);
-    font-size: 14px;
+    font-size: 15px;
     background-color: transparent;
     border: none;
-    cursor: pointer;
-  }
-
-  .partner-referral .copy-icon {
-    fill: var(--teal-medium-color);
-    width: 16px;
-    height: 16px;
-    margin-left: 5px;
-  }
+}
   
   .partner-referral .referral-footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 5px;
+  }
+
+  .referral-footer button {
+    flex: 1;
     background-color: var(--teal-medium-color);
-    font-size: 13px;
-    font-family: var(--font-regular);
+    font-size: 12px;
+    font-family: var(--font-reg);
     border-radius: 10px;
-    height: 30px;
-    line-height: 30px;
-    margin-left: 15%;
-    margin-right: 15%;
+    height: 35px;
+    line-height: 35px;
     margin-top: 5px;
     cursor: pointer;
     color: white;
     border: none;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .referral-footer .copy {
+    background-color: var(--purple-color);
+  }
+
+  .referral-footer .copy .copy-icon {
+    fill: white;
+    height: 16px;
+    width: 16px;
+  }
+
+  .referral-footer .record {
+    background-color: var(--teal-medium-color);
   }

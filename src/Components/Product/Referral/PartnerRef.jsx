@@ -14,15 +14,17 @@ function PartnerRef({partnerData, changePage}) {
         }, 1000);
     }
 
-    const createLink = () => {
-    }
-
     return (
         <div className="partner-referral">
-            {console.log(partnerData)}
-            <button className='copy-card' onClick={() => handleCopy()}>{copied ? 'Copied!' : 'Copy Card'}<CopyIcon className='copy-icon'/></button>
+            <button className="partner-referral-header">Share partner details</button>
             <Card key='asdfasd' partnerData={partnerData} status='popped'/>
-            <button className="referral-footer" onClick={() => changePage(false)}>{'Record Lead in Filo >>'}</button>
+            <div className='referral-footer'>
+                <button className="copy" onClick={handleCopy}>
+                    <span>Copy Card</span>
+                    <CopyIcon className='copy-icon'/>
+                </button>
+                <button className="record" onClick={() => changePage(false)}>{'Record Lead in Filo'}</button>
+            </div>
         </div>
     );
 };
