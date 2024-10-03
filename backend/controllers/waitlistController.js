@@ -2,7 +2,9 @@ import dynamodb from '../config/db.js';
 import shortUUID from "short-uuid";
 import { PutCommand, GetCommand, QueryCommand, BatchGetCommand } from '@aws-sdk/lib-dynamodb';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv'; // Package that loads environment variables from a .env file into process.env
 
+dotenv.config();
 const tableName = 'Waitlist'; // Name of the DynamoDB table
 
 export const addToWaitlist = async (req, res) => {
@@ -47,14 +49,14 @@ const transporter = nodemailer.createTransport({
     port: 587,  // or 587 for TLS
     secure: false,  // Use true for SSL, false for TLS
     auth: {
-      user: 'ryan@filosolutions.co',  // Your business email
-      pass: 'Rcooper22!',  // Your email password or app-specific password
+      user: process.env.MY_EMAIL,  // Your business email
+      pass: process.env.MY_PASSWORD,  // Your email password or app-specific password
     },
 });
   
 const sendEmailAlert = async (name, email) => {
     const mailOptions = {
-      from: 'ryan@filosolutions.co',  // Your business email
+      from: process.env.MY_EMAIL,  // Your business email
       to: email,  // Where you want to receive alerts
       subject: 'Filo Waitlist',
       text: `Hi ${name}, thanks for joining the Filo waitlist! We will contact you soon with more details on upcoming launches.`,
