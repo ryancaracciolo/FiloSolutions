@@ -24,8 +24,8 @@ function Authentication({setBusiness}) {
     try {
         const response = await axios.post('http://localhost:3001/api/businesses/get-business-byemail',{email});
         console.log("response!: "+response.data)
+        localStorage.setItem('business', JSON.stringify(response.data));
         setBusiness(response.data);
-        //navigate('/app/partnerships'); // Redirect after login
     } catch (err) {
         console.error('Error fetching business:', err.response?.data || err.message);
         setError(err.response?.data?.error || 'An error occurred while fetching business.');

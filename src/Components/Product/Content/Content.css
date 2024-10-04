@@ -5,22 +5,6 @@
     flex-direction: column;
 }
 
-.content .content-header {
-    display: flex;
-    height: 0px;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 25px 20px;
-    background-color: var(--background-color);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Light bottom border */
-}
-
-.content-header h1 {
-    font-family: var(--font-extraBold);
-    color: var(--grey-dark-color);
-    font-size: clamp(24px, 2.2vw, 34px);;
-}
-
 .content .content-detail {
     display: flex;
     flex: 1;

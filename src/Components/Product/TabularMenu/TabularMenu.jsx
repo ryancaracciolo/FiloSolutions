@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import './TabularMenu.css';
+import {ReactComponent as DeleteIcon} from '../../../Assets/Icons/delete-icon.svg'
 
-const TabularMenu = ({ headerName, tabItems, activeTab, setActiveTab }) => {
+
+const TabularMenu = ({ headerName, tabItems, activeTab, setActiveTab, trashOn, trashClicked }) => {
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -36,6 +38,12 @@ const TabularMenu = ({ headerName, tabItems, activeTab, setActiveTab }) => {
           </button>
         ))}
       </div>
+      {(headerName === "Opportunities") ? (
+        <div onClick={trashOn ? trashClicked : null}className={'delete-lead'+(trashOn ? ' active' : '')}>
+          <DeleteIcon onClick={trashClicked} className={'delete-icon'+(trashOn ? ' active' : '')} />
+          <span className={(trashOn ? ' active' : '')}>Delete</span>
+        </div>
+        ) : null}
     </div>
   );
 };

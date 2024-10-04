@@ -10,9 +10,9 @@ const CustCard = ({ formData, onChange }) => {
                 <span className="initials">CN</span>
             </div>
             <div className="details">
-                <input type="text" id="name" placeholder="[Customer Name]" value={formData.name} onChange={onChange} />
-                <input type="email" id="email" placeholder="[Customer Email]" value={formData.email} onChange={onChange} />
-                <input type="tel" id="phone" placeholder="[Customer Phone]" value={formData.phone} onChange={onChange} />
+                <h3 type="text" id="name" placeholder="[Customer Name]">{formData.name}</h3>
+                <h3 type="email" id="email" placeholder="[Customer Email]">{formData.email}</h3>
+                <h3 type="tel" id="phone" placeholder="[Customer Phone]" >{formData.phone}</h3>
             </div>
         </div>
     );

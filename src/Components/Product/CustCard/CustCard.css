@@ -37,7 +37,7 @@
   }
   
   /* Input field styles */
-  .cust-card .details input {
+  .cust-card .details h3 {
     margin: 1px 0;
     border: none;
     border-radius: 5px;
@@ -47,7 +47,7 @@
     background-color: lightgray;
   }
   
-  .cust-card .details input:focus {
+  .cust-card .details h3:focus {
     outline: none;
   }
 

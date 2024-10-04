@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { BusinessContext } from './objects/UserContext/UserContext'; // Import the UserContext
@@ -28,19 +28,34 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false); // menu state
   const { business, setBusiness } = useContext(BusinessContext); // Access user and setUser from context
   const location = useLocation();
+  const [loading, setLoading] = useState(true); // Loading state for business check
   let isProductRoute = location.pathname.startsWith('/app');
   let isReferral = location.pathname.startsWith('/referral');
   let isWaitlist = location.pathname.startsWith('/waitlist');
 
 
+  useEffect(() => {
+    const storedBusiness = localStorage.getItem('business');
+    if (storedBusiness) {
+      setBusiness(JSON.parse(storedBusiness));
+    }
+    setLoading(false); // Mark loading as complete once data is retrieved
+    console.log(storedBusiness);
+  }, [setBusiness]);
+
+  if (loading) {
+    // Show a loading spinner or blank page while checking business data
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="app-wrapper">
       {isProductRoute ? (
         <>
+         {console.log(business)}
+
           {business?.id ? (
           <>
-          {console.log(business)}
             <Header />
             <main className="product-main">
               <Menu />

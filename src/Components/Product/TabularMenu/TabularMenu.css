@@ -1,9 +1,64 @@
+
+.content-header {
+    display: flex;
+    height: 0px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 25px 20px;
+    background-color: var(--background-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Light bottom border */
+    position: relative;
+}
+
+.content-header h1 {
+    font-family: var(--font-extraBold);
+    color: var(--grey-dark-color);
+    font-size: clamp(24px, 2.2vw, 34px);
+    width: 20%;
+}
+
+
 .header-tabs {
     display: flex;
     justify-content: center;
     gap: 5px;
     width: 40vw;
     position: relative;
+    background-color: transparent;
+}
+
+.content-header .delete-lead {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 5px;
+}
+
+.content-header .delete-lead.active {
+    cursor: pointer;
+}
+
+.content-header .delete-lead .delete-icon {
+    fill: lightgray;
+    width: 20px;
+    height: 20px;    
+}
+
+.content-header .delete-lead span {
+    color: lightgray;
+    font-family: var(--font-reg);
+    font-size: 13px;
+}
+
+.content-header .delete-icon.active {
+    fill: var(--teal-medium-color);
+}
+
+.content-header .delete-lead span.active {
+    color: var(--teal-medium-color);
 }
 
 .header-tab {

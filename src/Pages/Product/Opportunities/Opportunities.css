@@ -4,6 +4,13 @@
     margin-left: 10px;
 
   }
+
+  .opportunities .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2.5%;
+  }
   
   table {
     width: calc(100%-40px);

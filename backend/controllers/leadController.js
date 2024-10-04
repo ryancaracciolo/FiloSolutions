@@ -177,6 +177,7 @@ export const updateLead = async (req, res) => {
 export const deleteLead = async (req, res) => {
   try {
     const { leadId, businessId, otherBusinessId } = req.body;
+    console.log(leadId+', '+businessId+', '+otherBusinessId)
 
     // Input validation
     if (!leadId || !businessId || !otherBusinessId) {
