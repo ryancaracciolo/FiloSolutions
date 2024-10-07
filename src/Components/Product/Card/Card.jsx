@@ -68,7 +68,7 @@ const Card = ({partnerData, status, setStatus}) => {
             //     <QRIcon className='qr-link' onClick={() => handleQR()}/>
             // </div>;
     }
-    else if(status==='Partner') {
+    else if(status==='Confirmed') {
         topLeftButton = <CheckIcon className={'card-icon check-icon'}/>;
         topRightButton = <ShareIcon className={'card-icon share-icon'} onClick={toggleShare}/>;
         cardFooter =
@@ -112,15 +112,7 @@ const Card = ({partnerData, status, setStatus}) => {
     else if (status==='Self') {
         topLeftButton = null;
         topRightButton = null;
-        cardFooter = 
-            <div className='card-footer-popped'>
-                <button className='copy-link' onClick={() => handleCopy()}>
-                    <LinkIcon className='copy-link-linkicon'/>
-                    <span>'https://filosolutions.com/as/asdfads/fadsaf'</span>
-                    <CopyIcon className='copy-link-copyicon'/>
-                </button>
-                <QRIcon className='qr-link' onClick={() => handleQR()}/>
-            </div>;
+        cardFooter = null;
     }
 
     return (

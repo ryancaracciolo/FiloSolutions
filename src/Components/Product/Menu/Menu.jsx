@@ -10,17 +10,16 @@ import './Menu.css';
 import { signOut } from '@aws-amplify/auth';
 import { Link } from 'react-router-dom';
 
-function Menu() {
-    const { business, setBusiness } = useContext(BusinessContext);
+function Menu({activeMenuIndex }) {
+    const { setBusiness } = useContext(BusinessContext);
+    const [selectedItem, setSelectedItem] = useState((activeMenuIndex ? activeMenuIndex : 0));
+
 
     const menuItems = [
-        //{ label: 'Dashboard', icon: DashboardIcon, path: '/app' },
         { label: 'Partnerships', icon: PartnershipIcon, path: '/app/partnerships' },
         { label: 'Opportunities', icon: OpportIcon, path: '/app/opportunities' },
-        //{ label: 'Collab', icon: CollabIcon, path: '/app/collab' },
     ];
     
-    const [selectedItem, setSelectedItem] = useState(0);
 
     const handleMenuClicked = (index) => {
         setSelectedItem(index);
@@ -30,10 +29,7 @@ function Menu() {
     const handleSignOut = async () => {
         try {
         await signOut();
-        // Optionally, redirect to a login page after sign-out
         setBusiness(null)
-        //window.location.href = '/app/login';
-
         } catch (error) {
         console.log('Error signing out: ', error);
         }

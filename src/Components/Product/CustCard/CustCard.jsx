@@ -1,18 +1,17 @@
 import React from 'react';
 import './CustCard.css';
+import Avatar from '../CircleInitials/CircleInitials'
 
-const CustCard = ({ formData, onChange }) => {
-
+const CustCard = ({ formData }) => {
 
     return (
         <div className="cust-card">
-            <div className="avatar">
-                <span className="initials">CN</span>
-            </div>
+            <Avatar businessName={formData.name ? formData.name : 'Lead Name'} size='60px' fontSize='20px' />
+            
             <div className="details">
-                <h3 type="text" id="name" placeholder="[Customer Name]">{formData.name}</h3>
-                <h3 type="email" id="email" placeholder="[Customer Email]">{formData.email}</h3>
-                <h3 type="tel" id="phone" placeholder="[Customer Phone]" >{formData.phone}</h3>
+                <h3 type="text" id="name">{formData.name ? formData.name : 'Lead Name'}</h3>
+                <h3 type="email" id="email">{formData.email ? formData.email : 'example@gmail.com'}</h3>
+                <h3 type="phone" id="phone">{formData.phone ? formData.phone : '(555) 555-5555'}</h3>
             </div>
         </div>
     );

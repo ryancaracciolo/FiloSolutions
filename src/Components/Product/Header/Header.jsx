@@ -2,16 +2,28 @@ import React, { useContext, useState } from 'react';
 import './Header.css';
 import logo from '../../../Assets/Images/FiloLogo.png';
 import {ReactComponent as ProfileButton} from '../../../Assets/Icons/profile-icon.svg';
-import { BusinessContext } from '../../../objects/UserContext/UserContext'; // Import the context
+import { BusinessContext, SearchContext } from '../../../objects/UserContext/UserContext'; // Import the context
 import Popup from '../Popup/Popup';
 import Card from '../../../Components/Product/Card/Card';
 
 const Header = () => {
     const { business } = useContext(BusinessContext);
+    const { searchText, setSearchText } = useContext(SearchContext);
     const [showPopup, setShowPopup] = useState(false); // popup state
+     
     
     const handleProfileClick = () => {
         setShowPopup(!showPopup);
+    };
+
+    const handleSearch = (e) => {
+        console.log(e.target.value);
+        const value = e.target.value;
+        if (value) {
+            setSearchText(value);
+        } else {
+            setSearchText(''); 
+        }
     };
     
 
@@ -22,7 +34,7 @@ const Header = () => {
                     <img src={logo} alt="Filo Logo" />
                 </div>
                 <div className="search-bar-container">
-                    <input type="text" placeholder="Search for Anything..." className="search-bar" />
+                    <input type="text" placeholder="Search for Partners..." className="search-bar" value={searchText} onChange={handleSearch} />
                 </div>
                 <button className="profile-button" onClick={handleProfileClick}>
                     <h3>{business.name}</h3>
@@ -32,7 +44,7 @@ const Header = () => {
             {showPopup ? <Popup content={
                 <div className='user-profile-wrapper'>
                     <div className='user-profile-header'>
-                        <h2>My Profile Info</h2>
+                        <h2>My Card Info</h2>
                         {/*<button onClick={handleEdit}>Edit</button>*/}
                     </div>
                     <Card key={business.id} partnerData={business} status='Self'/>

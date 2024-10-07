@@ -12,14 +12,14 @@
   
   /* Avatar styles */
   .cust-card .avatar {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background-color: #d6b8eb;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px 0;
+    margin: 5px 5px;
   }
   
   .cust-card .avatar .initials {
@@ -29,11 +29,13 @@
   }
 
   .cust-card .details {
+    flex: 1;
     align-self: stretch;
-    margin: 0px;
+    margin-left: 20px;
     padding: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
   
   /* Input field styles */
@@ -41,34 +43,27 @@
     margin: 1px 0;
     border: none;
     border-radius: 5px;
+    padding: 0px 2px;
     font-size: 12px;
-    text-align: center;
-    color: var(--grey-dark-color);
-    background-color: lightgray;
-  }
-  
-  .cust-card .details h3:focus {
-    outline: none;
+    text-align: left;
+    color: rgb(102, 102, 102);
   }
 
   .cust-card #name {
     font-family: var(--font-bold);
-    font-size: 14px;
   }
 
   .cust-card #email {
-    font-family: var(--font-light);
+    font-family: var(--font-thin);
+    color: rgb(151, 151, 151);
   }
 
-  input#phone {
+  .cust-card #phone {
     font-family: var(--font-bold);
     background-color: #d6b8eb;
-    padding: 2px;
-    margin: 0 20%;
-    color: white;
-  }
-
-  input#phone::placeholder {
+    margin-top: 3px;
+    padding: 2px 5px;
+    margin-right: 43%;
     color: white;
   }
   

@@ -12,6 +12,7 @@
     --purple-color: #5C3D99;
 
     /* Filo Font Family */
+    --font-thin: 'BA-Thin', sans-serif;
     --font-light: 'BA-Light', sans-serif;
     --font-regular: 'BA-Light', sans-serif;
     --font-reg: 'BA-Regular', sans-serif;
@@ -72,6 +73,13 @@
 @font-face {
     font-family: "BA-Light";
     src: url(../Assets/Fonts/BuenosAires-Light.ttf) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BA-Thin";
+    src: url(../Assets/Fonts/BuenosAires-Thin.ttf) format('truetype');
     font-weight: 300;
     font-style: normal;
 }

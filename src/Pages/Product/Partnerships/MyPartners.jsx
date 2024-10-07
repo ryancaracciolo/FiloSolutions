@@ -13,7 +13,7 @@ const MyPartners = ({partners, suggPartners, updatePartner}) => {
             {!(partners.length > 0) ? <div className='no-partners'>Invite other members to create your first partnership!</div> : null}
             <div className="partner-cards">
                 {partners ? partners.map(partner => (
-                    <Card key={partner.id} partnerData={partner} status='Partner' setStatus={updatePartner}/>
+                    <Card key={partner.id} partnerData={partner} status='Confirmed' setStatus={updatePartner}/>
                 )) : null}
             </div>
             <div className="subheader">

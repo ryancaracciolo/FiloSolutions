@@ -25,7 +25,9 @@ Amplify.configure(config);
 
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false); // menu state
+  const [menuOpen, setMenuOpen] = useState(false); // landing menu state
+  const [activeMenuIndex, setActiveMenuIndex] = useState(0); // Menu active index
+
   const { business, setBusiness } = useContext(BusinessContext); // Access user and setUser from context
   const location = useLocation();
   const [loading, setLoading] = useState(true); // Loading state for business check
@@ -33,6 +35,14 @@ function App() {
   let isReferral = location.pathname.startsWith('/referral');
   let isWaitlist = location.pathname.startsWith('/waitlist');
 
+
+  useEffect(() => {
+    if (location.pathname === '/app/partnerships') {
+      setActiveMenuIndex(0); // Partnerships corresponds to menu index 0
+    } else if (location.pathname === '/app/opportunities') {
+      setActiveMenuIndex(1); // Opportunities corresponds to menu index 1
+    }
+  }, [location.pathname]); // Re-run whenever the location changes
 
   useEffect(() => {
     const storedBusiness = localStorage.getItem('business');
@@ -48,6 +58,7 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  
   return (
     <div className="app-wrapper">
       {isProductRoute ? (
@@ -58,7 +69,7 @@ function App() {
           <>
             <Header />
             <main className="product-main">
-              <Menu />
+              <Menu activeMenuIndex={activeMenuIndex}/>
               <Routes>
                 <Route path="/app/partnerships" element={<Partnerships />} />
                 <Route path="/app/opportunities" element={<Opportunities />} />

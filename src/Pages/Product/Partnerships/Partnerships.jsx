@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useContext } from 'react';
-import { BusinessContext } from '../../../objects/UserContext/UserContext';
+import React, {useEffect, useState, useContext, useRef } from 'react';
+import { BusinessContext, SearchContext } from '../../../objects/UserContext/UserContext';
 import './Partnerships.css';
 import MyPartners from './MyPartners'
 import Invites from './Invites'
@@ -13,21 +13,27 @@ function Partnerships() {
     const { business } = useContext(BusinessContext);
     const tabItems = ['My Partners', 'Invites', 'Find Partners'];
     const [activeTab, setActiveTab] = useState('My Partners');
-    const [fetchedPartners, setFetchedPartners] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(''); 
-    // My Partners Lists
+    const [error, setError] = useState('');
+    const isInitialMount = useRef(true); // This keeps track of the first render
+
+    // My Partners
     const [partners, setPartners] = useState([]);
     const [suggPartners, setSuggPartners] = useState([]);
-    // Invites Lists
+    const [fetchedPartners, setFetchedPartners] = useState(false);
+    // Invites
     const [pendingSent, setPendingSent] = useState([]);
     const [pendingReceived, setPendingReceived] = useState([]);
-    // Other List
+    // Find Partners
     const [otherBusinesses, setOtherBusinesses] = useState([]);
+    const [fetchedOther, setFetchedOther] = useState(false);
+    const [lastEvaluatedKey, setLastEvaluatedKey] = useState(null);
+    const {searchText, setSearchText} = useContext(SearchContext);
+
 
     const fetchPartners = async () => {
+        setLoading(true);
         try {
-            setLoading(true);
             const response = await axios.get(`http://localhost:3001/api/businesses/get-partners/${business.id}`);
             const data = response.data;
             setPendingSent(data["Pending_Sent"])
@@ -47,6 +53,36 @@ function Partnerships() {
             setFetchedPartners(true);
             setLoading(false);
         }        
+    };
+
+    const fetchOther = async (reset = false) => {
+        setLoading(true);
+        try {
+            const params = {
+              lastEvaluatedKey: reset ? null : lastEvaluatedKey,
+            };
+      
+            if (searchText.trim() !== '') {
+              params.search = searchText;
+            }
+      
+            const response = await axios.get('http://localhost:3001/api/businesses/search', { params });
+            const list = updateBusinessStatus(response.data.items);
+            if (reset) {
+              // If reset is true, we replace the businesses list
+              setOtherBusinesses(list);
+            } else {
+              // Append new items to the existing list
+              setOtherBusinesses((prev) => [...prev, ...list]);
+            }
+      
+            setLastEvaluatedKey(response.data.lastEvaluatedKey);
+        } catch (error) {
+            console.error('Error fetching businesses:', error);
+        } finally {
+            setLoading(false);
+            setFetchedOther(true);
+        } 
     };
 
     const updatePartner = async ({partnerId, newStatus, oldStatus}) => {
@@ -86,8 +122,32 @@ function Partnerships() {
         }
     }; 
 
+    const handleSearchChange = (e) => {
+        setSearchText(e.target.value);
+        setLastEvaluatedKey(null); // Reset pagination when search term changes
+    };
+
+    const updateBusinessStatus = (businesses) => {
+        return businesses
+        .filter((bus) => bus.id !== business.id) // Remove any business that has the same id as businessId
+        .map((business) => {
+          // Check each list in order of priority and assign the respective status
+          if (partners.some((partner) => partner.id === business.id)) {
+            return { ...business, status: 'Confirmed' }; // Business found in confirmedPartners
+          } else if (pendingSent.some((partner) => partner.id === business.id)) {
+            return { ...business, status: 'Pending_Sent' }; // Business found in pendingSentPartners
+          } else if (pendingReceived.some((partner) => partner.id === business.id)) {
+            return { ...business, status: 'Pending_Received' }; // Business found in pendingReceivedPartners
+          } else if (suggPartners.some((partner) => partner.id === business.id)) {
+            return { ...business, status: 'Suggested' }; // Business found in suggPartners
+          }
+          // If the business is not in any of the lists, return it as Other
+          return  { ...business, status: 'Suggested' };
+        });
+    };
+      
+
     useEffect(() => {
-        // Prevent body from scrolling when the component mounts
         document.body.style.overflow = 'hidden';
         return () => {
           document.body.style.overflow = '';
@@ -98,7 +158,21 @@ function Partnerships() {
         if (!fetchedPartners && !loading) {
             fetchPartners();
         }
+
+        if (activeTab === 'Find Partners') {
+            if (!fetchedOther && !loading) {
+                fetchOther();
+            }
+        }
     }, [activeTab]);
+
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else if (activeTab === 'Find Partners') {
+            fetchOther(true);   
+        }
+      }, [searchText]);
 
     return (
         <div className="content partnerships">
@@ -117,7 +191,9 @@ function Partnerships() {
                         {activeTab === 'Invites' && (
                         <Invites pendingSent={pendingSent} pendingReceived={pendingReceived} updatePartner={updatePartner} />
                         )}
-                        {activeTab === 'Find Partners' && <FindPartners />}
+                        {activeTab === 'Find Partners' && (
+                            <FindPartners suggPartners={suggPartners} otherBusinesses={otherBusinesses} updatePartner={updatePartner}/>
+                        )}
                     </>
                 )}
             </div>

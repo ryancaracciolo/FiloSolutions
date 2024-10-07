@@ -206,6 +206,7 @@ export const fetchPartnersForBusiness = async (req, res) => {
       const { status } = partnerInfoMap[partnerId];
 
       if (result[status]) {
+        partnerBusiness.status = status;
         result[status].push(partnerBusiness);
       } else {
         console.warn(`Unknown status '${status}' for partnerId '${partnerId}'`);
@@ -219,7 +220,7 @@ export const fetchPartnersForBusiness = async (req, res) => {
   }
 };
 
-// Fetch Leads for a Business and include Business Names
+/////////////////////////////// Fetch Leads
 export const fetchLeadsForBusiness = async (req, res) => {
   const businessId = req.params.id;
 
@@ -286,3 +287,55 @@ export const fetchLeadsForBusiness = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching leads. ' + error });
   }
 };
+
+
+/////////////////////// Search Businesses
+export const searchBusinesses = async (req, res) => {
+  const { lastEvaluatedKey, search } = req.query;
+
+  // Set up the base parameters
+  const params = {
+    TableName: tableName,
+    IndexName: 'Search-Businesses',
+    KeyConditionExpression: '#Type = :typeValue',
+    ExpressionAttributeNames: {
+      '#Type': 'Type',
+    },
+    ExpressionAttributeValues: {
+      ':typeValue': 'Business',
+    },
+    Limit: 10,
+    ScanIndexForward: true,
+  };
+
+  // If there's a search term, add it to the KeyConditionExpression
+  if (search && search.trim() !== '') {
+    params.KeyConditionExpression += ' AND begins_with(#name, :nameValue)';
+    params.ExpressionAttributeNames['#name'] = 'name';
+    params.ExpressionAttributeValues[':nameValue'] = search;
+  }
+
+  // Handle pagination
+  if (lastEvaluatedKey) {
+    params.ExclusiveStartKey = JSON.parse(decodeURIComponent(lastEvaluatedKey));
+  }
+
+  try {
+    const data = await dynamodb.send(new QueryCommand(params));
+    const itemsWithStatus = data.Items.map((item) => ({
+      ...item,
+      status: 'Other', // Add the 'status' attribute
+    }));
+    
+    res.json({
+      items: itemsWithStatus,
+      lastEvaluatedKey: data.LastEvaluatedKey
+        ? encodeURIComponent(JSON.stringify(data.LastEvaluatedKey))
+        : null,
+    });
+  } catch (error) {
+    console.error('Error querying DynamoDB:', JSON.stringify(error, null, 2));
+    res.status(500).json({ error: 'Could not fetch businesses' });
+  }
+};
+
