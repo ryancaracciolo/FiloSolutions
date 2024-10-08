@@ -62,11 +62,11 @@
 
 .add-icon {
     left: 0;
-    fill: var(--gold-dark-color);
+    fill: var(--purple-color);
 }
 
 .add-icon:hover {
-    fill: var(--gold-light-color);
+    fill: var(--purple-color);
 }
 
 .share-icon {
@@ -83,8 +83,8 @@
 }
 
 .pending_sent-icon {
-    background-color: var(--purple-color);
-    color: white;
+    background-color: lightgray;
+    color: var(--grey-dark-color);
     border-radius: 5px;
     padding: 2px 6px;
     font-size: 12px;

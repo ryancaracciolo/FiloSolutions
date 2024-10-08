@@ -4,21 +4,23 @@ import './Invite.css';
 const Invite = ({ onClose, onInvite }) => {
   const [yesClicked, setYesClicked] = useState(false);
 
-  const handleInvite = () => {
+  const handleInviteUI = () => {
     if (yesClicked) return;
-
     setYesClicked(true);
-    onInvite();
-
     // Close the component after a delay of 1 second
-    setTimeout(onClose, 1000);
+    setTimeout(handleInvite, 1000);
+  };
+
+  const handleInvite = () => {
+    onInvite();
+    onClose();
   };
 
   return (
     <div className='invite-wrapper'>
         <h3>{yesClicked ? 'Invite Sent!' : 'Send Partner Invite?'}</h3>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button className='invite-yes' onClick={handleInvite}>
+          <button className='invite-yes' onClick={handleInviteUI}>
             Send
           </button>
           <button className='invite-no' onClick={onClose}>

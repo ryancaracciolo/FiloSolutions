@@ -9,6 +9,7 @@ const tableName = 'FiloTableMVP1'; // Name of the DynamoDB table
 export const createPartnership = async (req, res) => {
   try {
     const { businessId1, businessId2, status } = req.body;
+    console.log(businessId1+ " "+businessId2+" "+status);
 
     // Validate input
     if (!businessId1 || !businessId2) {

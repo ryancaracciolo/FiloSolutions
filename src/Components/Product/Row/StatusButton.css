@@ -49,6 +49,11 @@
 }
 
 /* Status color classes */
+
+.status.closed-other {
+    background-color: var(--gold-light-color);
+}
+
 .status.closed-won {
     background-color: rgb(62, 177, 150);
 }
@@ -57,16 +62,12 @@
     background-color: rgb(230, 118, 118);
 }
 
-.status.in-negotiation {
-    background-color: rgb(72, 96, 215);
-}
-
-.status.qualified {
+.status.in-progress {
     background-color: var(--purple-color);
 }
 
 .status.contacted {
-    background-color: var(--gold-light-color);
+    background-color: rgb(33, 112, 185);
 }
 
 .status.new {

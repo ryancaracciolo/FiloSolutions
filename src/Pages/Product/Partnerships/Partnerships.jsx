@@ -87,15 +87,31 @@ function Partnerships() {
 
     const updatePartner = async ({partnerId, newStatus, oldStatus}) => {
         moveItem(partnerId, newStatus, oldStatus);
-        try {
-            const response = await axios.post('http://localhost:3001/api/partnerships/update-partnership', {
-                businessId1: business.id,
-                businessId2: partnerId,
-                status: newStatus,
-            });
-            console.log('Partnership updated successfully:', response.data);
-        } catch (error) {
-            console.error('Error updating partnership:', error.response?.data || error.message);
+
+        if (oldStatus === "Suggested") {
+            try {
+                const response = await axios.post('http://localhost:3001/api/partnerships/update-partnership', {
+                    businessId1: business.id,
+                    businessId2: partnerId,
+                    status: newStatus,
+                });
+                console.log('Partnership updated successfully:', response.data);
+            } catch (error) {
+                console.error('Error updating partnership:', error.response?.data || error.message);
+            }
+        }
+
+        else if (oldStatus === "Other") {
+            try {
+                const response = await axios.post('http://localhost:3001/api/partnerships/create-partnership', {
+                    businessId1: business.id,
+                    businessId2: partnerId,
+                    status: newStatus,
+                });
+                console.log('Partnership created successfully:', response.data);
+            } catch (error) {
+                console.error('Error creating partnership:', error.response?.data || error.message);
+            }
         }
     };
 
@@ -110,14 +126,19 @@ function Partnerships() {
 
         const key = `${newStatus}-${oldStatus}`;
         const config = statusMap[key];
+        console.log(key);
 
         if (config) {
             const { sourceList, setSource, setTarget } = config;
             const itemToMove = sourceList.find((item) => item.id === id);
             if (itemToMove) {
-                const updatedSourceList = sourceList.filter((item) => item.id !== id);
-                setSource(updatedSourceList);
                 setTarget((prevTargetList) => [...prevTargetList, itemToMove]);
+                if (key !== 'Pending_Sent-Other') {
+                    const updatedSourceList = sourceList.filter((item) => item.id !== id);
+                    setSource(updatedSourceList);
+                } else {
+                    setSource(updateBusinessStatus(otherBusinesses));
+                }
             }
         }
     }; 
@@ -142,7 +163,7 @@ function Partnerships() {
             return { ...business, status: 'Suggested' }; // Business found in suggPartners
           }
           // If the business is not in any of the lists, return it as Other
-          return  { ...business, status: 'Suggested' };
+          return  { ...business, status: 'Other' };
         });
     };
       
@@ -173,6 +194,10 @@ function Partnerships() {
             fetchOther(true);   
         }
       }, [searchText]);
+
+      useEffect(() => {
+        setOtherBusinesses(updateBusinessStatus(otherBusinesses));
+    }, [pendingSent, pendingReceived, partners, suggPartners]);
 
     return (
         <div className="content partnerships">

@@ -1,7 +1,7 @@
 import React from 'react';
 import './CircleInitials.css'; // CSS file for styling
 
-function CircleInitials({ businessName, size, fontSize }) {
+function CircleInitials({ businessName, businessImg, size, fontSize }) {
   if (!businessName) {
     return null;
   }
@@ -26,9 +26,15 @@ function CircleInitials({ businessName, size, fontSize }) {
   const initials = getInitials(businessName);
 
   return (
-    <div style={{ width: size, height: size, fontSize: fontSize }} className="circle-initials">
-      {initials}
-    </div>
+    (!businessImg) ? (
+      <div className="circle-initials">
+        <p className="circle-p" style={{ width: size, height: size, fontSize: fontSize }}>{initials}</p>
+      </div>
+    ) : (
+      <div className="circle-initials">
+        <img className='circle-image' style={{ width: size, height: size }} src={businessImg}></img>
+      </div>
+    )
   );
 }
 

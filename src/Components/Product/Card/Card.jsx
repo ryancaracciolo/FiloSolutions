@@ -13,13 +13,13 @@ import HoverIcon from '../HoverIcon/HoverIcon';
 import Referral from '../Referral/Referral';
 import Popup from '../Popup/Popup';
 import Confirm from '../Invite/Invite';
+import Avatar from '../CircleInitials/CircleInitials';
 
 const Card = ({partnerData, status, setStatus}) => {
     
     let topLeftButton;
     let topRightButton;
     let cardFooter;
-    var link = 'http://localhost:3000/referral'+partnerData.id;
 
     const [showPopup, setShowPopup] = useState(false); // popup state
     const [showShare, setShowShare] = useState(false);
@@ -51,6 +51,9 @@ const Card = ({partnerData, status, setStatus}) => {
     }
 
     const handlePartnerUpdate = (newStatus) => {
+        console.log(partnerData);
+        console.log(newStatus);
+        console.log(status);
         setStatus({partnerId: partnerData.id, newStatus: newStatus, oldStatus: status});
     }
 
@@ -76,12 +79,12 @@ const Card = ({partnerData, status, setStatus}) => {
                 <button className='card-footer-content'>Send Referral</button>
             </div>;
     }
-    else if (status==='Suggested') {
+    else if (status==='Suggested' || status==='Other') {
         topLeftButton = <AddIcon className={'card-icon add-icon'} onClick={toggleAdd}/>;
-        topRightButton = <ShareIcon className={'card-icon share-icon'}/>;
+        topRightButton = null;
         cardFooter =
-            <div className={'card-footer'} onClick={togglePopup}>
-                <button className='card-footer-content'>Send Referral</button>
+            <div className={'card-footer'} onClick={toggleAdd}>
+                <button className='card-footer-content' style={{backgroundColor: 'var(--purple-color', borderRadius: '10px'}}>Send Partner Invite</button>
             </div>;
     }
 
@@ -97,7 +100,7 @@ const Card = ({partnerData, status, setStatus}) => {
         topLeftButton = <div className={'card-icon pending_received-icon'}>Received</div>;
         topRightButton = null;
         cardFooter =
-            <div className={'card-footer'} style={{backgroundColor: 'var(--teal-light-color)'}} onClick={() => handlePartnerUpdate('Confirmed')}>
+            <div className={'card-footer'} style={{backgroundColor: 'var(--gold-dark-color)'}} onClick={() => handlePartnerUpdate('Confirmed')}>
                 <button className='card-footer-content'>Accept Invite</button>
             </div>;
     }
@@ -119,7 +122,7 @@ const Card = ({partnerData, status, setStatus}) => {
         <div className={'card active'}>
             <div className="card-header">
                 {topLeftButton}
-                <img src={partnerData.logo} loading="lazy" alt="Company Logo" className="company-logo" />
+                <Avatar className="company-logo" businessImg={''} businessName={partnerData.name} size={'80px'} fontSize={'25px'}/>
                 {topRightButton}
             </div>
             <div className="card-body">

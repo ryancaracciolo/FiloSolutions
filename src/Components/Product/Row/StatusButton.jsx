@@ -7,7 +7,7 @@ const StatusButton = ({ status, setStatus }) => {
     const dropdownRef = useRef(null); // Reference to the dropdown container
 
 
-    const statuses = ['New', 'Contacted', 'Qualified', 'In-Negotiation', 'Closed-Won', 'Closed-Lost'];
+    const statuses = ['New', 'Contacted', 'In-Progress', 'Closed-Won', 'Closed-Lost', 'Closed-Other'];
 
     // Toggle dropdown visibility
     const toggleDropdown = () => {

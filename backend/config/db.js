@@ -1,5 +1,6 @@
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'; // Correct package for DynamoDBClient
+import { S3Client } from '@aws-sdk/client-s3'
 import dotenv from 'dotenv'; // Package that loads environment variables from a .env file into process.env
 
 dotenv.config();
@@ -19,7 +20,17 @@ const dbClient = new DynamoDBClient({
   },
 });
 
+const s3Client = new S3Client({
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+});
+
 // Create the DynamoDB Document client using the DynamoDB client
 const ddbDocClient = DynamoDBDocumentClient.from(dbClient);
 
 export default ddbDocClient;
+//export default s3Client;
+

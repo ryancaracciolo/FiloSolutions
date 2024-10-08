@@ -13,6 +13,7 @@ function Opportunities() {
     const tabItems = ['All Referrals', 'Received', 'Shared'];
     const [activeTab, setActiveTab] = useState('All Referrals');
     const [trashOn, setTrashOn]= useState(false);
+    const [selectAll, setSelectAll] = useState(false); // Header checkbox state
     const [selectedLeads, setSelectedLeads] = useState([]);
     const [fetchedLeads, setFetchedLeads] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -86,37 +87,53 @@ function Opportunities() {
     };
 
     const leadSelected = ({ lead }) => {
-        setSelectedLeads(prevSelectedLeads => {
-            let updatedLeads;
-            // Check if the lead is already in selectedLeads by comparing lead.id
-            if (prevSelectedLeads.some(selectedLead => selectedLead.id === lead.id)) {
-                // If it's already selected, remove it by filtering out the lead with the same id
-                updatedLeads = prevSelectedLeads.filter(selectedLead => selectedLead.id !== lead.id);
-            } else {
-                // If it's not selected, add the full lead object
-                updatedLeads = [...prevSelectedLeads, lead];
-            }
-            setTrashOn(updatedLeads.length > 0);
+        setSelectedLeads((prevSelected) => {
+            const updatedLeads = {
+                ...prevSelected,
+                [lead.id]: !prevSelected[lead.id],
+            };
+            setTrashOn(Object.values(updatedLeads).some((isSelected) => isSelected));
             console.log(updatedLeads);
             return updatedLeads;
         });
     };
-    
+
+    const allSelected = () => {
+        setSelectAll(!selectAll);
+        const newSelectedLeads = {};
+        leads.forEach((lead) => {
+            newSelectedLeads[lead.id] = !selectAll;
+        });
+        setSelectedLeads(newSelectedLeads);
+        setTrashOn(Object.values(newSelectedLeads).some((isSelected) => isSelected));
+    }
 
     const deleteSelectedLeads = async () => {
-        for (let lead of selectedLeads) {
-            const { id, otherBusinessId } = lead; // Assuming lead has these properties  
-            console.log(id, otherBusinessId);          
-            try {
-                await deleteLead({ leadId: id, otherBusinessId: otherBusinessId });
-            } catch (error) {
-                console.error('Error deleting lead:', error.response?.data || error.message);
+        // Iterate over selected leads and filter only those that are `true`
+        for (let leadId in selectedLeads) {
+            if (selectedLeads[leadId]) {
+              const lead = getLeadById(leadId); // Get the lead data from the leads list
+              if (lead) {
+                const { id, otherBusinessId } = lead;
+                console.log(id, otherBusinessId);
+                try {
+                  await deleteLead({ leadId: id, otherBusinessId });
+                } catch (error) {
+                  console.error('Error deleting lead:', error.response?.data || error.message);
+                }
+              } else {
+                console.error(`Lead with id ${leadId} not found.`);
+              }
             }
-        }
-    
-        setSelectedLeads([]);
+          }
+        setSelectedLeads({});
         setTrashOn(false);
+        setSelectAll(false);
     };
+
+    const getLeadById = (leadId) => {
+        return leads.find((lead) => lead.id === leadId); // Compare as strings since id is a string
+    };      
 
     useEffect(() => {
         // Prevent body from scrolling when the component mounts
@@ -144,7 +161,7 @@ function Opportunities() {
                     <table className="opportunities-table">
                         <thead>
                             <tr>
-                            <th><input type="checkbox" /></th>
+                            <th><input type="checkbox" checked={selectAll} onChange={() => allSelected()}/></th>
                             <th>Type</th>
                             <th>Date</th>
                             <th>Customer Name</th>
@@ -157,19 +174,19 @@ function Opportunities() {
                         <tbody>
                             {(activeTab === "All Referrals") ? (
                                 leads.map(lead => (
-                                    <Row key={lead.id} leadData={lead} updateLead={updateLead} leadSelected={leadSelected} />
+                                    <Row key={lead.id} leadData={lead} updateLead={updateLead} leadSelected={leadSelected} checked={selectedLeads[lead.id]} />
                                 ))
                             ) : (activeTab === "Received") ? (
                                 leads
                                     .filter(lead => lead.direction === 'Received')
                                     .map(lead => (
-                                        <Row key={lead.id} leadData={lead} updateLead={updateLead} leadSelected={leadSelected} />
+                                        <Row key={lead.id} leadData={lead} updateLead={updateLead} leadSelected={leadSelected} checked={selectedLeads[lead.id]} />
                                     ))
                             ) : (
                                 leads
                                     .filter(lead => lead.direction === 'Shared')
                                     .map(lead => (
-                                        <Row key={lead.id} leadData={lead} updateLead={updateLead} leadSelected={leadSelected} />
+                                        <Row key={lead.id} leadData={lead} updateLead={updateLead} leadSelected={leadSelected} checked={selectedLeads[lead.id]} />
                                     ))
                             )}
                         </tbody>

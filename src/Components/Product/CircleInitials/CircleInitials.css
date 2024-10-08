@@ -1,14 +1,34 @@
 .circle-initials {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35px; /* Adjust size as needed */
-    height: 35px; /* Adjust size as needed */
-    border-radius: 50%;
-    background-color: #d6b8eb;
     color: white; /* Text color */
     font-size: 13px; /* Adjust font size as needed */
     font-family: var(--font-bold);
     text-transform: uppercase; /* Ensure initials are uppercase */
+
+  }
+
+  .circle-initials .circle-image {
+    width: 35px; /* Adjust size as needed */
+    height: 35px; /* Adjust size as needed */
+    box-sizing: border-box;
+    background-color: white;
+    padding: 2px;
+    border-radius: 50%;
+    margin: 0;
+  }
+
+  .circle-initials .circle-p {
+    width: 35px; /* Adjust size as needed */
+    height: 35px; /* Adjust size as needed */
+    text-align: center;
+    align-content: center;
+    box-sizing: border-box;
+    padding: 2px;
+    background-color: #d6b8eb;
+    border-radius: 50%;
+    margin: 0;
   }
   

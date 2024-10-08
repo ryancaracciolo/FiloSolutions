@@ -26,7 +26,7 @@ function CustomerRef({ partnerData }) {
         setFormData({ name: '', email: '', phone: '', note: '' });
         setTimeout(() => {
           setIsSubmitted(false);
-        }, 600); 
+        }, 1000); 
       } catch (error) {
         console.error('Error updating Lead:', error.response?.data || error.message);
     }
@@ -83,56 +83,62 @@ function CustomerRef({ partnerData }) {
   return (
     <div className="customer-referral">
       <button className="cust-referral-header">Refer Customer to Partner</button>
-      <CustCard formData={formData} onChange={handleInputChange} />
-      <form className="contact-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Lead Name"
-          value={formData.name}
-          onChange={handleInputChange}
-          className="input-full"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Lead Email"
-          value={formData.email}
-          onChange={handleInputChange}
-          className="input-full"
-          required
-        />
-      
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Lead Phone"
-          value={formData.phone}
-          onChange={handleInputChange}
-          className="input-full"
-          required
-        />
-        <textarea
-          name="note"
-          placeholder="Note (Optional)..."
-          value={formData.note}
-          onChange={handleInputChange}
-          className="textarea-full"
-        />
-      </form>
-      <div className="acknowledge-statement">
-        <input
-          type="checkbox"
-          id="acknowledge-checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        <div>
-            <p>I acknowledge customer info will be shared with Partner</p>
-            {showWarning && (<p className="warning-text">Please acknowledge to Submit.</p>)}
-        </div>
-      </div>
+      {(!isSubmitted) ? (
+        <>
+          <CustCard formData={formData} onChange={handleInputChange} />
+          <form className="contact-form">
+            <input
+              type="text"
+              name="name"
+              placeholder="Lead Name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="input-full"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Lead Email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="input-full"
+              required
+            />
+          
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Lead Phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className="input-full"
+              required
+            />
+            <textarea
+              name="note"
+              placeholder="Note (Optional)..."
+              value={formData.note}
+              onChange={handleInputChange}
+              className="textarea-full"
+            />
+          </form>
+          <div className="acknowledge-statement">
+            <input
+              type="checkbox"
+              id="acknowledge-checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
+            <div>
+                <p>I acknowledge customer info will be shared with Partner</p>
+                {showWarning && (<p className="warning-text">Please acknowledge to Submit.</p>)}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="cust-referral-header">Submitted!</div>
+      )}
       <button className="cust-referral-footer" onClick={handleSubmit}>
         {isSubmitted ? 'Submitted!' : 'Send Lead'}
       </button>

@@ -3,7 +3,7 @@ import './Row.css';
 import CircleInitials from '../CircleInitials/CircleInitials'
 import StatusButton from './StatusButton';
 
-const Row = ({leadData, updateLead, leadSelected}) => {
+const Row = ({leadData, updateLead, leadSelected, checked}) => {
     const date = new Date(leadData.createdAt).toLocaleDateString()
 
     function getRelativeDateDescription(date) {
@@ -35,7 +35,7 @@ const Row = ({leadData, updateLead, leadSelected}) => {
 
     return (
         <tr>
-            <td><input type="checkbox" onChange={() => leadSelected({lead: leadData})} /></td>
+            <td><input type="checkbox" checked={checked} onChange={() => leadSelected({lead: leadData})} /></td>
             {(leadData.direction === 'Received') ? <td className="received">Received</td> : <td className="shared">Shared</td>}
             <td>{date}</td>
             <td>

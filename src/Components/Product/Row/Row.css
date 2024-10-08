@@ -56,12 +56,12 @@ input[type="checkbox"] {
 }
 
 .received {
-  color: var(--teal-medium-color);
+  color: var(--teal-light-color);
   font-family: var(--font-bold);
 }
 
 .shared {
-  color: var(--gold-dark-color);
+  color: var(--purple-color);
   font-family: var(--font-bold);
 }
 
