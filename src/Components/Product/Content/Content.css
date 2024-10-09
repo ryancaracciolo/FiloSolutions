@@ -13,3 +13,9 @@
     overflow: auto;
     padding-bottom: 0px;
 }
+
+@media (max-width: 768px) {
+    .content {
+        max-height: calc(100vh - 4vh - 100px);
+    }
+}

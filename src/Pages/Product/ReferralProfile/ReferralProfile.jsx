@@ -26,7 +26,7 @@ function ReferralProfile() {
     const fetchBusiness = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:3001/api/businesses/get-business/${businessId}`);
+            const response = await axios.get((process.env.REACT_APP_API_BASE_URL)+`/api/businesses/get-business/${businessId}`);
             const data = response.data;
             console.log(data);
             setBusiness(data);

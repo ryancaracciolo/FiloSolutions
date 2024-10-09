@@ -21,7 +21,7 @@
 /* Adjust card header, body, and footer (kept from previous) */
 .card-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 10px;
     position: relative;
@@ -32,7 +32,6 @@
     height: 80px;
     margin: 0 auto;
     padding: 0;
-    display: block;
     background-color: gray;
     opacity: 75%;
     border-radius: 50%;
@@ -75,6 +74,7 @@
 }
 
 .pending_received-icon {
+    left: 0;
     background-color: var(--gold-light-color);
     color: white;
     border-radius: 5px;
@@ -83,6 +83,7 @@
 }
 
 .pending_sent-icon {
+    left: 0;
     background-color: lightgray;
     color: var(--grey-dark-color);
     border-radius: 5px;

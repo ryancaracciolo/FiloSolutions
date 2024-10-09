@@ -15,20 +15,21 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({
-  origin: 'http://localhost:3000',
-}));
+app.use(cors());
+
 // Routes
 app.use('/api/businesses', businessRoutes);
 app.use('/api/partnerships', partnershipRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/waitlist', waitlistRoutes);
 
-
+app.get('/', (req, res) => {
+  res.status(200).send('OK');
+});
 
 
 // Start the server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

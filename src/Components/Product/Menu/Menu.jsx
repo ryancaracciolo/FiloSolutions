@@ -29,7 +29,8 @@ function Menu({activeMenuIndex }) {
     const handleSignOut = async () => {
         try {
         await signOut();
-        setBusiness(null)
+        localStorage.removeItem('business'); // Remove the business item from localStorage
+        setBusiness(null);
         } catch (error) {
         console.log('Error signing out: ', error);
         }

@@ -7,7 +7,7 @@ function PartnerRef({partnerData, changePage}) {
     const [copied, setCopied] = useState(false);
 
     function handleCopy() {
-        navigator.clipboard.writeText('http://localhost:3000/referral/'+partnerData.id);
+        navigator.clipboard.writeText((process.env.REACT_APP_BASE_URL)+'/referral/'+partnerData.id);
         setCopied(true);
         setTimeout(() => {
             setCopied(false);
@@ -16,7 +16,7 @@ function PartnerRef({partnerData, changePage}) {
 
     return (
         <div className="partner-referral">
-            <button className="partner-referral-header">Share partner details</button>
+            <button className="partner-referral-header">Share your partner's information <br></br>with a potential customer</button>
             <Card key='asdfasd' partnerData={partnerData} status='popped'/>
             <div className='referral-footer'>
                 <button className="copy" onClick={handleCopy}>

@@ -25,7 +25,7 @@ function Opportunities() {
     const fetchLeads = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:3001/api/businesses/get-leads/${business.id}`);
+            const response = await axios.get((process.env.REACT_APP_API_BASE_URL)+'/api/businesses/get-leads/'+(business.id));
             const data = response.data;
             setLeads(data)
         } catch (err) {
@@ -46,7 +46,7 @@ function Opportunities() {
     const deleteLead = async ({leadId, otherBusinessId}) => {
         removeLeadFromList({leadId: leadId})
         try {
-            const response = await axios.post('http://localhost:3001/api/leads/delete-lead', {
+            const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/leads/delete-lead', {
                 businessId: business.id,
                 otherBusinessId: otherBusinessId,
                 leadId: leadId,
@@ -60,7 +60,7 @@ function Opportunities() {
     const updateLead = async ({leadId, otherBusinessId, newStatus}) => {
         updateLeadList({leadId: leadId, newStatus: newStatus})
         try {
-            const response = await axios.post('http://localhost:3001/api/leads/update-lead', {
+            const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/leads/update-lead', {
                 businessId: business.id,
                 otherBusinessId: otherBusinessId,
                 leadId: leadId,

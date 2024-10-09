@@ -58,7 +58,8 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  
+  console.log('Environment Variables:', process.env);
+
   return (
     <div className="app-wrapper">
       {isProductRoute ? (

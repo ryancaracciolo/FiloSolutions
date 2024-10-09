@@ -18,9 +18,8 @@ function Referral({partnerData, closeClicked, toCustomer}) {
 
     return (
         <div className="referral-popup">
-            <button className="close-btn" onClick={closeClicked}>X</button>
             <div className="referral-header">
-                <button className={'toggle-btn ' + (toCust ? 'active' : '')} onClick={() => handleToggle('customer')}>Share Business Card</button>
+                <button className={'toggle-btn ' + (toCust ? 'active' : '')} onClick={() => handleToggle('customer')}>Share to Lead</button>
                 <button className={'toggle-btn ' + (!toCust ? 'active' : '')} onClick={() => handleToggle('business')}>Refer Customer</button>
             </div>
             {toCust ? <PartnerRef partnerData={partnerData} changePage={setToCustomer}/> : <CustomerRef partnerData={partnerData} changePage={setToCustomer}/>}

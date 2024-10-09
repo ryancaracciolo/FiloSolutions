@@ -10,6 +10,7 @@ import ConfirmationCode from './ConfirmCode';
 import LoadingScreen from '../../../Components/Product/LoadingScreen/LoadingScreen';
 import axios from 'axios';
 
+
 function Authentication({setBusiness}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,11 +19,11 @@ function Authentication({setBusiness}) {
   const [isSignIn, setIsSignIn] = useState(true); // Toggle between sign-in and sign-up
   const [isSubmitting, setIsSubmitting] = useState(false); // Prevent multiple submissions
   const [loading, setLoading] = useState(true); // loading state to track authentication check
-  //const navigate = useNavigate();
+
 
   const fetchBusiness = async (email) => {
     try {
-        const response = await axios.post('http://localhost:3001/api/businesses/get-business-byemail',{email});
+        const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/businesses/get-business-byemail',{email});
         console.log("response!: "+response.data)
         localStorage.setItem('business', JSON.stringify(response.data));
         setBusiness(response.data);
@@ -37,7 +38,7 @@ function Authentication({setBusiness}) {
 
   const checkExistence = async (email) => {
     try {
-        const response = await axios.post('http://localhost:3001/api/businesses/check-existence',{email});
+        const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/businesses/check-existence',{email});
         return response.data?.exists
     } catch (err) {
         console.error('Error confirming email:', err.response?.data || err.message);

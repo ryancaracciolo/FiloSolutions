@@ -34,7 +34,7 @@ function Partnerships() {
     const fetchPartners = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:3001/api/businesses/get-partners/${business.id}`);
+            const response = await axios.get((process.env.REACT_APP_API_BASE_URL)+`/api/businesses/get-partners/${business.id}`);
             const data = response.data;
             setPendingSent(data["Pending_Sent"])
             setPendingReceived(data["Pending_Received"])
@@ -66,7 +66,7 @@ function Partnerships() {
               params.search = searchText;
             }
       
-            const response = await axios.get('http://localhost:3001/api/businesses/search', { params });
+            const response = await axios.get((process.env.REACT_APP_API_BASE_URL)+'/api/businesses/search', { params });
             const list = updateBusinessStatus(response.data.items);
             if (reset) {
               // If reset is true, we replace the businesses list
@@ -90,7 +90,7 @@ function Partnerships() {
 
         if (oldStatus === "Suggested") {
             try {
-                const response = await axios.post('http://localhost:3001/api/partnerships/update-partnership', {
+                const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/partnerships/update-partnership', {
                     businessId1: business.id,
                     businessId2: partnerId,
                     status: newStatus,
@@ -103,7 +103,7 @@ function Partnerships() {
 
         else if (oldStatus === "Other") {
             try {
-                const response = await axios.post('http://localhost:3001/api/partnerships/create-partnership', {
+                const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/partnerships/create-partnership', {
                     businessId1: business.id,
                     businessId2: partnerId,
                     status: newStatus,

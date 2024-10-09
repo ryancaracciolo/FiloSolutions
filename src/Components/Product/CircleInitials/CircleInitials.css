@@ -1,14 +1,4 @@
-.circle-initials {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white; /* Text color */
-    font-size: 13px; /* Adjust font size as needed */
-    font-family: var(--font-bold);
-    text-transform: uppercase; /* Ensure initials are uppercase */
 
-  }
 
   .circle-initials .circle-image {
     width: 35px; /* Adjust size as needed */
@@ -30,5 +20,12 @@
     background-color: #d6b8eb;
     border-radius: 50%;
     margin: 0;
+    font-family: var(--font-bold);
+    text-transform: uppercase; /* Ensure initials are uppercase */
+    color: white;
+  }
+
+  .circle-initials .circle-p:hover {
+    background-color: #e4c4fa;
   }
   

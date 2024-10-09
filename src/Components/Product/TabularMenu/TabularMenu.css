@@ -86,4 +86,34 @@
     transition: all 0.3s ease;
     z-index: 1;
     border-radius: 2px;
-  }
+}
+
+@media (max-width: 768px) {
+    .content-header {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: auto;
+        padding: 0;
+    }
+
+    .content-header h1 {
+        width: 100%;
+        align-self: stretch;
+        padding-left: 7%;
+        margin-bottom: 0;
+    }
+
+    .content-header .header-tabs {
+        width: 100%;
+    }
+
+    .content-header .delete-lead {
+        top: 25px;
+        right: 20px;
+    }
+
+    .content-header .delete-lead span {
+        display: none;
+    }
+}

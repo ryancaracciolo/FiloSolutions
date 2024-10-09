@@ -43,3 +43,17 @@
     font-family: var(--font-regular);
     color: var(--grey-dark-color);
 }
+
+@media (max-width: 768px) {
+    .content-detail .partner-cards {
+        justify-content: center;
+    }
+
+    .partner-detail {
+        padding-right: 20px;
+    }
+
+    .subheader {
+        margin-left: 10px;
+    }
+}

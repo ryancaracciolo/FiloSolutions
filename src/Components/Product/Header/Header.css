@@ -93,4 +93,15 @@
     font-family: var(--font-bold);
     color: var(--grey-dark-color);
   }
+
+
+@media (max-width: 768px) {
+  .product-header .search-bar {
+    display: none;
+  }
+
+  .product-header .profile-button h3 {
+    display: none;
+  }
+}
   

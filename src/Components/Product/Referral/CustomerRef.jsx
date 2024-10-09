@@ -13,7 +13,7 @@ function CustomerRef({ partnerData }) {
 
   const createLead = async () => {
     try {
-        const response = await axios.post('http://localhost:3001/api/leads/create-lead', {
+        const response = await axios.post((process.env.REACT_APP_API_BASE_URL)+'/api/leads/create-lead', {
             businessId: business.id,
             otherBusinessId: partnerData.id,
             name: formData.name,

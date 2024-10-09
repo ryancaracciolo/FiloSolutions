@@ -39,7 +39,7 @@ const TabularMenu = ({ headerName, tabItems, activeTab, setActiveTab, trashOn, t
         ))}
       </div>
       {(headerName === "Opportunities") ? (
-        <div onClick={trashOn ? trashClicked : null}className={'delete-lead'+(trashOn ? ' active' : '')}>
+        <div onClick={trashOn ? trashClicked : null} className={'delete-lead'+(trashOn ? ' active' : '')}>
           <DeleteIcon onClick={trashClicked} className={'delete-icon'+(trashOn ? ' active' : '')} />
           <span className={(trashOn ? ' active' : '')}>Delete</span>
         </div>
