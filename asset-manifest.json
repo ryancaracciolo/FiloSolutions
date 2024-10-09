@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1091e762.css",
-    "main.js": "/static/js/main.e8458251.js",
+    "main.css": "/static/css/main.4e0199a1.css",
+    "main.js": "/static/js/main.f3736797.js",
     "static/media/partners-page.png": "/static/media/partners-page.c4d7424132dc4f1f7280.png",
     "static/media/product-overview.png": "/static/media/product-overview.cd621d886034e3c36fc0.png",
     "static/media/opport-page.png": "/static/media/opport-page.903c3775df03e18722e1.png",
@@ -14,6 +14,7 @@
     "static/media/background.png": "/static/media/background.1b240ec5411e89a8f37e.png",
     "static/media/BuenosAires-Light.ttf": "/static/media/BuenosAires-Light.b823872001097ce0ff3c.ttf",
     "static/media/BuenosAires-Bold.ttf": "/static/media/BuenosAires-Bold.8b64c0887bb3bbd435d8.ttf",
+    "static/media/BuenosAires-Thin.ttf": "/static/media/BuenosAires-Thin.d28e8b25bead33fad22b.ttf",
     "static/media/BuenosAires-Black.ttf": "/static/media/BuenosAires-Black.63f7b7910e14f40884af.ttf",
     "static/media/BuenosAires-Regular.ttf": "/static/media/BuenosAires-Regular.7853472108d03785f178.ttf",
     "static/media/FiloLogo.png": "/static/media/FiloLogo.2310c19d881a74f2daac.png",
@@ -27,6 +28,7 @@
     "static/media/logout-icon.svg": "/static/media/logout-icon.240712982462b36d8f3bc4f7562db566.svg",
     "static/media/add-icon.svg": "/static/media/add-icon.f5a65f69f5a17949ed094287f761c55c.svg",
     "static/media/password-icon.svg": "/static/media/password-icon.544712d6b9ebdcf20b41ff098176a21f.svg",
+    "static/media/id-icon.svg": "/static/media/id-icon.6cf19f408db597685216a44d0a94b941.svg",
     "static/media/lightbulb-icon.svg": "/static/media/lightbulb-icon.4060ed833d4a8a9a928fc5c2678e508c.svg",
     "static/media/circles-icon.svg": "/static/media/circles-icon.1178af6c4d0e4f0677d431141a8164f7.svg",
     "static/media/link-icon.svg": "/static/media/link-icon.902ceb5d34bcfa728c3662cb09657017.svg",
@@ -37,11 +39,13 @@
     "static/media/graph-icon.svg": "/static/media/graph-icon.406a0c1acf46a7bc2990bf8ea3d12d6f.svg",
     "static/media/copy-icon.svg": "/static/media/copy-icon.3894c6a0cf5623d5d525a997add79011.svg",
     "static/media/email-icon.svg": "/static/media/email-icon.959bf418ad03c15222f458fcbf9b9e8e.svg",
-    "main.1091e762.css.map": "/static/css/main.1091e762.css.map",
-    "main.e8458251.js.map": "/static/js/main.e8458251.js.map"
+    "static/media/delete-icon.svg": "/static/media/delete-icon.0863b6b605d761a79d357dfc21f89c74.svg",
+    "static/media/down-icon.svg": "/static/media/down-icon.8097a67ebfcec3e1c435551e6af0cd9a.svg",
+    "main.4e0199a1.css.map": "/static/css/main.4e0199a1.css.map",
+    "main.f3736797.js.map": "/static/js/main.f3736797.js.map"
   },
   "entrypoints": [
-    "static/css/main.1091e762.css",
-    "static/js/main.e8458251.js"
+    "static/css/main.4e0199a1.css",
+    "static/js/main.f3736797.js"
   ]
 }
