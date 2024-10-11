@@ -15,7 +15,18 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+
+const allowedOrigins = ['https://www.filosolutions.co', 'https://filosolutions.co'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+          callback(null, true);
+      } else {
+          callback(new Error('Not allowed by CORS'));
+      }
+  }
+}));
 
 // Routes
 app.use('/api/businesses', businessRoutes);

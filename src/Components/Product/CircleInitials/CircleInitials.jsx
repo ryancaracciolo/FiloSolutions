@@ -1,5 +1,6 @@
 import React from 'react';
 import './CircleInitials.css'; // CSS file for styling
+import RandomImage from './RandomImage'
 
 function CircleInitials({ businessName, businessImg, size, fontSize }) {
   if (!businessName) {
@@ -25,6 +26,8 @@ function CircleInitials({ businessName, businessImg, size, fontSize }) {
   // Get initials based on the business name
   const initials = getInitials(businessName);
 
+  console.log(businessImg);
+
   return (
     (!businessImg) ? (
       <div className="circle-initials">
@@ -32,7 +35,8 @@ function CircleInitials({ businessName, businessImg, size, fontSize }) {
       </div>
     ) : (
       <div className="circle-initials">
-        <img className='circle-image' style={{ width: size, height: size }} src={businessImg}></img>
+        <RandomImage />
+        {/*<img className='circle-image' style={{ width: size, height: size }} src={'../../../Assets/x/1.png'} alt='Logo'></img>*/}
       </div>
     )
   );

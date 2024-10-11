@@ -38,6 +38,58 @@ export const addBusiness = async (req, res) => {
   }
 };
 
+export const addBusinesses = async (req, res) => {
+  const businesses = req.body; // Expecting an array of businesses
+
+  // Validate that req.body is an array
+  if (!Array.isArray(businesses)) {
+    return res.status(400).json({ error: 'Invalid input: expected an array of businesses.' });
+  }
+
+  const errors = [];
+  const successMessages = [];
+
+  for (const businessData of businesses) {
+    const { name, logo, desc, owner, industry, address, email, phone, website } = businessData;
+
+    const business = new Business(shortUUID().new(), name, logo, desc, owner, industry, address, email, phone, website);
+
+    try {
+      business.validate();
+    } catch (error) {
+      console.error('Validation error:', error.message);
+      errors.push({ business: name, error: error.message });
+      continue; // Skip to the next business
+    }
+
+    const item = business.toItem();
+
+    const params = {
+      TableName: tableName,
+      Item: item,
+      ConditionExpression: 'attribute_not_exists(PK)', // Prevents overwriting existing items
+    };
+
+    try {
+      const command = new PutCommand(params);
+      await dynamodb.send(command);
+      console.log('Added business:', JSON.stringify(item, null, 2));
+      successMessages.push({ business: name, message: 'Business added successfully.' });
+    } catch (err) {
+      console.error('Unable to add business. Error JSON:', JSON.stringify(err, null, 2));
+      errors.push({ business: name, error: 'An error occurred while adding the business.' });
+    }
+  }
+
+  // Send the results as a response
+  if (errors.length > 0) {
+    return res.status(207).json({ success: successMessages, errors });
+  } else {
+    return res.status(201).json({ success: successMessages });
+  }
+};
+
+
 //////////////////////////////////// Fetching Business with ID
 export const fetchBusinessByID = async (req, res) => {
   const businessId = req.params.id;
@@ -304,7 +356,7 @@ export const searchBusinesses = async (req, res) => {
     ExpressionAttributeValues: {
       ':typeValue': 'Business',
     },
-    Limit: 10,
+    Limit: 25,
     ScanIndexForward: true,
   };
 

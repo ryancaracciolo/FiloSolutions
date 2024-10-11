@@ -114,7 +114,7 @@ const Card = ({partnerData, status, setStatus}) => {
         <div className={'card active'}>
             <div className="card-header">
                 {topLeftButton}
-                <Avatar className="company-logo" businessImg={''} businessName={partnerData.name} size={'80px'} fontSize={'25px'}/>
+                <Avatar className="company-logo" businessImg={"x"} businessName={partnerData.name} size={'80px'} fontSize={'25px'}/>
                 {topRightButton}
             </div>
             <div className="card-body">
