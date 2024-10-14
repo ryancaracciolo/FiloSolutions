@@ -321,9 +321,9 @@
 
     .hero-home .container {
         flex-direction: column;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        gap: 30px;
+        margin-top: 70px;
+        margin-bottom: 30px;
+        gap: 60px;
     }
 
     .hero-home .product-image {

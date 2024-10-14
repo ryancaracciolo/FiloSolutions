@@ -1,11 +1,11 @@
 .menu {
     position: fixed;
-    right: -250px; /* Start off-screen */
+    right: -300px; /* Start off-screen */
     top: 0;
     height: 100%;
-    width: 250px;
+    width: 300px;
     background-color: var(--grey-dark-color);
-    color: white;
+    color: lightgray;
     overflow-x: hidden;
     transition: 0.3s;
     padding-top: 60px; /* Padding to push content below the header */
@@ -17,7 +17,7 @@
 }
 
 .menu.closed {
-    right: -250px; /* Move out of view */
+    right: -300px; /* Move out of view */
 }
   
 .menu ul {
@@ -26,19 +26,29 @@
 }
   
 .menu li {
-    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between; /* Ensures text and icon are spaced apart */
+    align-items: center; /* Vertically center the text and icon */
+    padding: 8px 14px;
     text-align: left;
 }
   
 .menu li a {
-    color: var(--background-color);
+    color: lightgray;
     display: block;
     text-decoration: none;
     font-family: var(--font-regular);
+    flex-grow: 1; /* Ensures anchor text takes up available space */
 }
   
 .menu li a:hover {
     background-color: #575757;
+}
+
+.arrow-icon {
+    width: 16px; /* Adjust the size of the arrow */
+    height: 16px;
+    fill: lightgray; /* Ensure the arrow matches the desired color */
 }
   
 .close-Menu {
@@ -55,7 +65,7 @@
     top: 16px;
     width: 22px;
     height: 2px;
-    background-color: var(--background-color);
+    background-color: lightgray;
     margin: 2px 0;
     border-radius: 4px;
 }
@@ -67,3 +77,44 @@
     transform: rotate(45deg);
 }
 
+.menu hr {
+    background-color: lightgray;
+    height: 0.5px;
+    opacity: 80%;
+    border: none;
+}
+
+.menu .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 14px;
+    margin-top: 20px;
+    width: calc(100% - 28px);
+    gap: 8px;
+}
+
+.menu .auth-buttons a {
+    font-family: var(--font-bold);
+    font-size: clamp(10px, 1.2vw, 20px);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 7px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.menu .auth-buttons a.sign-in {
+    color: lightgray;
+    background-color: transparent;
+    border: 1px solid lightgray;
+    width: 100%;
+}
+
+.menu .auth-buttons a.register {
+    color: var(--grey-dark-color);
+    background-color: lightgray;
+    border: 1px solid transparent;
+    width: 100%;
+}

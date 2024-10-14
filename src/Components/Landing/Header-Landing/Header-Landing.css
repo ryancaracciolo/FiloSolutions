@@ -1,6 +1,6 @@
 header {
     background-color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
     z-index: 1000;
     
 }
@@ -62,15 +62,15 @@ header .auth-buttons a {
     font-size: clamp(10px, 1.2vw, 20px);
     letter-spacing: 0.5px;
     text-decoration: none;
-    padding: 0.5em 1em;
-    border-radius: 0.3em;
-    margin-left: 0.6em;
+    padding: 6px 10px;
+    border-radius: 7px;
+    margin-left: 0.3em;
+    box-sizing: border-box;
 }
 
 .header-landing .auth-buttons a.sign-in {
     color: var(--grey-dark-color);
-    background-color: transparent;
-    padding: 5px 5px;
+    background-color: white;
 }
 
 .header-landing .auth-buttons a.register {
@@ -81,21 +81,36 @@ header .auth-buttons a {
 .header-landing .hamburger {
     display: none;
     flex-direction: column;
+    align-items: flex-end;
     height: 100%;
     cursor: pointer;
+    gap: 5px;
 }
 
-.header-landing .hamburger span {
+.header-landing .hamburger .menu-line {
     width: 18px;
-    height: 2px;
+    height: 3px;
     background-color: var(--grey-dark-color);
-    margin: 2px 0;
     margin-left: 15px;
     border-radius: 5px;
+}
+
+.hamburger .menu-line.two {
+    width: 14px;
 }
 
 @media (max-width: 768px) {
     .header-landing .hamburger {
         display: flex;
     }
+
+    .header-landing .auth-buttons a.sign-in {
+        display: none;
+    }
+    
+    .header-landing .auth-buttons a.register {
+        display: none;
+    }
+
+
 }
