@@ -20,6 +20,7 @@
 
 # backend files
 backend/.env
+backend/.env.development
 .env.production
 .env.development
 .env*
