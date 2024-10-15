@@ -29,7 +29,7 @@ function Waitlist() {
     e.preventDefault();
     setJoinedWaitlist(true);
     try {
-        const response = await axios.post('http://localhost:3001/api/waitlist/add-user', {
+        const response = await axios.post(process.env.REACT_APP_API_BASE_URL+'/api/waitlist/add-user', {
         fullName,
         email,
       });

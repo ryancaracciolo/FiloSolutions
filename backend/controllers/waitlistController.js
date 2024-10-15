@@ -4,7 +4,7 @@ import { PutCommand, GetCommand, QueryCommand, BatchGetCommand } from '@aws-sdk/
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv'; // Package that loads environment variables from a .env file into process.env
 
-dotenv.config();
+dotenv.config({ path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development' });
 const tableName = 'Waitlist'; // Name of the DynamoDB table
 
 export const addToWaitlist = async (req, res) => {
@@ -30,7 +30,7 @@ export const addToWaitlist = async (req, res) => {
     try {
       const command = new PutCommand(params);
       await dynamodb.send(command);
-      await sendEmailAlert(fullName, email);
+      //await sendEmailAlert(fullName, email);
       console.log('Added:', JSON.stringify(item, null, 2));
       res.status(201).json({ message: 'Added to waitlist successfully.' });
     } catch (err) {

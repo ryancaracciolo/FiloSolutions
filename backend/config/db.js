@@ -3,7 +3,11 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb'; // Correct package fo
 import { S3Client } from '@aws-sdk/client-s3'
 import dotenv from 'dotenv'; // Package that loads environment variables from a .env file into process.env
 
-dotenv.config();
+if (process.env.NODE_ENV === 'production') {
+  dotenv.config({ path: '.env.production' });
+} else {
+  dotenv.config({ path: '.env.development' });
+}
 
 // Validate if environment variables are loaded
 if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || !process.env.AWS_REGION) {

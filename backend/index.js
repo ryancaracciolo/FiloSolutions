@@ -10,21 +10,22 @@ import waitlistRoutes from './routes/waitlistRoutes.js';
 
 
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development' });
 
 // Initialize Express app
 const app = express();
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://www.filosolutions.co', 'https://filosolutions.co'];
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
 
 app.use(cors({
   origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-          callback(null, true);
-      } else {
-          callback(new Error('Not allowed by CORS'));
-      }
+    // Allow only the specified origins from the environment variable
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
   }
 }));
 
@@ -38,9 +39,9 @@ app.get('/', (req, res) => {
   res.status(200).send('OK');
 });
 
-
 // Start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Running in ${process.env.NODE_ENV} mode`);
 });

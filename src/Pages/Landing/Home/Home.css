@@ -335,25 +335,30 @@
     .hero-home .hero-content h1 {
         font-family: var(--font-bold);
         color: var(--teal-medium-color);
-        font-size: var(--font-size-m);
+        font-size: clamp(17px, 2.0vw, 32px);
         margin: 0;
-        margin-bottom: 10px;
+        margin-bottom: 14px;
     }
     
     .hero-home .hero-content h2 {
         font-family: var(--font-extraBold);
         max-width: 600px;
-        font-size: var(--font-size-l);
+        font-size: clamp(28px, 3.0vw, 48px);
         margin: 0;
-        margin-bottom: 10px;
+        margin-bottom: 14px;
     }
     
     .hero-home .hero-content p {
         font-family: var(--font-regular);
         max-width: 700px;
-        font-size: var(--font-size-m);
-        margin-bottom: 20px;
+        font-size: clamp(16px, 2.0vw, 28px);;
+        margin-bottom: 24px;
         margin-top: 0;
+    }
+
+    .hero-home .hero-content .cta-buttons a {
+        font-size: clamp(16px, 2.0vw, 28px);;
+ 
     }
 }
 
