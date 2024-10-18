@@ -1,6 +1,6 @@
 import awsServerlessExpress from 'aws-serverless-express';
-import app from './index';
+import index from './index.js';
 
-const server = awsServerlessExpress.createServer(app);
+const server = awsServerlessExpress.createServer(index);
 
-exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context);
+export const handler = (event, context) => awsServerlessExpress.proxy(server, event, context);
