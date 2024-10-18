@@ -39,9 +39,13 @@ app.get('/', (req, res) => {
   res.status(200).send('OK');
 });
 
-// Start the server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Running in ${process.env.NODE_ENV} mode`);
-});
+// Start the server if running locally
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`Running in ${process.env.NODE_ENV} mode`);
+  });
+}
+
+export default app;
