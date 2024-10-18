@@ -66,14 +66,15 @@ header .auth-buttons a {
     border-radius: 7px;
     margin-left: 0.3em;
     box-sizing: border-box;
+    width: clamp(100px, 12vw, 150px);
 }
 
 .header-landing .auth-buttons a.sign-in {
     color: var(--grey-dark-color);
-    background-color: white;
+    background-color: var(--grey-light-color);
 }
 
-.header-landing .auth-buttons a.register {
+.header-landing .auth-buttons a.demo-request {
     color: var(--background-color);
     background-color: var(--teal-medium-color);
 }
@@ -108,7 +109,7 @@ header .auth-buttons a {
         display: none;
     }
     
-    .header-landing .auth-buttons a.register {
+    .header-landing .auth-buttons a.demo-request {
         display: none;
     }
 

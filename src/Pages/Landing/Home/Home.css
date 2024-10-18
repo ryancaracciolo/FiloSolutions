@@ -76,7 +76,7 @@
     transition: background-color 0.3s ease;
 }
 
-.hero-home .cta-buttons .join-waitlist {
+.hero-home .cta-buttons .join-demo {
     background-color: var(--teal-medium-color);
     color: white;
     padding: 8px clamp(10px, 1.5vw, 15px);

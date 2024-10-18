@@ -3,12 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { BusinessContext } from './objects/UserContext/UserContext'; // Import the UserContext
 import './styles/App.css';
+import LoadingScreen from './Components/Product/LoadingScreen/LoadingScreen';
 /*Landing Pages*/
 import LandingHeader from './Components/Landing/Header-Landing/Header-Landing';
 import LandingFooter from './Components/Landing/Footer-Landing/Footer-Landing';
 import LandingMenu from './Components/Landing/Menu-Landing/Menu-Landing';
 import LandingMain from './Pages/Landing/LandingMain/LandingMain';
-import Waitlist from './Pages/Landing/Waitlist/Waitlist';
+import Demo from './Pages/Landing/Demo/Demo';
 /*Product Pages*/
 import Header from './Components/Product/Header/Header';
 import Menu from './Components/Product/Menu/Menu';
@@ -33,7 +34,7 @@ function App() {
   const [loading, setLoading] = useState(true); // Loading state for business check
   let isProductRoute = location.pathname.startsWith('/app');
   let isReferral = location.pathname.startsWith('/referral');
-  let isWaitlist = location.pathname.startsWith('/waitlist');
+  let isDemo = location.pathname.startsWith('/demo');
 
 
   useEffect(() => {
@@ -54,8 +55,8 @@ function App() {
   }, [setBusiness]);
 
   if (loading) {
-    // Show a loading spinner or blank page while checking business data
-    return <div>Loading...</div>;
+    console.log('Loading...');
+    return <LoadingScreen isLoading={loading}/>;
   }
 
   return (
@@ -89,9 +90,9 @@ function App() {
             <Route path="/referral/:businessId" element={<ReferralProfile />} />
           </Routes>
         ) : (
-          isWaitlist ? (
+          isDemo ? (
             <Routes>
-              <Route path="/waitlist" element={<Waitlist />} />
+              <Route path="/demo" element={<Demo />} />
             </Routes>
           ) : (
             <>

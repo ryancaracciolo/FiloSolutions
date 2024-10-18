@@ -23,7 +23,7 @@ const Home = () => {
                             that makes strategic partnerships and collaboration effortless.
                         </p>
                         <div className="cta-buttons">
-                            <Link to="/waitlist" className="join-waitlist">Join Waitlist</Link>
+                            <Link to="/demo" className="join-demo">Request Demo</Link>
                         </div>
                     </div>
                     <div className="product-image">

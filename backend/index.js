@@ -5,7 +5,7 @@ import dotenv from 'dotenv'; // this is a package that loads environment variabl
 import businessRoutes from './routes/businessRoutes.js';
 import partnershipRoutes from './routes/partnershipRoutes.js';
 import leadRoutes from './routes/leadRoutes.js';
-import waitlistRoutes from './routes/waitlistRoutes.js';
+import demoRoutes from './routes/demoRoutes.js';
 
 
 
@@ -33,7 +33,7 @@ app.use(cors({
 app.use('/api/businesses', businessRoutes);
 app.use('/api/partnerships', partnershipRoutes);
 app.use('/api/leads', leadRoutes);
-app.use('/api/waitlist', waitlistRoutes);
+app.use('/api/demo', demoRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).send('OK');

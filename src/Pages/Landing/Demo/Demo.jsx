@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Waitlist.css';
+import './Demo.css';
 import filoLogo from '../../../Assets/Images/FiloLogo.png';
 import background from '../../../Assets/Images/background.png';
 import { ReactComponent as EmailIcon } from '../../../Assets/Icons/email-icon.svg';
@@ -8,11 +8,11 @@ import LoadingScreen from '../../../Components/Product/LoadingScreen/LoadingScre
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Waitlist() {
+function Demo() {
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
   const [message, setMessage] = useState('');
-  const [joinedWaitlist, setJoinedWaitlist] = useState(false);
+  const [joinedDemo, setJoinedDemo] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -27,15 +27,15 @@ function Waitlist() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setJoinedWaitlist(true);
+    setJoinedDemo(true);
     try {
-        const response = await axios.post(process.env.REACT_APP_API_BASE_URL+'/api/waitlist/add-user', {
+        const response = await axios.post(process.env.REACT_APP_API_BASE_URL+'/api/demo/add-user', {
         fullName,
         email,
       });
       
       if (response.status === 201) {
-        setMessage('Thank you for joining the waitlist!');
+        setMessage('Thank you for joining the Demo!');
         setFullName('');  // Clear the form after successful submission
         setEmail('');
       } else {
@@ -43,7 +43,7 @@ function Waitlist() {
       }
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        setMessage('You are already on the waitlist!');
+        setMessage('You are already on the Demo!');
       } else {
         console.error('Error submitting form:', error);
         setMessage('Something went wrong, please try again later.');
@@ -57,23 +57,25 @@ function Waitlist() {
         <div className="left-side">
             <div className="left-content">
                 <img src={filoLogo} alt="Filo Logo" className="filo-logo" />
-                <h1>Join Waitlist Today!</h1>
+                <h1>Request Demo of Filo</h1>
                 <p>
                 Filo is partnering with select Chambers of Commerce to bring a powerful 
                 collaboration platform to local businesses.
                 </p>
                 <hr />
-                <p className='sub-p'> By joining the waitlist, you’ll 
-                be among the first to experience streamlined business referrals, partnerships, 
-                and growth opportunities within your community. </p>
+                <p className='sub-p'>
+                  By requesting a demo, you’ll have the opportunity to see firsthand how Filo 
+                  can streamline business referrals, partnerships, and growth opportunities 
+                  within your community.
+                </p>
                 <img src={background} alt="Filo Logo" className="login-background" />
             </div>
         </div>
 
         <div className="right-side">
-            {joinedWaitlist ? (
+            {joinedDemo ? (
                 <div className="right-content">
-                    <h2>Thanks for Joining the Filo Waitlist!</h2>
+                    <h2>Thanks for requesting a demo!</h2>
                     <div className='dots'>
                         <div className='dot'></div>
                         <div className='dot'></div>
@@ -91,13 +93,13 @@ function Waitlist() {
                 </div>
             ) : (
                 <div className="right-content">
-                    <h2>Join the Filo Waitlist</h2>
+                    <h2>Request demo of the Filo platform</h2>
                     <div className='dots'>
                         <div className='dot'></div>
                         <div className='dot'></div>
                         <div className='dot'></div>
                     </div>
-                    <p>Please enter your name and email to join</p>
+                    <p>Please enter your name and email</p>
 
                     <form onSubmit={handleSubmit}>
                         <div className='input-wrapper'>
@@ -123,7 +125,7 @@ function Waitlist() {
                             />
                         </div>
                         <button type="submit" className="submit-btn">
-                            Join Waitlist
+                            Request Demo
                         </button>
                     </form>
 
@@ -134,10 +136,9 @@ function Waitlist() {
                     </p>
                 </div>
             )}
-            
         </div>
     </div>
   );
 }
 
-export default Waitlist;
+export default Demo;

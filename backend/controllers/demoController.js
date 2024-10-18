@@ -1,13 +1,12 @@
 import dynamodb from '../config/db.js';
-import shortUUID from "short-uuid";
 import { PutCommand, GetCommand, QueryCommand, BatchGetCommand } from '@aws-sdk/lib-dynamodb';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv'; // Package that loads environment variables from a .env file into process.env
 
 dotenv.config({ path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development' });
-const tableName = 'Waitlist'; // Name of the DynamoDB table
+const tableName = 'Demo'; // Name of the DynamoDB table
 
-export const addToWaitlist = async (req, res) => {
+export const addToDemo = async (req, res) => {
     const { fullName, email } = req.body;
     if (!fullName || !email) {
       return res.status(400).json({ error: 'Name and email are required.' });
@@ -30,15 +29,15 @@ export const addToWaitlist = async (req, res) => {
     try {
       const command = new PutCommand(params);
       await dynamodb.send(command);
-      //await sendEmailAlert(fullName, email);
+      await sendEmailAlert(fullName, email);
       console.log('Added:', JSON.stringify(item, null, 2));
-      res.status(201).json({ message: 'Added to waitlist successfully.' });
+      res.status(201).json({ message: 'Added to demo successfully.' });
     } catch (err) {
       if (err.name === 'ConditionalCheckFailedException') {
-        res.status(409).json({ error: 'User already exists in the waitlist.' });
+        res.status(409).json({ error: 'User already exists in Demo table.' });
       } else {
         console.error('Unable to add. Error JSON:', JSON.stringify(err, null, 2));
-        res.status(500).json({ error: 'An error occurred while adding to the waitlist.' });
+        res.status(500).json({ error: 'An error occurred while adding to the Demo table.' });
       }
     }
 };
@@ -58,8 +57,8 @@ const sendEmailAlert = async (name, email) => {
     const mailOptions = {
       from: process.env.MY_EMAIL,  // Your business email
       to: email,  // Where you want to receive alerts
-      subject: 'Filo Waitlist',
-      text: `Hi ${name}, thanks for joining the Filo waitlist! We will contact you soon with more details on upcoming launches.`,
+      subject: 'Filo Demo',
+      text: `Hi ${name}, thanks for requesting a demo of Filo! We will contact you soon with more details shortly.`,
     };
   
     try {

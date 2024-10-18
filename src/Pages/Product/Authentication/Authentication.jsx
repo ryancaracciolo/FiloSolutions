@@ -58,11 +58,6 @@ function Authentication({setBusiness}) {
         setLoading(false); // No user logged in, stop loading
       });
   }, []);
-  
-  if (loading) {
-    console.log('Loading...');
-    return <LoadingScreen isLoading={loading}/>;
-  }
 
   const handleEmailSubmit = async (e) => {
     console.log('Email Submit');
@@ -136,6 +131,11 @@ function Authentication({setBusiness}) {
       setIsSubmitting(false);
     }
   };
+
+  if (loading) {
+    console.log('Loading...');
+    return <LoadingScreen isLoading={loading}/>;
+  }
 
   return (
     <div className="login-container">
