@@ -22,6 +22,7 @@
 backend/.env
 backend/.env.development
 backend/.env.production
+backend/.serverless
 .env.production
 .env.development
 .env*
