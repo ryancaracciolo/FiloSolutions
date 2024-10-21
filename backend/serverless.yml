@@ -6,6 +6,10 @@ provider:
   region: us-east-1
   environment:
     NODE_ENV: production  # Set NODE_ENV to production for Lambda
+    AWS_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+    MY_EMAIL: ${env:MY_EMAIL}
+    MY_PASSWORD: ${env:MY_PASSWORD}
 
 functions:
   app:
@@ -17,6 +21,12 @@ functions:
       - http:
           path: /{proxy+}
           method: any
+
+package:
+  exclude:
+    - .env
+    - .env.production
+    - .env.development
 
 plugins:
   - serverless-offline
