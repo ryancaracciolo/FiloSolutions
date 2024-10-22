@@ -18,7 +18,7 @@ body {
   display: flex;
   align-items: stretch;
   padding: 0px;
-  background-color: var(--background-color);
+  background-color: var(--blue-dark-color);
   overflow: hidden;
 }
 

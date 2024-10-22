@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { BusinessContext } from '../../../objects/UserContext/UserContext';
-//import { ReactComponent as DashboardIcon } from '../../../Assets/Icons/dashboard-icon.svg';
+import { ReactComponent as HomeIcon } from '../../../Assets/Icons/profile-icon.svg';
 import { ReactComponent as PartnershipIcon } from '../../../Assets/Icons/handshake-icon.svg';
-import { ReactComponent as OpportIcon } from '../../../Assets/Icons/lightbulb-icon.svg';
-//import { ReactComponent as CollabIcon } from '../../../Assets/Icons/collab-icon.svg';
+import { ReactComponent as OpportIcon } from '../../../Assets/Icons/list-icon.svg';
+import { ReactComponent as PurchIcon } from '../../../Assets/Icons/tag-icon.svg';
+import { ReactComponent as CollabIcon } from '../../../Assets/Icons/collab-icon.svg';
 import { ReactComponent as SignOutIcon } from '../../../Assets/Icons/logout-icon.svg';
 import MenuItem from './MenuItem';
 import './Menu.css';
@@ -16,8 +17,11 @@ function Menu({activeMenuIndex }) {
 
 
     const menuItems = [
-        { label: 'Partnerships', icon: PartnershipIcon, path: '/app/partnerships' },
-        { label: 'Opportunities', icon: OpportIcon, path: '/app/opportunities' },
+        { label: 'Partners', icon: PartnershipIcon, path: '/app/partnerships' },
+        { label: 'Referrals', icon: OpportIcon, path: '/app/opportunities' },
+        { label: 'Group Purchase', icon: PurchIcon, path: '/app/opportunities' },
+        { label: 'Collab', icon: CollabIcon, path: '/app/opportunities' },
+
     ];
     
 

@@ -201,8 +201,8 @@ function Partnerships() {
 
     return (
         <div className="content partnerships">
-            <TabularMenu headerName={"Partners"} tabItems={tabItems} activeTab={activeTab} setActiveTab={setActiveTab}/>
             {/* Render Content Based on Active Tab */}
+            <TabularMenu headerName={"Partners"} tabItems={tabItems} activeTab={activeTab} setActiveTab={setActiveTab}/>
             <div className="content-detail">
                 {loading ? (
                     <LoadingScreen isLoading={loading}/>

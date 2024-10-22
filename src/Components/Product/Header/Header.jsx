@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react';
 import './Header.css';
-import logo from '../../../Assets/Images/FiloLogo.png';
-import {ReactComponent as ProfileButton} from '../../../Assets/Icons/profile-icon.svg';
+import logo from '../../../Assets/Images/Filo-Logo-white.png';
+import {ReactComponent as DownIcon} from '../../../Assets/Icons/down-icon.svg';
+import {ReactComponent as SettingsIcon} from '../../../Assets/Icons/settings-icon.svg';
+import {ReactComponent as BellIcon} from '../../../Assets/Icons/bell-icon.svg';
+
 import { BusinessContext, SearchContext } from '../../../objects/UserContext/UserContext'; // Import the context
 import Popup from '../Popup/Popup';
 import Card from '../../../Components/Product/Card/Card';
+import CircleInitials from '../CircleInitials/CircleInitials'
 
 const Header = () => {
     const { business } = useContext(BusinessContext);
@@ -25,7 +29,6 @@ const Header = () => {
             setSearchText(''); 
         }
     };
-    
 
     return (
         <header className='product-header'>
@@ -34,12 +37,17 @@ const Header = () => {
                     <img src={logo} alt="Filo Logo" />
                 </div>
                 <div className="search-bar-container">
-                    <input type="text" placeholder="Search for Partners..." className="search-bar" value={searchText} onChange={handleSearch} />
+                    <input type="text" placeholder="Search for Anything..." className="search-bar" value={searchText} onChange={handleSearch} />
                 </div>
-                <button className="profile-button" onClick={handleProfileClick}>
-                    <h3>{business.name}</h3>
-                    <ProfileButton className='header-button' />
-                </button>
+                <div className='button-container'>
+                    <BellIcon className='header-button'/>
+                    <SettingsIcon className='header-button'/>
+                    <button className="profile-button" onClick={handleProfileClick}>
+                        <CircleInitials businessName={business.name}/>
+                        <h3>{business.name}</h3>
+                        <DownIcon className='header-button'/>
+                    </button>
+                </div>
             </div>
             {showPopup ? <Popup content={
                 <div className='user-profile-wrapper'>

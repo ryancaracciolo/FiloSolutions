@@ -1,6 +1,6 @@
 .ProductMenu {
     flex: 0;
-    background-color: var(--teal-dark-color);
+    background-color: var(--blue-dark-color);
     z-index: 1001;
     border-top-right-radius: 10px;
     display: flex;
@@ -11,41 +11,49 @@
 .ProductMenu ul {
     list-style-type: none;
     padding: 0;
+    margin: 5px;
     margin-top: 10px;
 }
   
 .ProductMenu li {
     display: flex;
+    justify-content: center;
     height: clamp(45px, 4vw, 65px);
     padding-left: 15px;
     padding-right: 30px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     border-radius: 8px;
+    height: auto;
+    padding: 8px 0;
 }
 
 .ProductMenu li a {
     display: flex; /* Make the Link a flex container */
-    flex-direction: row; /* Ensure items are in a row */
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
     align-items: center; /* Vertically align items */
     text-decoration: none; /* Remove underline from link text */
-    gap: 15px; /* Space between image and text */
+    text-align: center;
 }
 
 .ProductMenu .menu-icon {
     width: 22px;
     height: 22px;
-    fill: var(--background-color);
+    fill: var(--blue-light-color);
 }
 
-.ProductMenu li p {
-    color: var(--background-color);
+.ProductMenu li .menu-label {
+    margin: 4px;
+    margin-bottom: 0px;
+    color: var(--blue-light-color);
     text-decoration: none;
     font-family: var(--font-bold);
-    font-size: var(--font-size-s);
+    font-size: 12px;
 }
   
 .menu-item.active {
-    background-color: var(--teal-light-color);
+    background-color: var(--blue-medium-color);
 }
 
 .ProductMenu .sign-out {
@@ -76,26 +84,8 @@
         margin-bottom: 25px;
     }
 
-    .ProductMenu ul li {
-        height: auto;
-        margin: 0;
-        padding: 0;
-    }
-
     .ProductMenu ul .menu-item.active {
         background-color: transparent;
-    }
-
-    .ProductMenu ul li a {
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 0;
-    }
-
-    .ProductMenu li .menu-label {
-        margin: 4px;
-        margin-bottom: 0px;
-        color: grey;
     }
 
     .ProductMenu li .menu-label.active {
