@@ -5,6 +5,7 @@ import '../../../Components/Product/Content/Content.css';
 import Row from '../../../Components/Product/Row/Row';
 import TabularMenu from '../../../Components/Product/TabularMenu/TabularMenu';
 import LoadingScreen from '../../../Components/Product/LoadingScreen/LoadingScreen';
+import {ReactComponent as DeleteIcon} from '../../../Assets/Icons/delete-icon.svg'
 import axios from 'axios';
 
 
@@ -151,13 +152,21 @@ function Opportunities() {
 
     return (
         <div className="content opportunities">
-            <TabularMenu headerName={"Opportunities"} tabItems={tabItems} activeTab={activeTab} setActiveTab={setActiveTab} trashOn={trashOn} trashClicked={deleteSelectedLeads}/>
+            <TabularMenu headerName={"Referrals"} tabItems={tabItems} activeTab={activeTab} setActiveTab={setActiveTab} />
             <div className="content-detail">
             {loading ? (
                     <LoadingScreen isLoading={loading}/>
                 ) : error ? (
                     <div>Error: {error}</div>
                 ) : (
+                    <>
+                    <div className='detail-header'>
+                            <h2>{activeTab}</h2>
+                            <div onClick={trashOn ? deleteSelectedLeads : null} className={'delete-lead'+(trashOn ? ' active' : '')}>
+                                <DeleteIcon onClick={deleteSelectedLeads} className={'delete-icon'+(trashOn ? ' active' : '')} />
+                                <span className={(trashOn ? ' active' : '')}>Delete</span>
+                            </div>
+                    </div>
                     <table className="opportunities-table">
                         <thead>
                             <tr>
@@ -191,6 +200,7 @@ function Opportunities() {
                             )}
                         </tbody>
                     </table>
+                    </>
                 )}
             </div>
         </div>

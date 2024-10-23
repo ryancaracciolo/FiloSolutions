@@ -5,6 +5,7 @@
     --teal-medium-color: #5795A7;
     --teal-light-color: #79BEC3;
     --grey-light-color: #F2F2F7;
+    --grey-medium-color: #afafb3;
     --gold-dark-color: #D2A93A;
     --gold-light-color: #DBBF57;
     --sand-color: #E2DAD6;
@@ -13,6 +14,7 @@
     --blue-dark-color: #36454F;
     --blue-light-color: #B8C3CD;
     --blue-medium-color: #708090;
+    --blue-extralight-color: #DFE3EA;
 
     /* Filo Font Family */
     --font-thin: 'BA-Thin', sans-serif;

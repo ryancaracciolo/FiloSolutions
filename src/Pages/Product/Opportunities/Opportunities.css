@@ -4,13 +4,6 @@
     margin-left: 10px;
 
   }
-
-  .opportunities .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 2.5%;
-  }
   
   table {
     width: calc(100%-40px);
@@ -27,6 +20,43 @@
     color: grey;
     font-family: var(--font-bold);
     font-size: 13px;
-
   }
+
+  .detail-header {
+    position: relative;
+  }
+  
+  .detail-header .delete-lead {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 5px;
+}
+
+.detail-header .delete-lead.active {
+    cursor: pointer;
+}
+
+.detail-header .delete-lead .delete-icon {
+    fill: lightgray;
+    width: 20px;
+    height: 20px;    
+}
+
+.detail-header .delete-lead span {
+    color: lightgray;
+    font-family: var(--font-reg);
+    font-size: 13px;
+}
+
+.detail-header .delete-icon.active {
+    fill: var(--teal-medium-color);
+}
+
+.detail-header .delete-lead span.active {
+    color: var(--teal-medium-color);
+}
   

@@ -1,0 +1,165 @@
+/* Conversation Container */
+.conversation-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 15vw;
+    background-color: transparent;
+    padding: 10px 0 0 0; /* Adjusted padding-top */
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-family: var(--font-bold);
+    color: var(--blue-dark-color);
+    text-align: left;
+  }
+  
+  .conversation-container .new-thread {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start; /* Added to prevent stretching */
+    width: fit-content; /* Ensures width is only as large as needed */
+    background-color: var(--blue-dark-color);
+    border-radius: 8px;
+    padding: 5px 8px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+  
+  .new-thread .chat-icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--blue-light-color);
+  }
+  
+  .new-thread h2 {
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    font-family: var(--font-bold);
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: var(--blue-light-color);
+  }
+  
+  /* Conversation Group Heading */
+  .convo-group h2 {
+    margin-bottom: 5px;
+    font-size: clamp(16px, 1.0vw, 16px);
+    color: var(--blue-dark-color);
+  }
+  
+  /* Conversations List */
+  .conversations {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background-color: transparent;
+    padding: 0;
+    padding-left: 10px; /* Only left padding needed */
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-family: var(--font-regular);
+    text-align: left;
+    border-radius: 7px;
+  }
+  
+  /* Conversation Text */
+  .conversations .menu-tab p {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: var(--blue-medium-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Menu Tab */
+  .menu-tab {
+    position: relative;
+    margin: 4px 5px;
+    padding: 4px 7px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    border-radius: 7px;
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-family: var(--font-regular);
+    color: var(--grey-dark-color);
+    text-align: left;
+  }
+  
+  /* Active Menu Tab */
+  .conversations .menu-tab.active {
+    font-family: var(--font-bold);
+    background-color: var(--grey-light-color);
+  }
+  
+  /* Line and Dash Decorations */
+  .conversations .menu-tab .line {
+    position: absolute;
+    left: -11px;
+    top: -6px;
+    width: 2px;
+    height: calc(100% + 10px);
+    background-color: var(--blue-medium-color);
+    border-radius: 1px;
+  }
+  
+  .conversations .menu-tab:last-child .line {
+    height: calc(50% + 7px);
+  }
+  
+  .conversations .menu-tab .dash {
+    position: absolute;
+    left: -11px;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background-color: var(--blue-medium-color);
+    border-radius: 1px;
+  }
+  
+  /* Loading Placeholder Styles */
+  .menu-tab.placeholder {
+    position: relative;
+    margin: 4px 5px;
+    padding: 0;
+    background-color: var(--grey-light-color);
+    border-radius: 7px;
+    overflow: hidden;
+  }
+  
+  /* Pulsing Animation for Loading Bubbles */
+  .menu-tab.placeholder .loading-bubble {
+    width: 100%;
+    height: 16px;
+    background-color: var(--grey-light-color);
+    border-radius: 4px;
+    animation: pulse 2s infinite;
+  }
+  
+  /* Pulse Keyframes */
+  @keyframes pulse {
+    0% {
+      background-color: rgb(204, 204, 204);
+    }
+    50% {
+      background-color: rgb(171, 171, 171);
+    }
+    100% {
+      background-color: rgb(204, 204, 204);
+    }
+  }
+  
+  /* Adjustments for Loading Placeholders */
+  .placeholder .line,
+  .placeholder .dash {
+    display: none;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .conversation-container {
+      width: auto;
+    }
+  }
+  

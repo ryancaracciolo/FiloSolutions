@@ -15,6 +15,7 @@ import Header from './Components/Product/Header/Header';
 import Menu from './Components/Product/Menu/Menu';
 import Partnerships from './Pages/Product/Partnerships/Partnerships';
 import Opportunities from './Pages/Product/Opportunities/Opportunities';
+import Collab from './Pages/Product/Collab/Collab';
 import Authentication from './Pages/Product/Authentication/Authentication';
 /*Referral Page*/
 import ReferralProfile from './Pages/Product/ReferralProfile/ReferralProfile'
@@ -73,6 +74,7 @@ function App() {
               <Routes>
                 <Route path="/app/partnerships" element={<Partnerships />} />
                 <Route path="/app/opportunities" element={<Opportunities />} />
+                <Route path="/app/collab" element={<Collab />} />
                 <Route path="*" element={<Navigate to="/app/partnerships" />} />
               </Routes>
             </main>

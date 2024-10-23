@@ -210,6 +210,9 @@ function Partnerships() {
                     <div>Error: {error}</div>
                 ) : (
                     <>
+                        <div className='detail-header'>
+                            <h2>{activeTab}</h2>
+                        </div>
                         {activeTab === 'My Partners' && (
                         <MyPartners partners={partners} suggPartners={suggPartners} updatePartner={updatePartner} />
                         )}

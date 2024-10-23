@@ -1,30 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TabularMenu.css';
-import {ReactComponent as DeleteIcon} from '../../../Assets/Icons/delete-icon.svg'
+import {ReactComponent as ArrowIcon} from '../../../Assets/Icons/down-icon.svg'
+import Conversation from './Conversations';
 
 
-const TabularMenu = ({ headerName, tabItems, activeTab, setActiveTab, trashOn, trashClicked }) => {
+const TabularMenu = ({ headerName, tabItems, activeTab, setActiveTab, isCollab, startNewChat, conversations}) => {
+
+  const [menuClosed, setMenuClosed] = useState(false);
 
   return (
-    <div className="content-header">
-      <h1>{headerName}</h1>
-      <div className="header-tabs">
-        {tabItems.map((tab) => (
-          <button
-            key={tab} // Ensure tab names are unique; otherwise, use tab.id if available
-            className={`header-tab${activeTab === tab ? ' active' : ''}`}
-            onClick={() => setActiveTab(tab)}
-          >
-            <p>{tab}</p>
-          </button>
-        ))}
+    <div className={"content-menu"+ (menuClosed ? ' closed' : ' open')}>
+      <div className='menu-toggle' onClick={() => setMenuClosed(!menuClosed)}>
+          <ArrowIcon className={'menu-toggle-img'+ (menuClosed ? ' closed' : ' open')}/>
       </div>
-      {(headerName === "Opportunities") ? (
-        <div onClick={trashOn ? trashClicked : null} className={'delete-lead'+(trashOn ? ' active' : '')}>
-          <DeleteIcon onClick={trashClicked} className={'delete-icon'+(trashOn ? ' active' : '')} />
-          <span className={(trashOn ? ' active' : '')}>Delete</span>
-        </div>
-        ) : null}
+      <div className={'menu-container'+(menuClosed ? ' closed' : ' open')}>
+        <h1>{headerName}</h1>
+        {isCollab ? (
+          <Conversation activeTab={activeTab} setActiveTab={setActiveTab} startNewChat={startNewChat} conversations={conversations}/>
+        ) : (
+          <>
+            <div className="menu-tabs">
+              {tabItems.map((tab) => (
+                <button
+                  key={tab} // Ensure tab names are unique; otherwise, use tab.id if available
+                  className={`menu-tab${activeTab === tab ? ' active' : ''}`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  <p>{tab}</p>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

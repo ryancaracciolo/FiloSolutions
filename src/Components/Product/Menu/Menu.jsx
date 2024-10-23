@@ -20,8 +20,7 @@ function Menu({activeMenuIndex }) {
         { label: 'Partners', icon: PartnershipIcon, path: '/app/partnerships' },
         { label: 'Referrals', icon: OpportIcon, path: '/app/opportunities' },
         { label: 'Group Purchase', icon: PurchIcon, path: '/app/opportunities' },
-        { label: 'Collab', icon: CollabIcon, path: '/app/opportunities' },
-
+        { label: 'Collab', icon: CollabIcon, path: '/app/collab' },
     ];
     
 
