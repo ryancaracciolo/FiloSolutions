@@ -4,6 +4,8 @@ import './Collab.css';
 import '../../../Components/Product/Content/Content.css';
 import TabularMenu from '../../../Components/Product/TabularMenu/TabularMenu';
 import LoadingScreen from '../../../Components/Product/LoadingScreen/LoadingScreen';
+import axios from 'axios';
+import Avatar from '../../../Components/Product/CircleInitials/CircleInitials';
 
 function Collab() {
     const { business } = useContext(BusinessContext);
@@ -229,8 +231,9 @@ function Collab() {
                                             <img
                                                 className="profile-pic"
                                                 src={message.profilePic}
-                                                alt={`${message.sender}'s profile`}
+                                                alt={`profile picture`}
                                             />
+                                            {/*<Avatar className="profile-pic" businessName={business.name}/>*/}
                                             <div className="message-content">
                                                 <p>{message.text}</p>
                                                 <span className="timestamp">{message.timestamp}</span>

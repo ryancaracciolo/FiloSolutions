@@ -66,12 +66,11 @@ header .auth-buttons a {
     border-radius: 7px;
     margin-left: 0.3em;
     box-sizing: border-box;
-    width: clamp(100px, 12vw, 150px);
 }
 
 .header-landing .auth-buttons a.sign-in {
     color: var(--grey-dark-color);
-    background-color: var(--grey-light-color);
+    background-color: transparent;
 }
 
 .header-landing .auth-buttons a.demo-request {

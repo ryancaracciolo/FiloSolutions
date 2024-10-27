@@ -21,7 +21,7 @@ const Header = ({ onMenuClick }) => {
                     </ul>
                 </nav>
                 <div className="auth-buttons">
-                    <Link to="/app/login" className="sign-in">Filo Login</Link>
+                    <Link to="/app/login" className="sign-in">Login</Link>
                     <Link to="/demo" className="demo-request">Request Demo</Link>
                     <div className="hamburger" onClick={onMenuClick}>
                         <span className="menu-line one"></span>
